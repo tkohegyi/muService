@@ -1,0 +1,61 @@
+/*==========================================================================
+ Copyright since 2013, EPAM Systems
+
+ This file is part of Wilma.
+
+ Wilma is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ Wilma is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
+===========================================================================*/
+apply plugin: 'application'
+apply from: '../common.gradle'
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile "com.epam.gepard:gepard-core:4.0.35"
+    compile 'commons-httpclient:commons-httpclient:3.1'
+    compile 'org.custommonkey.xmlunit:com.springsource.org.custommonkey.xmlunit:1.2.0'
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+    compile 'com.sun.xml.fastinfoset:FastInfoset:1.2.13'
+    compile "com.epam.wilma:wilma-service-api:$version"
+    compile 'com.github.everit-org.json-schema:org.everit.json.schema:1.9.1'
+}
+
+mainClassName = "com.epam.gepard.AllTestRunner"
+
+def appArgs = ["$buildDir/resources/main/wilma-test.properties,$buildDir/resources/main/gepard.properties"]
+applicationDefaultJvmArgs = ["-Xss256k", "-Xmx512M", "-Xms512M", "-Djavax.net.ssl.trustStore=wilma.jks", "-DTEID=DEV"]
+if ( !hasProperty('buildTag') ) {
+    project.ext.buildTag="UNSET"
+}
+if ( hasProperty('wilmahost') ) {
+    applicationDefaultJvmArgs += ["-Dwilma.host=${project.ext.wilmahost}"]
+} else {
+    applicationDefaultJvmArgs += ["-Dwilma.host=localhost"]
+}
+
+run {
+    doFirst {
+        logger.lifecycle('\n ====================================================================')
+        logger.lifecycle('\n Running Wilma-Functional Tests with Gepard.')
+        logger.lifecycle('\n if you would like to see Gepard output properly, use -q parameter.')
+        logger.lifecycle('\n ====================================================================')
+        logger.lifecycle('\n')
+    }
+    args = appArgs
+    logging.captureStandardOutput LogLevel.QUIET
+}
+

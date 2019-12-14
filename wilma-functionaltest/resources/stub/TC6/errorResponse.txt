@@ -1,0 +1,2 @@
+java.lang.NullPointerException
+	at something.test.ResponseFormatterWithError.formatResponse(ResponseFormatterWithError.java:37)

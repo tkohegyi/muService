@@ -50,7 +50,7 @@ import com.google.common.util.concurrent.Service;
  */
 public class WilmaBootstrapTest {
 
-    private static final String WILMA_CANNOT_BE_STARTED_ERROR_MSG = "Wilma cannot be started. ";
+    private static final String WILMA_CANNOT_BE_STARTED_ERROR_MSG = "muService cannot be started. ";
     private ApplicationContextFactory applicationContextFactory;
 
     @Mock

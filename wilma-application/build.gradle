@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-description = 'wilma application'
+description = 'muService application'
 
 allprojects  {
     apply plugin: 'jacoco'
@@ -52,7 +52,7 @@ dependencies {
 }
 
 task deleteRelease(type: Delete) {
-    delete rootProject.rootDir.absolutePath + '/wilma-application/release'
+    //delete rootProject.rootDir.absolutePath + '/muService-application/release'
 }
 
 def myCopySpec = project.copySpec {
@@ -62,42 +62,33 @@ def myCopySpec = project.copySpec {
        include 'stubConfig.json'
    }
    from(rootProject.rootDir.absolutePath + '/wilma-application/modules/wilma-engine/build/libs/') {
-     include "wilma-$wilmaVersion.$buildNumber" + '.jar'
-   }
-   from(rootProject.rootDir.absolutePath + '/wilma-application/resources/'){
-     include 'certificate/wilma.cer'
-     include 'certificate/wilma.jks'
+     include "wilma-$appVersion.$buildNumber" + '.jar'
    }
    from(rootProject.rootDir.absolutePath + '/') {
      include 'COPYRIGHT.txt'
-     include 'COPYRIGHTS/'
    }
    
 }
 
 task copyToReleaseRoot (type: Copy) {
 	dependsOn deleteRelease
-	into(rootProject.rootDir.absolutePath + '/wilma-application/release')
+	into(rootProject.rootDir.absolutePath + '/muService-application/release')
 	with myCopySpec
 }
 
 task createDir {
 	dependsOn copyToReleaseRoot
 	doLast{
-	    file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/templates').mkdirs()
-        file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/formatters').mkdirs()
         file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/interceptors').mkdirs()
         file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/cache/stub_descriptors').mkdirs()
-        file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/condition-checkers').mkdirs()
         file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/jar').mkdirs()
-        file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/sequencehandlers').mkdirs()
 	}
 }
 
 task release(type: Zip) {
 	dependsOn createDir
-	archiveName = "wilma-application-$wilmaVersion.$buildNumber"+'.zip'
-    from rootProject.rootDir.absolutePath + '/wilma-application/release'
+	archiveName = "muService-$appVersion.$buildNumber"+'.zip'
+    from rootProject.rootDir.absolutePath + '/muService-application/release'
 }
 
 subprojects {

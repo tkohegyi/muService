@@ -17,10 +17,9 @@
    </bean>
    
    <bean id="wilmaStartMessage" class="java.lang.String">
-       <constructor-arg value="%s &#10;Copyright since 2013, EPAM Systems - GNU GPL-V3.0 License&#10;Used proxy port: %d &#10;Wilma UI is available via URL: http://localhost:%d/index/ &#10;Application logs are stored in '%s' folder.&#10;Request-response pairs are stored in '%s' folder." />
+       <constructor-arg value="%s &#10;GNU GPL-V3.0 License&#10;muService UI is available via URL: http://localhost:%d/index/ &#10;Application logs are stored in '%s' folder.&#10;." />
    </bean>
 
-  <bean class="net.lightbody.bmp.proxy.ProxyServer" />
   <bean id="simpleDateFormatterForAlerts" class="java.text.SimpleDateFormat">
     <constructor-arg index="0" value="yyyy-MM-dd HH:mm:ss" />
   </bean>
@@ -33,6 +32,5 @@
   <import resource="classpath:conf/spring/webapp-application-context.xml"/>
   <import resource="classpath:conf/spring/stub-config-application-context.xml"/>
   <import resource="classpath:conf/spring/logger-application-context.xml"/>
-  <import resource="classpath:conf/spring/indexing-application-context.xml"/>
-  
+
 </beans>

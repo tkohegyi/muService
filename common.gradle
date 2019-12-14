@@ -19,7 +19,7 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 // Common local repository info
 ext.myLocalRepository='file://C:/tmp/myRepo/'
-ext.wilmaVersion=2.0
+ext.appVersion=0.0
 
 if ( hasProperty('localRepository') ) {
     myLocalRepository = "${project.ext.localRepository}"
@@ -32,7 +32,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'java'
 apply plugin: 'maven'
 
-version = "$wilmaVersion"+'.'+"$buildNumber"
+version = "$appVersion"+'.'+"$buildNumber"
 
 repositories {
     jcenter()

@@ -89,6 +89,6 @@ public class WilmaBootstrap {
     }
 
     private void logError(final String message, final Exception e) {
-        logger.error("Wilma cannot be started. " + message, e);
+        logger.error("muService cannot be started. " + message, e);
     }
 }

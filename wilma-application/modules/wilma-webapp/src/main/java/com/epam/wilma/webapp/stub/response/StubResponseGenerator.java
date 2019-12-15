@@ -21,19 +21,12 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 import com.epam.wilma.common.helper.StackTraceToStringConverter;
 import com.epam.wilma.core.MapBasedResponseDescriptorAccess;
-import com.epam.wilma.domain.http.WilmaHttpEntity;
 import com.epam.wilma.domain.http.WilmaHttpRequest;
 import com.epam.wilma.domain.stubconfig.dialog.response.ResponseDescriptor;
-import com.epam.wilma.domain.stubconfig.dialog.response.ResponseFormatter;
 import com.epam.wilma.domain.stubconfig.dialog.response.ResponseFormatterDescriptor;
-import com.epam.wilma.domain.sequence.WilmaSequence;
 import com.epam.wilma.router.domain.ResponseDescriptorDTO;
-import com.epam.wilma.sequence.helper.SequenceHeaderUtil;
-import com.epam.wilma.sequence.matcher.SequenceMatcher;
 import com.epam.wilma.webapp.stub.response.support.HttpServletRequestTransformer;
-import com.epam.wilma.webapp.stub.response.support.SequenceResponseGuard;
 import com.epam.wilma.webapp.stub.response.support.StubResponseHeaderConfigurer;
-import com.epam.wilma.webapp.stub.servlet.helper.WaitProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,17 +51,9 @@ public class StubResponseGenerator {
     @Autowired
     private StackTraceToStringConverter stackTraceToStringConverter;
     @Autowired
-    private WaitProvider waitProvider;
-    @Autowired
     private StubResponseHeaderConfigurer stubResponseHeaderConfigurer;
     @Autowired
     private HttpServletRequestTransformer httpServletRequestTransformer;
-    @Autowired
-    private SequenceHeaderUtil sequenceHeaderUtil;
-    @Autowired
-    private SequenceMatcher sequenceMatcher;
-    @Autowired
-    private SequenceResponseGuard sequenceResponseGuard;
 
     /**
      * Gets the response descriptor data transfer object from the key-value store using the request's WilmaLoggerId and generates the response.
@@ -98,25 +83,8 @@ public class StubResponseGenerator {
         ResponseDescriptor responseDescriptor = responseDescriptorDTO.getResponseDescriptor();
         try {
             result = responseDescriptor.getAttributes().getTemplate().getResource();
-            String sequenceKeysParam = wilmaRequest.getHeader(WilmaHttpEntity.WILMA_SEQUENCE_ID);
-            String[] sequenceIds = sequenceHeaderUtil.resolveSequenceHeader(sequenceKeysParam);
-            WilmaSequence actualSequence = sequenceMatcher.matchSequenceKeyWithDescriptor(responseDescriptor.getAttributes().getSequenceDescriptorKey(),
-                    sequenceIds);
-            if (actualSequence != null) {
-                wilmaRequest.setSequence(actualSequence);
-                sequenceResponseGuard.waitForResponses(wilmaRequest, actualSequence);
-            }
             //set response status and content type
             stubResponseHeaderConfigurer.setResponseContentTypeAndStatus(resp, responseDescriptorDTO);
-            //run formatters, with formatters we can overwrite both mime type and status code
-            if (responseFormatterDescriptors != null && !responseFormatterDescriptors.isEmpty()) {
-                for (ResponseFormatterDescriptor responseFormatterDescriptor : responseFormatterDescriptors) {
-                    ResponseFormatter responseFormatter = responseFormatterDescriptor.getResponseFormatter();
-                    result = responseFormatter.formatResponse(wilmaRequest, resp, result, responseFormatterDescriptor.getParams());
-                }
-            }
-            //delay response if necessary
-            delayResponse(responseDescriptor.getAttributes().getDelay());
         } catch (Exception e) {
             stubResponseHeaderConfigurer.setErrorResponseContentTypeAndStatus(resp);
             result = getErrorMessageWithStackTrace(e);
@@ -126,17 +94,6 @@ public class StubResponseGenerator {
 
     private byte[] getErrorMessageWithStackTrace(final Exception e) {
         return stackTraceToStringConverter.getStackTraceAsString(e).getBytes();
-    }
-
-    private void delayResponse(final int delay) {
-        try {
-            if (delay > 0) {
-                waitProvider.waitMilliSeconds(delay);
-            }
-        } catch (InterruptedException e) {
-            logger.error("Could not return response. Exception while thread.sleep", e);
-            Thread.currentThread().interrupt();
-        }
     }
 
 }

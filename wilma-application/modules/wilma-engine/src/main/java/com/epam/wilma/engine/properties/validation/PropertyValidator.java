@@ -31,7 +31,6 @@ import org.springframework.stereotype.Component;
 
 import com.epam.wilma.properties.InvalidPropertyException;
 import com.epam.wilma.properties.PropertyHolder;
-import com.epam.wilma.properties.validation.SafeguardLimitValidator;
 
 /**
  * Validates configuration properties.
@@ -45,17 +44,12 @@ public class PropertyValidator {
 
     @Autowired
     private PropertyHolder propertyHolder;
-    @Autowired
-    private SafeguardLimitValidator safeguardLimitValidator;
 
     /**
      * Validates configuration properties.
      */
     public void validateProperties() {
         validate();
-        //special safeguard limit validation that could not be made with Ognl
-        safeguardLimitValidator.validate();
-
     }
 
     public void setProperties(final Properties properties) {

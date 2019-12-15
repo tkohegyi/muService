@@ -26,6 +26,5 @@ dependencies {
     compile project(':wilma-application:wilma-message-marker')
     compile project(':wilma-application:wilma-stub-configuration-domain')
     compile project(':wilma-application:wilma-message-maintainer')
-    compile project(':wilma-application:wilma-message-sequence')
     compile group: 'com.google.code.gson', name: 'gson', version:'2.2.4'
 }

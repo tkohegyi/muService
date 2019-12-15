@@ -20,7 +20,6 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
 import com.epam.wilma.domain.stubconfig.StubResourcePathProvider;
-import com.epam.wilma.domain.stubconfig.sequence.SequenceDescriptorHolder;
 import com.epam.wilma.router.RoutingService;
 import com.epam.wilma.stubconfig.StubDescriptorJsonFactory;
 import com.epam.wilma.webapp.config.servlet.stub.upload.helper.FileWriter;
@@ -54,8 +53,6 @@ public class MultiPartFileProcessor {
     @Autowired
     private RoutingService routingService;
     @Autowired
-    private SequenceDescriptorHolder sequenceDescriptorHolder;
-    @Autowired
     private ServiceMap serviceMap;
 
     /**
@@ -77,7 +74,7 @@ public class MultiPartFileProcessor {
         } else {
             if ("stub-configuration".equals(fieldName) && JSON_CONTENT_TYPE.equals(contentType)) {
                 try {
-                    routingService.performModification(new NewStubDescriptorCommand(resource, stubConfigurationJsonBuilder, sequenceDescriptorHolder));
+                    routingService.performModification(new NewStubDescriptorCommand(resource, stubConfigurationJsonBuilder));
                     serviceMap.detectServices();
                 } catch (ClassNotFoundException e) {
                     result = "Uploading " + fileName + " failed with ClassNotFoundException.";

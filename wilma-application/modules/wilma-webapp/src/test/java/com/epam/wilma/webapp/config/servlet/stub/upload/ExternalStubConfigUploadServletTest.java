@@ -19,7 +19,6 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
 import com.epam.wilma.domain.stubconfig.exception.DescriptorCannotBeParsedException;
-import com.epam.wilma.domain.stubconfig.sequence.SequenceDescriptorHolder;
 import com.epam.wilma.router.RoutingService;
 import com.epam.wilma.stubconfig.StubDescriptorJsonFactory;
 import com.epam.wilma.webapp.helper.UrlAccessLogMessageAssembler;
@@ -69,9 +68,6 @@ public class ExternalStubConfigUploadServletTest {
     private ServiceMap serviceMap;
     @Mock
     private UrlAccessLogMessageAssembler urlAccessLogMessageAssembler;
-    @Mock
-    private SequenceDescriptorHolder sequenceDescriptorHolder;
-
 
     @InjectMocks
     private ExternalStubConfigUploadServlet underTest;
@@ -80,7 +76,6 @@ public class ExternalStubConfigUploadServletTest {
     public void setUp() throws IOException {
         MockitoAnnotations.initMocks(this);
         Whitebox.setInternalState(underTest, "urlAccessLogMessageAssembler", urlAccessLogMessageAssembler);
-        Whitebox.setInternalState(underTest, "sequenceDescriptorHolder", sequenceDescriptorHolder);
         Whitebox.setInternalState(underTest, "stubDescriptorJsonFactory", stubDescriptorJsonFactory);
         Whitebox.setInternalState(underTest, "routingService", routingService);
         Whitebox.setInternalState(underTest, "serviceMap", serviceMap);

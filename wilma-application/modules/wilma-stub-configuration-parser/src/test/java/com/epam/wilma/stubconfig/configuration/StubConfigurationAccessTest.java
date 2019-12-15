@@ -136,11 +136,4 @@ public class StubConfigurationAccessTest {
         verify(stubResourcePathProvider).setSequenceHandlerPath(sequenceHandlerPath);
     }
 
-    @Test
-    public void testOnApplicationEventShouldInitializeClassNameMapper() {
-        //WHEN
-        underTest.setProperties();
-        //THEN
-        verify(classNameMapper).initialize(new ArrayList<>());
-    }
 }

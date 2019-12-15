@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-ext.componentDescription = "Wilma - Service Stub and Transparent Proxy"
+ext.componentDescription = "muService - Service that hosts several microServices"
 buildscript {
     repositories { jcenter() }
     dependencies {
@@ -66,10 +66,6 @@ jar {
     archiveName = "$componentName-$version"+'.jar'
 
     finalizedBy shadowJar
-}
-
-repositories {
-    maven { url "${myLocalRepository}" }
 }
 
 dependencies {

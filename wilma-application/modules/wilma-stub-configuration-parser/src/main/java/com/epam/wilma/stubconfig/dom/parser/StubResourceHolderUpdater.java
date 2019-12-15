@@ -18,20 +18,18 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.w3c.dom.Document;
-
 import com.epam.wilma.domain.stubconfig.StubResourceHolder;
 import com.epam.wilma.domain.stubconfig.TemporaryStubResourceHolder;
 import com.epam.wilma.domain.stubconfig.helper.InternalResourceHolder;
 import com.epam.wilma.domain.stubconfig.interceptor.RequestInterceptor;
 import com.epam.wilma.domain.stubconfig.interceptor.ResponseInterceptor;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Updates the {@link StubResourceHolder} from the {@link TemporaryStubResourceHolder}.
@@ -52,12 +50,8 @@ public class StubResourceHolderUpdater {
      * Copies the resources from the {@link TemporaryStubResourceHolder} to the {@link StubResourceHolder}.
      */
     public void updateResourceHolder() {
-        stubResourceHolder.setConditionChekers(new ArrayList<>(temporaryStubResourceHolder.getConditionCheckers()));
-        stubResourceHolder.setResponseFormatters(new ArrayList<>(temporaryStubResourceHolder.getResponseFormatters()));
-        stubResourceHolder.setTemplates(new HashMap<>(temporaryStubResourceHolder.getTemplates()));
         updateRequestInterceptors();
         updateResponseInterceptors();
-        stubResourceHolder.setSequenceHandlers(new ArrayList<>(temporaryStubResourceHolder.getSequenceHandlers()));
     }
 
     private void updateRequestInterceptors() {
@@ -78,12 +72,8 @@ public class StubResourceHolderUpdater {
      * Clears the resources in the {@link TemporaryStubResourceHolder}.
      */
     public void clearTemporaryResourceHolder() {
-        temporaryStubResourceHolder.clearConditionCheckers();
-        temporaryStubResourceHolder.clearResponseFormatters();
-        temporaryStubResourceHolder.clearTemplates();
         temporaryStubResourceHolder.clearRequestInterceptors();
         temporaryStubResourceHolder.clearResponseInterceptors();
-        temporaryStubResourceHolder.clearSequenceHandlers();
     }
 
     /**
@@ -110,11 +100,8 @@ public class StubResourceHolderUpdater {
      * into the {@link TemporaryStubResourceHolder}.
      */
     public void initializeTemporaryResourceHolder() {
-        temporaryStubResourceHolder.setConditionCheckers(new ArrayList<>(internalResourceHolder.getConditionCheckers()));
-        temporaryStubResourceHolder.setResponseFormatters(new ArrayList<>(internalResourceHolder.getResponseFormatters()));
         initializeRequestInterceptors();
         initializeResponseInterceptors();
-        temporaryStubResourceHolder.setSequenceHandlers(new ArrayList<>(internalResourceHolder.getSequenceHandlers()));
     }
 
     private void initializeRequestInterceptors() {

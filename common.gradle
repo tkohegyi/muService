@@ -18,12 +18,7 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
 // Common local repository info
-ext.myLocalRepository='file://C:/tmp/myRepo/'
 ext.appVersion=0.0
-
-if ( hasProperty('localRepository') ) {
-    myLocalRepository = "${project.ext.localRepository}"
-}
 
 group = 'com.epam.wilma'
 apply plugin: 'idea'
@@ -37,7 +32,6 @@ version = "$appVersion"+'.'+"$buildNumber"
 repositories {
     jcenter()
     maven { url "http://repo.maven.apache.org/maven2" }
-    maven { url "${myLocalRepository}" }
 }
 
 // Source and target info

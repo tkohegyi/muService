@@ -31,7 +31,6 @@ import org.springframework.stereotype.Component;
 
 import com.epam.wilma.domain.exception.SystemException;
 import com.epam.wilma.domain.http.WilmaHttpResponse;
-import com.epam.wilma.sequence.SequenceManager;
 
 /**
  * Listens for response messages put on the response queue.
@@ -48,8 +47,6 @@ public class ResponseQueueListener implements MessageListener {
     private JmsResponseMessageCreatorFactory messageCreatorFactory;
     @Autowired
     private MessageExtractor messageExtractor;
-    @Autowired
-    private SequenceManager manager;
 
     private boolean fiDecompressionEnabled = true;
     private boolean messageLoggingEnabled = true;
@@ -67,7 +64,6 @@ public class ResponseQueueListener implements MessageListener {
                 if (messageLoggingEnabled  && response.isLoggingEnabled()) {
                     jmsTemplate.send(loggerQueue, messageCreatorFactory.create(response, consistentFIDecompressionEnabled));
                 }
-                manager.tryToSaveResponseIntoSequence(response);
             } catch (JMSException e) {
                 throw new SystemException("JMS Exception occurred", e);
             }

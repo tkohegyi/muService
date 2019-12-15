@@ -47,12 +47,11 @@ public class ResponseFormatterInitializer extends CommonClassInitializer<Respons
 
     @Override
     protected List<ResponseFormatter> getExternalClassObjects() {
-        return stubResourceHolder.getResponseFormatters();
+        return null;
     }
 
     @Override
     protected void addExternalClassObject(ResponseFormatter externalClassObject) {
-        stubResourceHolder.addResponseFormatter(externalClassObject);
     }
 
     @Override

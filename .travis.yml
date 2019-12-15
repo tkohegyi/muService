@@ -6,17 +6,17 @@ before_install:
 install:
  - mkdir $HOME/localrepo/
 script:
- - ./gradlew build release sonarqube -PlocalRepository=file:///$HOME/localrepo/
+ - ./gradlew build release sonarqube
  - ./gradlew -b wilma-test/wilma-test-client/build.gradle build -x checkstyleMain -x checkstyleTest -PbuildNumber=$TRAVIS_BUILD_NUMBER
  - ./gradlew -b wilma-test/wilma-test-server/build.gradle build -x checkstyleMain -x checkstyleTest -PbuildNumber=$TRAVIS_BUILD_NUMBER
- - ./gradlew -b wilma-functionaltest/build.gradle build -PlocalRepository=file:///$HOME/localrepo/
- - ./gradlew -b wilma-extras/bulkhead/build.gradle clean build -PlocalRepository=file:///$HOME/localrepo/
- - ./gradlew -b wilma-extras/circuit.breaker/build.gradle clean build -PlocalRepository=file:///$HOME/localrepo/
- - ./gradlew -b wilma-extras/lookandsay.service/build.gradle clean build -PlocalRepository=file:///$HOME/localrepo/
- - ./gradlew -b wilma-extras/random.error.generator/build.gradle clean build -PlocalRepository=file:///$HOME/localrepo/
- - ./gradlew -b wilma-extras/replicator/build.gradle clean build -PlocalRepository=file:///$HOME/localrepo/
- - ./gradlew -b wilma-extras/reverse.proxy/build.gradle clean build -PlocalRepository=file:///$HOME/localrepo/
- - ./gradlew -b wilma-extras/short.circuit/build.gradle clean build -PlocalRepository=file:///$HOME/localrepo/
+ - ./gradlew -b wilma-functionaltest/build.gradle build
+ - ./gradlew -b wilma-extras/bulkhead/build.gradle clean build
+ - ./gradlew -b wilma-extras/circuit.breaker/build.gradle clean build
+ - ./gradlew -b wilma-extras/lookandsay.service/build.gradle clean build
+ - ./gradlew -b wilma-extras/random.error.generator/build.gradle clean build
+ - ./gradlew -b wilma-extras/replicator/build.gradle clean build
+ - ./gradlew -b wilma-extras/reverse.proxy/build.gradle clean build
+ - ./gradlew -b wilma-extras/short.circuit/build.gradle clean build
 branches:
   only:
   - master

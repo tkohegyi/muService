@@ -21,8 +21,6 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 import java.util.Properties;
 
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.util.reflection.Whitebox;
 import org.testng.annotations.BeforeMethod;
@@ -30,7 +28,6 @@ import org.testng.annotations.Test;
 
 import com.epam.wilma.properties.InvalidPropertyException;
 import com.epam.wilma.properties.PropertyHolder;
-import com.epam.wilma.properties.validation.SafeguardLimitValidator;
 
 /**
  * Unit tests for the class {@link PropertyValidator}.
@@ -41,8 +38,6 @@ public class PropertyValidatorTest {
 
     private Properties properties;
     private PropertyHolder propertyHolder;
-    @Mock
-    private SafeguardLimitValidator safeguardLimitValidator;
 
     @InjectMocks
     private PropertyValidator underTest;
@@ -66,19 +61,6 @@ public class PropertyValidatorTest {
         //WHEN
         underTest.validateProperties();
         //THEN it should not throw exception
-    }
-
-    @Test
-    public void testValidatePropertiesShouldCallSafeguardValidator() {
-        //GIVEN
-        String validationExpression = "#this >1";
-        String propertyValue = "1234";
-        properties.put("proxy.port", validationExpression);
-        propertyHolder.addProperty("proxy.port", propertyValue);
-        //WHEN
-        underTest.validateProperties();
-        //THEN
-        Mockito.verify(safeguardLimitValidator).validate();
     }
 
     @Test(expectedExceptions = InvalidPropertyException.class)

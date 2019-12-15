@@ -24,7 +24,6 @@ import com.epam.wilma.domain.http.WilmaHttpEntity;
 import com.epam.wilma.domain.http.WilmaHttpRequest;
 import com.epam.wilma.domain.stubconfig.parameter.ParameterList;
 import com.epam.wilma.sequence.formatters.helper.converter.Converter;
-import com.epam.wilma.sequence.formatters.helper.resolver.RestUrlMappingMessageNameResolver;
 
 /**
  * A REST response.
@@ -34,9 +33,6 @@ import com.epam.wilma.sequence.formatters.helper.resolver.RestUrlMappingMessageN
 public class RestResponse implements Message {
 
     private static final String POSTFIX = "Response";
-
-    @Autowired
-    private RestUrlMappingMessageNameResolver restUrlMappingMessageNameResolver;
 
     private final WilmaHttpEntity entity;
     private final Converter converter;
@@ -56,8 +52,7 @@ public class RestResponse implements Message {
 
     @Override
     public String resolveName(final ParameterList parameters) {
-        String name = restUrlMappingMessageNameResolver.resolve(request, parameters);
-        return name.isEmpty() ? "" : name + POSTFIX;
+        return POSTFIX;
     }
 
     @Override

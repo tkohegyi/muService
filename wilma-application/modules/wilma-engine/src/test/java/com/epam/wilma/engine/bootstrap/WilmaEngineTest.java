@@ -29,8 +29,6 @@ import org.testng.annotations.Test;
 
 import com.epam.wilma.engine.bootstrap.helper.ApplicationContextCloser;
 import com.epam.wilma.maintainer.LogFileMaintainer;
-import com.epam.wilma.safeguard.monitor.JmsQueueMonitor;
-import com.epam.wilma.sequence.maintainer.SequenceMaintainer;
 import com.epam.wilma.webapp.jetty.JettyServer;
 
 /**
@@ -38,18 +36,12 @@ import com.epam.wilma.webapp.jetty.JettyServer;
  */
 public class WilmaEngineTest {
 
-    private static final String ERR_MSG = "System error";
-
     @Mock
     private JettyServer webAppServer;
     @Mock
     private LogFileMaintainer logFileMaintainer;
     @Mock
     private ApplicationContextCloser applicationCloser;
-    @Mock
-    private JmsQueueMonitor jmsQueueMonitor;
-    @Mock
-    private SequenceMaintainer sequenceMaintainer;
 
     @InjectMocks
     private WilmaEngine underTest;
@@ -76,24 +68,6 @@ public class WilmaEngineTest {
         underTest.start();
         //THEN
         verify(logFileMaintainer).startScheduling();
-    }
-
-    @Test
-    public void testStartShouldStartJmsQueueMonitor() {
-        //GIVEN in setup
-        //WHEN
-        underTest.start();
-        //THEN
-        verify(jmsQueueMonitor).startScheduling();
-    }
-
-    @Test
-    public void testStartShouldStartSequenceCleanMaintainer() {
-        //GIVEN in setup
-        //WHEN
-        underTest.start();
-        //THEN
-        verify(sequenceMaintainer).startScheduling();
     }
 
 }

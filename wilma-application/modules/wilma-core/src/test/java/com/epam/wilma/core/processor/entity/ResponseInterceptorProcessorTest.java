@@ -94,13 +94,13 @@ public class ResponseInterceptorProcessorTest {
         List<InterceptorDescriptor> interceptorDescriptors = new ArrayList<>();
         InterceptorDescriptor interceptorDescriptor = new InterceptorDescriptor("responseInterceptor", null, responseInterceptor, PARAMS);
         interceptorDescriptors.add(interceptorDescriptor);
-        return new StubDescriptor(null, null, interceptorDescriptors, null);
+        return new StubDescriptor(null, interceptorDescriptors);
     }
 
     private StubDescriptor createStubDescriptorWithNoInterceptor() {
         List<InterceptorDescriptor> interceptorDescriptors = new ArrayList<>();
         InterceptorDescriptor interceptorDescriptor = new InterceptorDescriptor("responseInterceptor", null, null, PARAMS);
         interceptorDescriptors.add(interceptorDescriptor);
-        return new StubDescriptor(null, null, interceptorDescriptors, null);
+        return new StubDescriptor(null, interceptorDescriptors);
     }
 }

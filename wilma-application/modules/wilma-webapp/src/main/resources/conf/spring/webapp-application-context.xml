@@ -29,7 +29,6 @@
     <property name="servlets">
       <list>
         <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="buildInformationServlet" p:name="buildInformationServlet" />
-        <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="loadInformationServlet" p:name="loadInformationServlet" />
         <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="serviceServlet" p:name="serviceServlet" />
         <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="messageLoggingOnServlet" p:name="messageLoggingOnServlet" />
         <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="messageLoggingOffServlet" p:name="messageLoggingOffServlet" />
@@ -82,7 +81,6 @@
     <property name="servletMappings">
       <list>
         <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="buildInformationServlet" p:pathSpec="/public/version" />
-        <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="loadInformationServlet" p:pathSpec="/public/actualload" />
         <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="serviceServlet" p:pathSpec="/public/services/*" />
         <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="sequenceInformationServlet" p:pathSpec="/public/livesequences" />
         <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="messageLoggingOnServlet" p:pathSpec="/admin/logging/on" />

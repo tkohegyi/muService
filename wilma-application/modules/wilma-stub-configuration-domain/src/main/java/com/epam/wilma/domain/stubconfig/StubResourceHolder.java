@@ -18,11 +18,8 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import com.epam.wilma.domain.stubconfig.dialog.condition.checker.ConditionChecker;
-import com.epam.wilma.domain.stubconfig.dialog.response.ResponseFormatter;
 import com.epam.wilma.domain.stubconfig.interceptor.RequestInterceptor;
 import com.epam.wilma.domain.stubconfig.interceptor.ResponseInterceptor;
-import com.epam.wilma.domain.stubconfig.sequence.SequenceHandler;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
@@ -43,43 +40,14 @@ import java.util.Map;
 public class StubResourceHolder {
 
     private final Map<String, JSONObject> stubConfigJsonObjects;
-    private Map<String, byte[]> templates;
-    private List<ConditionChecker> conditionCheckers;
-    private List<ResponseFormatter> responseFormatters;
     private List<RequestInterceptor> requestInterceptors;
     private List<ResponseInterceptor> responseInterceptors;
-    private List<SequenceHandler> sequenceHandlers;
 
     /**
      * Default constructor for {@link StubResourceHolder} creation which initializes templates map.
      */
     public StubResourceHolder() {
-        templates = new HashMap<>();
         stubConfigJsonObjects = new HashMap<>();
-    }
-
-    public void setConditionChekers(final List<ConditionChecker> conditionCheckers) {
-        this.conditionCheckers = conditionCheckers;
-    }
-
-    public List<ConditionChecker> getConditionCheckers() {
-        return conditionCheckers;
-    }
-
-    public List<ResponseFormatter> getResponseFormatters() {
-        return responseFormatters;
-    }
-
-    public void setResponseFormatters(final List<ResponseFormatter> responseFormatters) {
-        this.responseFormatters = responseFormatters;
-    }
-
-    public Map<String, byte[]> getTemplates() {
-        return templates;
-    }
-
-    public void setTemplates(final Map<String, byte[]> templates) {
-        this.templates = templates;
     }
 
     public List<RequestInterceptor> getRequestInterceptors() {
@@ -98,13 +66,6 @@ public class StubResourceHolder {
         this.responseInterceptors = responseInterceptors;
     }
 
-    public List<SequenceHandler> getSequenceHandlers() {
-        return sequenceHandlers;
-    }
-
-    public void setSequenceHandlers(final List<SequenceHandler> sequenceHandlers) {
-        this.sequenceHandlers = sequenceHandlers;
-    }
 
     /**
      * Get the JSON String of stub configuration from a Map.

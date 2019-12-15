@@ -24,25 +24,15 @@ import com.epam.wilma.webapp.service.external.ServiceMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.epam.wilma.router.RoutingService;
-import com.epam.wilma.sequence.SequenceManager;
 import com.epam.wilma.webapp.helper.UrlAccessLogMessageAssembler;
-import com.epam.wilma.webapp.service.command.DropCommand;
 
 /**
- * This Service make the changes in the map of stub descriptors and then applies the changes at {@link RoutingService}.
  * @author Tibor_Kovacs
  *
  */
 @Component
 public class StubConfigurationDropperService {
 
-    @Autowired
-    private SequenceManager sequenceManager;
-    @Autowired
-    private RoutingService routingService;
-    @Autowired
-    private UrlAccessLogMessageAssembler urlAccessLogMessageAssembler;
     @Autowired
     private ServiceMap serviceMap;
 
@@ -53,8 +43,6 @@ public class StubConfigurationDropperService {
      * @throws ClassNotFoundException in case of problem
      */
     public void dropSelectedStubConfiguration(final String groupName, final HttpServletRequest request) throws ClassNotFoundException {
-        sequenceManager.removeSequenceDescriptors(groupName);
-        routingService.performModification(new DropCommand(groupName, request, urlAccessLogMessageAssembler));
         serviceMap.detectServices();
     }
 }

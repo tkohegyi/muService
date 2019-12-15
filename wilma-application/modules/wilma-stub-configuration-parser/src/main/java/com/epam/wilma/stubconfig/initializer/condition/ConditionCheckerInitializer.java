@@ -48,12 +48,11 @@ public class ConditionCheckerInitializer extends CommonClassInitializer<Conditio
 
     @Override
     protected List<ConditionChecker> getExternalClassObjects() {
-        return stubResourceHolder.getConditionCheckers();
+        return null;
     }
 
     @Override
     protected void addExternalClassObject(ConditionChecker externalClassObject) {
-        stubResourceHolder.addConditionChecker(externalClassObject);
     }
 
     @Override

@@ -32,11 +32,9 @@ import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.domain.stubconfig.StubConfigSchema;
 import com.epam.wilma.engine.configuration.EngineConfigurationAccess;
 import com.epam.wilma.engine.configuration.domain.PropertyDTO;
 import com.epam.wilma.stubconfig.cache.cleaner.helper.StubConfigPathProvider;
-import com.epam.wilma.stubconfig.dom.parser.xsd.StubConfigSchemaParser;
 
 /**
  * Provides unit tests for the class {@link FileBasedStubConfigReader}.
@@ -54,10 +52,6 @@ public class FileBasedStubConfigReaderTest {
     private EngineConfigurationAccess configurationAccess;
     @Mock
     private PropertyDTO properties;
-    @Mock
-    private StubConfigSchemaParser stubConfigSchemaParser;
-    @Mock
-    private StubConfigSchema stubConfigSchema;
     @Mock
     private StubConfigPathProvider cachePathProvider;
 
@@ -102,16 +96,6 @@ public class FileBasedStubConfigReaderTest {
         underTest.readStubConfiguration();
         //THEN
         verify(stubDescriptorReader).loadSpecificStubDescriptors(paths);
-    }
-
-    @Test
-    public final void testReadStubConfigurationShouldParseXSDSchema() {
-        //GIVEN
-        given(stubConfigSchemaParser.parseSchema()).willReturn(schema);
-        //WHEN
-        underTest.readStubConfiguration();
-        //THEN
-        verify(stubConfigSchema).setSchema(schema);
     }
 
 }

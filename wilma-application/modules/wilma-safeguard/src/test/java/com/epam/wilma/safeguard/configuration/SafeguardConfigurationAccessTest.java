@@ -29,7 +29,6 @@ import org.testng.annotations.Test;
 
 import com.epam.wilma.properties.PropertyHolder;
 import com.epam.wilma.safeguard.configuration.domain.PropertyDTO;
-import com.epam.wilma.safeguard.configuration.domain.SafeguardLimits;
 
 /**
  * Unit tests for the class {@link SafeguardConfigurationAccess}.
@@ -38,16 +37,10 @@ import com.epam.wilma.safeguard.configuration.domain.SafeguardLimits;
  */
 public class SafeguardConfigurationAccessTest {
 
-    private static final long LIMIT = 100L;
-    private static final String PORT = "1099";
-
     private static final String CRON_EXPRESSION = "CRON_EXPRESSION";
 
     @InjectMocks
     private SafeguardConfigurationAccess underTest;
-
-    @Mock
-    private SafeguardLimits safeguardLimits;
 
     @Mock
     private PropertyHolder propertyHolder;
@@ -55,11 +48,6 @@ public class SafeguardConfigurationAccessTest {
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        given(propertyHolder.getLong("safeguard.responseFIdecoder.OFFlimit")).willReturn(LIMIT);
-        given(propertyHolder.getLong("safeguard.responseFIdecoder.ONlimit")).willReturn(LIMIT);
-        given(propertyHolder.getLong("safeguard.responseMessageWriter.OFFlimit")).willReturn(LIMIT);
-        given(propertyHolder.getLong("safeguard.responseMessageWriter.ONlimit")).willReturn(LIMIT);
-        given(propertyHolder.get("com.sun.management.jmxremote.port")).willReturn(PORT);
         given(propertyHolder.get("safeguard.guardperiod")).willReturn(CRON_EXPRESSION);
     }
 
@@ -70,11 +58,6 @@ public class SafeguardConfigurationAccessTest {
         underTest.loadProperties();
         //THEN
         PropertyDTO actual = underTest.getProperties();
-        assertEquals(actual.getSafeguardLimits().getFiOffLimit(), Long.valueOf(LIMIT));
-        assertEquals(actual.getSafeguardLimits().getFiOnLimit(), Long.valueOf(LIMIT));
-        assertEquals(actual.getSafeguardLimits().getMwOffLimit(), Long.valueOf(LIMIT));
-        assertEquals(actual.getSafeguardLimits().getMwOnLimit(), Long.valueOf(LIMIT));
-        assertEquals(actual.getSafeguardLimits().getJmxPort(), PORT);
     }
 
     @Test

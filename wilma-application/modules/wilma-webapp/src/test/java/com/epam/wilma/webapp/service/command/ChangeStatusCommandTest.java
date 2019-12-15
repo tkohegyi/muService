@@ -32,7 +32,6 @@ import org.testng.annotations.Test;
 
 import com.epam.wilma.domain.stubconfig.StubDescriptor;
 import com.epam.wilma.domain.stubconfig.StubDescriptorAttributes;
-import com.epam.wilma.domain.stubconfig.dialog.DialogDescriptor;
 import com.epam.wilma.domain.stubconfig.interceptor.InterceptorDescriptor;
 import com.epam.wilma.webapp.helper.UrlAccessLogMessageAssembler;
 
@@ -59,7 +58,7 @@ public class ChangeStatusCommandTest {
         MockitoAnnotations.initMocks(this);
         normalStubDescriptors = new LinkedHashMap<>();
         attributes = new StubDescriptorAttributes(GROUPNAME_FIRST);
-        stubDescriptor = new StubDescriptor(attributes, new ArrayList<DialogDescriptor>(), new ArrayList<InterceptorDescriptor>(), null);
+        stubDescriptor = new StubDescriptor(attributes, new ArrayList<InterceptorDescriptor>());
         normalStubDescriptors.put(GROUPNAME_FIRST, stubDescriptor);
     }
 
@@ -68,7 +67,7 @@ public class ChangeStatusCommandTest {
         //GIVEN in setUp
         normalStubDescriptors = new LinkedHashMap<>();
         attributes = new StubDescriptorAttributes(GROUPNAME_FIRST, true);
-        stubDescriptor = new StubDescriptor(attributes, new ArrayList<DialogDescriptor>(), new ArrayList<InterceptorDescriptor>(), null);
+        stubDescriptor = new StubDescriptor(attributes, new ArrayList<InterceptorDescriptor>());
         normalStubDescriptors.put(GROUPNAME_FIRST, stubDescriptor);
         //WHEN
         underTest = new ChangeStatusCommand(false, GROUPNAME_FIRST, request, urlAccessLogMessageAssembler);
@@ -85,7 +84,7 @@ public class ChangeStatusCommandTest {
         //GIVEN in setUp
         normalStubDescriptors = new LinkedHashMap<>();
         attributes = new StubDescriptorAttributes(GROUPNAME_FIRST, false);
-        stubDescriptor = new StubDescriptor(attributes, new ArrayList<DialogDescriptor>(), new ArrayList<InterceptorDescriptor>(), null);
+        stubDescriptor = new StubDescriptor(attributes, new ArrayList<InterceptorDescriptor>());
         normalStubDescriptors.put(GROUPNAME_FIRST, stubDescriptor);
         //WHEN
         underTest = new ChangeStatusCommand(true, GROUPNAME_FIRST, request, urlAccessLogMessageAssembler);

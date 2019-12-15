@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.epam.wilma.domain.http.WilmaHttpEntity;
 import com.epam.wilma.domain.stubconfig.parameter.ParameterList;
 import com.epam.wilma.sequence.formatters.helper.converter.Converter;
-import com.epam.wilma.sequence.formatters.helper.resolver.RestUrlMappingMessageNameResolver;
 
 /**
  * A REST request.
@@ -33,9 +32,6 @@ import com.epam.wilma.sequence.formatters.helper.resolver.RestUrlMappingMessageN
 public class RestRequest implements Message {
 
     private static final String POSTFIX = "Request";
-
-    @Autowired
-    private RestUrlMappingMessageNameResolver restUrlMappingMessageNameResolver;
 
     private final WilmaHttpEntity entity;
     private final Converter converter;
@@ -52,8 +48,7 @@ public class RestRequest implements Message {
 
     @Override
     public String resolveName(final ParameterList parameters) {
-        String name = restUrlMappingMessageNameResolver.resolve(entity, parameters);
-        return name.isEmpty() ? "" : name + POSTFIX;
+        return POSTFIX;
     }
 
     @Override

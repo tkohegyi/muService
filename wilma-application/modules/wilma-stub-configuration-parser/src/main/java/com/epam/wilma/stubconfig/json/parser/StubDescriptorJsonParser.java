@@ -20,18 +20,10 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 import com.epam.wilma.domain.stubconfig.StubDescriptor;
 import com.epam.wilma.domain.stubconfig.StubDescriptorAttributes;
-import com.epam.wilma.domain.stubconfig.dialog.DialogDescriptor;
-import com.epam.wilma.domain.stubconfig.dialog.DialogDescriptorAttributes;
-import com.epam.wilma.domain.stubconfig.dialog.condition.ConditionDescriptor;
-import com.epam.wilma.domain.stubconfig.dialog.response.ResponseDescriptor;
 import com.epam.wilma.domain.stubconfig.interceptor.InterceptorDescriptor;
-import com.epam.wilma.domain.stubconfig.sequence.SequenceDescriptor;
-import com.epam.wilma.stubconfig.json.parser.helper.DialogDescriptorAttributeJsonParser;
-import com.epam.wilma.stubconfig.json.parser.helper.ObjectParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -46,16 +38,6 @@ import java.util.List;
 public class StubDescriptorJsonParser {
 
     @Autowired
-    @Qualifier("conditionDescriptorJsonParser")
-    private ObjectParser<ConditionDescriptor> conditionDescriptorJsonParser;
-    @Autowired
-    @Qualifier("responseDescriptorJsonParser")
-    private ObjectParser<ResponseDescriptor> responseDescriptorJsonParser;
-    @Autowired
-    private DialogDescriptorAttributeJsonParser dialogDescriptorAttributeJsonParser;
-    @Autowired
-    private SequenceDescriptorJsonParser sequenceDescriptorJsonParser;
-    @Autowired
     private InterceptorDescriptorJsonParser interceptorDescriptorJsonParser;
 
     /**
@@ -67,14 +49,12 @@ public class StubDescriptorJsonParser {
     public StubDescriptor parse(final JSONObject jsonStubDescriptor) {
         JSONObject root = jsonStubDescriptor.getJSONObject("wilmaStubConfiguration");
         StubDescriptorAttributes attributes = getStubDescriptorAttributes(root);
-        List<DialogDescriptor> dialogDescriptors = getDialogDescriptors(root);
         List<InterceptorDescriptor> interceptorDescriptors = getInterceptorDescriptors(root);
-        List<SequenceDescriptor> sequenceDescriptors = sequenceDescriptorJsonParser.parse(root, dialogDescriptors);
         //set validity - it is valid only if it has something inside
-        if (dialogDescriptors.size() + interceptorDescriptors.size() + sequenceDescriptors.size() > 0) {
+        if (interceptorDescriptors.size() > 0) {
             attributes.setValid(true);
         }
-        StubDescriptor stubDescriptor = new StubDescriptor(attributes, dialogDescriptors, interceptorDescriptors, sequenceDescriptors);
+        StubDescriptor stubDescriptor = new StubDescriptor(attributes, interceptorDescriptors);
         return stubDescriptor;
     }
 
@@ -84,21 +64,6 @@ public class StubDescriptorJsonParser {
         boolean active;
         active = Boolean.valueOf(activeText);
         return new StubDescriptorAttributes(groupName, active);
-    }
-
-    private List<DialogDescriptor> getDialogDescriptors(final JSONObject root) {
-        List<DialogDescriptor> dialogDescriptors = new ArrayList<DialogDescriptor>();
-        if (root.has("dialogDescriptors")) {
-            JSONArray dialogDescriptorsArray = root.getJSONArray("dialogDescriptors");
-            for (int i = 0; i < dialogDescriptorsArray.length(); i++) {
-                JSONObject dialogDescriptor = dialogDescriptorsArray.getJSONObject(i);
-                DialogDescriptorAttributes attributes = dialogDescriptorAttributeJsonParser.getAttributes(dialogDescriptor);
-                ConditionDescriptor conditionDescriptor = conditionDescriptorJsonParser.parseObject(dialogDescriptor.getJSONObject(ConditionDescriptor.TAG_NAME_JSON), root);
-                ResponseDescriptor responseDescriptor = responseDescriptorJsonParser.parseObject(dialogDescriptor.getJSONObject(ResponseDescriptor.TAG_NAME_JSON), root);
-                dialogDescriptors.add(new DialogDescriptor(attributes, conditionDescriptor, responseDescriptor));
-            }
-        }
-        return dialogDescriptors;
     }
 
     private List<InterceptorDescriptor> getInterceptorDescriptors(final JSONObject root) {

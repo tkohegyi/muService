@@ -25,8 +25,6 @@ import org.springframework.stereotype.Component;
 import com.epam.wilma.common.helper.WilmaService;
 import com.epam.wilma.engine.bootstrap.helper.ApplicationContextCloser;
 import com.epam.wilma.maintainer.LogFileMaintainer;
-import com.epam.wilma.safeguard.monitor.JmsQueueMonitor;
-import com.epam.wilma.sequence.maintainer.SequenceMaintainer;
 import com.epam.wilma.webapp.jetty.JettyServer;
 import com.google.common.util.concurrent.AbstractIdleService;
 
@@ -42,18 +40,12 @@ public class WilmaEngine extends AbstractIdleService implements WilmaService {
     @Autowired
     private LogFileMaintainer logFileMaintainer;
     @Autowired
-    private JmsQueueMonitor jmsQueueMonitor;
-    @Autowired
     private ApplicationContextCloser applicationCloser;
-    @Autowired
-    private SequenceMaintainer sequenceMaintainer;
 
     @Override
     protected void startUp() throws Exception {
         webAppServer.start();
         logFileMaintainer.startScheduling();
-        jmsQueueMonitor.startScheduling();
-        sequenceMaintainer.startScheduling();
     }
 
     @Override

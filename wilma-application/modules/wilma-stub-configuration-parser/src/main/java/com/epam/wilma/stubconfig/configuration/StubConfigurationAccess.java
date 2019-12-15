@@ -26,7 +26,6 @@ import com.epam.wilma.common.configuration.ConfigurationAccessBase;
 import com.epam.wilma.domain.stubconfig.StubResourcePathProvider;
 import com.epam.wilma.properties.PropertyHolder;
 import com.epam.wilma.stubconfig.configuration.domain.PropertyDto;
-import com.epam.wilma.stubconfig.dom.parser.node.helper.ClassNameMapper;
 
 /**
  * Sets the module appropriate configurations.
@@ -42,8 +41,6 @@ public class StubConfigurationAccess implements ConfigurationAccessBase {
     private PropertyHolder propertyHolder;
     @Autowired
     private StubResourcePathProvider stubResourcePathProvider;
-    @Autowired
-    private ClassNameMapper classNameMapper;
 
     @Override
     public void loadProperties() {
@@ -78,7 +75,6 @@ public class StubConfigurationAccess implements ConfigurationAccessBase {
         stubResourcePathProvider.setJarPath(jarPath);
         stubResourcePathProvider.setCachePath(cachePath);
         stubResourcePathProvider.setSequenceHandlerPath(sequenceHandlerPath);
-        classNameMapper.initialize(stubResourcePathProvider.getEveryPathAsString());
     }
 
 }

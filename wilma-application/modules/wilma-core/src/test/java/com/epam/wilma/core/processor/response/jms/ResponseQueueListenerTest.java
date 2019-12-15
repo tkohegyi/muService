@@ -39,7 +39,6 @@ import org.testng.annotations.Test;
 import com.epam.wilma.domain.exception.ApplicationException;
 import com.epam.wilma.domain.exception.SystemException;
 import com.epam.wilma.domain.http.WilmaHttpResponse;
-import com.epam.wilma.sequence.SequenceManager;
 
 /**
  * Provides unit tests for the {@link ResponseQueueListener} class.
@@ -64,8 +63,6 @@ public class ResponseQueueListenerTest {
     private ObjectMessage objectMessage;
     @Mock
     private Message message;
-    @Mock
-    private SequenceManager manager;
 
     @InjectMocks
     private ResponseQueueListener underTest;
@@ -133,18 +130,6 @@ public class ResponseQueueListenerTest {
         //WHEN
         underTest.onMessage(message);
         //THEN it should throw exception
-    }
-
-    @Test
-    public void testOnMessageShouldCallSequenceManagerToSaveTheResponse() throws JMSException {
-        //GIVEN
-        underTest.setMessageLoggingEnabled(true);
-        given(response.isLoggingEnabled()).willReturn(true);
-        given(objectMessage.getObject()).willReturn(response);
-        //WHEN
-        underTest.onMessage(objectMessage);
-        //THEN
-        verify(manager).tryToSaveResponseIntoSequence(response);
     }
 
     @Test

@@ -28,8 +28,6 @@ public class WilmaServiceListener extends Service.Listener {
     @Autowired
     private String startMessage;
     @Autowired
-    private LogFilePathProvider logFilePath;
-    @Autowired
     private VersionTitleProvider versionTitleProvider;
     @Autowired
     private EngineConfigurationAccess configurationAccess;
@@ -51,13 +49,7 @@ public class WilmaServiceListener extends Service.Listener {
 
     private String generateStartMessage() {
         int wilmaPort = getWilmaPort();
-        String appLogPath = logFilePath.getAppLogFilePath().toAbsolutePath().toString();
-        return String.format(startMessage, versionTitleProvider.getVersionTitle(), wilmaPort, appLogPath);
-    }
-
-    private int getProxyPort() {
-        PropertyDTO properties = configurationAccess.getProperties();
-        return properties.getProxyPort();
+        return String.format(startMessage, versionTitleProvider.getVersionTitle(), wilmaPort);
     }
 
     private int getWilmaPort() {

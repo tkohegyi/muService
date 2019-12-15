@@ -34,8 +34,6 @@ public class WilmaServiceListenerTest {
     private Logger logger;
     @Mock
     private VersionTitleProvider versionTitleProvider;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private LogFilePathProvider logFilePath;
     @Mock
     private EngineConfigurationAccess configurationAccess;
 
@@ -46,21 +44,17 @@ public class WilmaServiceListenerTest {
     private PropertyDTO properties;
 
     @BeforeMethod
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         Whitebox.setInternalState(underTest, "logger", logger);
         Whitebox.setInternalState(underTest, "startMessage", ERR_MSG);
         given(configurationAccess.getProperties()).willReturn(properties);
-        given(logFilePath.getLogFilePath().toAbsolutePath().toString()).willReturn("a");
-        given(properties.getProxyPort()).willReturn(1234);
     }
 
     @Test
     public void testRunningShouldLogStartMessage() {
         //GIVEN
         Whitebox.setInternalState(underTest, "startMessage", WILMA_START_MESSAGE);
-        given(logFilePath.getLogFilePath().toAbsolutePath().toString()).willReturn(WILMA_START_MESSAGE);
-        given(logFilePath.getAppLogFilePath().toAbsolutePath().toString()).willReturn(WILMA_START_MESSAGE);
         //WHEN
         underTest.running();
         //THEN

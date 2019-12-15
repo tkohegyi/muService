@@ -16,12 +16,6 @@
   <util:map id="maintainerTasks" map-class="java.util.HashMap">
     <entry>
       <key>
-        <value type="com.epam.wilma.maintainer.domain.MaintainerMethod">FILELIMIT</value>
-      </key>
-      <ref bean="fileLimitMaintainerTask" />
-    </entry>
-    <entry>
-      <key>
         <value type="com.epam.wilma.maintainer.domain.MaintainerMethod">TIMELIMIT</value>
       </key>
       <ref bean="timeLimitMaintainerTask" />

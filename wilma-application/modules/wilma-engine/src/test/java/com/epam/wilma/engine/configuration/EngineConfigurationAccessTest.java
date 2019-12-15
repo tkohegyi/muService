@@ -40,7 +40,6 @@ public class EngineConfigurationAccessTest {
 
     private static final String STUB_CONFIG_SOURCE_FOLDER_PATH = "src/main/resources/stubconfigs";
     private static final String STUB_CONFIG_PATTERN = "xml";
-    private final Integer port = 1234;
 
     @Mock
     private PropertyHolder propertyHolder;
@@ -51,19 +50,8 @@ public class EngineConfigurationAccessTest {
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        given(propertyHolder.getInt("proxy.port")).willReturn(port);
         given(propertyHolder.get("stub.descriptors.path")).willReturn(STUB_CONFIG_SOURCE_FOLDER_PATH);
         given(propertyHolder.get("stub.descriptors.pattern")).willReturn(STUB_CONFIG_PATTERN);
-    }
-
-    @Test
-    public void testLoadPropertiesShouldSetProxyPort() {
-        //GIVEN in setUp
-        //WHEN
-        underTest.loadProperties();
-        //THEN
-        PropertyDTO actual = underTest.getProperties();
-        assertEquals(actual.getProxyPort(), port);
     }
 
     @Test

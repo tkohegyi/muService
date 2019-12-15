@@ -17,7 +17,7 @@
    </bean>
    
    <bean id="startMessage" class="java.lang.String">
-       <constructor-arg value="%s &#10;GNU GPL-V3.0 License, UI is available via URL: http://localhost:%d/index/ &#10;Detailed log is available here: %s&#10;" />
+       <constructor-arg value="%s &#10;GNU GPL-V3.0 License, UI is available via URL: http://localhost:%d/index/ &#10;" />
    </bean>
 
   <bean id="simpleDateFormatterForAlerts" class="java.text.SimpleDateFormat">

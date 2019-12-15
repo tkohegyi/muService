@@ -25,7 +25,6 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class PropertyDTO {
 
-    private final Integer proxyPort;
     private final Integer wilmaPort;
     private final String stubConfigFolderPath;
     private final String stubConfigPattern;
@@ -33,7 +32,6 @@ public class PropertyDTO {
 
     /**
      * Constructs a new property holding object with the given fields.
-     * @param proxyPort the port used by the proxy
      * @param wilmaPort the port used by Wilma UI
      * @param stubConfigFolderPath the path of that folder from project root, what contains stub descriptor XML configuration files
      * @param stubConfigPattern extension pattern of stub descriptor XML configuration files
@@ -41,19 +39,14 @@ public class PropertyDTO {
      */
     //CHECKSTYLE OFF
     //more than 4 input field is allowed here
-    public PropertyDTO(final Integer proxyPort, final Integer wilmaPort,
+    public PropertyDTO(final Integer wilmaPort,
                        final String stubConfigFolderPath, final String stubConfigPattern, final String stubConfigCachePath) {
         //CHECKSTYLE ON
         super();
-        this.proxyPort = proxyPort;
         this.wilmaPort = wilmaPort;
         this.stubConfigFolderPath = stubConfigFolderPath;
         this.stubConfigPattern = stubConfigPattern;
         this.stubConfigCachePath = stubConfigCachePath;
-    }
-
-    public Integer getProxyPort() {
-        return proxyPort;
     }
 
     public Integer getWilmaPort() {

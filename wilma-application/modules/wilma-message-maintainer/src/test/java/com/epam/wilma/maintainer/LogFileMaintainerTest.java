@@ -18,13 +18,12 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
-import java.util.HashMap;
-import java.util.Map;
-
+import com.epam.wilma.common.helper.CronTriggerFactory;
+import com.epam.wilma.maintainer.configuration.MaintainerConfigurationAccess;
+import com.epam.wilma.maintainer.configuration.domain.MaintainerProperties;
+import com.epam.wilma.maintainer.domain.MaintainerMethod;
+import com.epam.wilma.maintainer.task.MaintainerTask;
+import com.epam.wilma.maintainer.task.timelimit.TimeLimitMaintainerTask;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -34,14 +33,11 @@ import org.springframework.scheduling.support.CronTrigger;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.common.helper.CronTriggerFactory;
-import com.epam.wilma.domain.exception.SchedulingCannotBeStartedException;
-import com.epam.wilma.maintainer.configuration.MaintainerConfigurationAccess;
-import com.epam.wilma.maintainer.configuration.domain.MaintainerProperties;
-import com.epam.wilma.maintainer.domain.MaintainerMethod;
-import com.epam.wilma.maintainer.task.MaintainerTask;
-import com.epam.wilma.maintainer.task.filelimit.FileLimitMaintainerTask;
-import com.epam.wilma.maintainer.task.timelimit.TimeLimitMaintainerTask;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 /**
  * Test class for LogFileMaintainer.
@@ -60,8 +56,6 @@ public class LogFileMaintainerTest {
     @Mock
     private TimeLimitMaintainerTask timeLimitMaintainerTask;
     @Mock
-    private FileLimitMaintainerTask fileLimitMaintainerTask;
-    @Mock
     private CronTrigger cronTrigger;
     @Mock
     private MaintainerConfigurationAccess configurationAccess;
@@ -72,7 +66,6 @@ public class LogFileMaintainerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         Map<MaintainerMethod, MaintainerTask> maintainerTasks = new HashMap<>();
-        maintainerTasks.put(MaintainerMethod.FILELIMIT, fileLimitMaintainerTask);
         maintainerTasks.put(MaintainerMethod.TIMELIMIT, timeLimitMaintainerTask);
         Whitebox.setInternalState(underTest, "maintainerTasks", maintainerTasks);
         given(configurationAccess.getProperties()).willReturn(properties);
@@ -89,29 +82,6 @@ public class LogFileMaintainerTest {
         // THEN
         verify(cronTriggerFactory).createCronTrigger(CRON_EXPRESSION);
         verify(taskScheduler).schedule(timeLimitMaintainerTask, cronTrigger);
-    }
-
-    @Test
-    public void testStartSchedulingShouldStartFileLimitTaskWhenItIsSetInProperties() {
-        // GIVEN
-        given(properties.getMaintainerMethod()).willReturn("filelimit");
-        given(cronTriggerFactory.createCronTrigger(CRON_EXPRESSION)).willReturn(cronTrigger);
-        // WHEN
-        underTest.startScheduling();
-        // THEN
-        verify(cronTriggerFactory).createCronTrigger(CRON_EXPRESSION);
-        verify(taskScheduler).schedule(fileLimitMaintainerTask, cronTrigger);
-    }
-
-    @Test(expectedExceptions = SchedulingCannotBeStartedException.class)
-    public void testStartSchedulingShouldThrowExceptionWhenWrongValueIsSetInProperties() {
-        // GIVEN
-        given(properties.getMaintainerMethod()).willReturn("asd");
-        given(cronTriggerFactory.createCronTrigger(CRON_EXPRESSION)).willReturn(cronTrigger);
-        // WHEN
-        underTest.startScheduling();
-        // THEN
-        verify(taskScheduler, never()).schedule(fileLimitMaintainerTask, cronTrigger);
     }
 
 }

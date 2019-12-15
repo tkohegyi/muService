@@ -77,7 +77,7 @@ public class WebAppConfigurationAccessTest {
         //THEN
         PropertyDTO actual = underTest.getProperties();
         ServerProperties result = actual.getServerProperties();
-        assertEquals(result.getProxyPort(), PROXY_PORT);
+        assertEquals(result.getServerPort(), PROXY_PORT);
         assertEquals(result.getRequestBufferSize(), REQUEST_BUFFER_SIZE);
         assertEquals(result.getResponseBufferSize(), RESPONSE_BUFFER_SIZE);
     }

@@ -45,7 +45,7 @@ public class ServerFactory {
     public Server createServer(final ServerProperties serverProperties) {
         Server server = new Server();
         Connector connector = new SelectChannelConnector();
-        connector.setPort(serverProperties.getProxyPort());
+        connector.setPort(serverProperties.getServerPort());
         connector.setRequestBufferSize(serverProperties.getRequestBufferSize());
         connector.setResponseBufferSize(serverProperties.getResponseBufferSize());
         server.setConnectors(new Connector[]{connector});

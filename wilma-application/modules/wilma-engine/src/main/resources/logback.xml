@@ -1,16 +1,6 @@
 <configuration>
-<!--  Copyright since 2013, EPAM Systems
-      This file is part of Wilma.
-      Wilma is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License 
-      as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-      Wilma is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-      You should have received a copy of the GNU General Public License along with Wilma. 
-      If not, see <http://www.gnu.org/licenses/>. -->
-
-
   <appender name="FILE-APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>log/app/wilmalog.txt</file>
+    <file>log/muServicelog.txt</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>log/app/wilmalog%d{yyyyMMdd}.txt</fileNamePattern>
       <maxHistory>5</maxHistory>
@@ -58,9 +48,9 @@
     <appender-ref ref="CONSOLE-APPENDER" />
   </logger>
 
-  <logger name="com.epam.wilma.webapp.stub.response.formatter.xsl" level="WARN"/>
-  <logger name="net.lightbody.bmp.proxy" level="INFO"/>
-  <logger name="net.lightbody.bmp.proxy.selenium" level="INFO"/>
+  <logger name="org.rockhill.muService" level="INFO">
+    <appender-ref ref="CONSOLE-APPENDER" />
+  </logger>
 
   <root level="INFO">
     <appender-ref ref="${logger:-EMPTY}" />

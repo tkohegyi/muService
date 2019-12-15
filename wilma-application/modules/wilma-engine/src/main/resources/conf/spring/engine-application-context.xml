@@ -16,8 +16,8 @@
     <constructor-arg  value="/conf/wilma/wilma.conf.validation.properties" />
    </bean>
    
-   <bean id="wilmaStartMessage" class="java.lang.String">
-       <constructor-arg value="%s &#10;GNU GPL-V3.0 License&#10;muService UI is available via URL: http://localhost:%d/index/ &#10;Application logs are stored in '%s' folder.&#10;." />
+   <bean id="startMessage" class="java.lang.String">
+       <constructor-arg value="%s &#10;GNU GPL-V3.0 License, UI is available via URL: http://localhost:%d/index/ &#10;Detailed log is available here: %s&#10;" />
    </bean>
 
   <bean id="simpleDateFormatterForAlerts" class="java.text.SimpleDateFormat">
@@ -27,7 +27,6 @@
     <constructor-arg index="0" value="yyyyMMddHHmmss" />
   </bean>
   <bean id="sLF4JBridgeConfigurer" class="com.epam.wilma.engine.slf4j.SLF4JBridgeConfigurer" init-method="configure" />
-  <import resource="classpath:conf/spring/core-application-context.xml"/>
   <import resource="classpath:conf/spring/maintainer-application-context.xml"/>
   <import resource="classpath:conf/spring/webapp-application-context.xml"/>
   <import resource="classpath:conf/spring/stub-config-application-context.xml"/>

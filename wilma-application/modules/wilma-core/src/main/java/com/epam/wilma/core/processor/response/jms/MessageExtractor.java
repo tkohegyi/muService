@@ -42,9 +42,6 @@ public class MessageExtractor {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageExtractor.class);
 
     @Autowired
-    @Qualifier("fastInfosetDecompressorProcessor")
-    private WilmaEntityProcessorInterface fastInfosetDecompressorProcessor;
-    @Autowired
     @Qualifier("base64DecoderProcessor")
     private WilmaEntityProcessorInterface base64DecoderProcessor;
 
@@ -56,7 +53,6 @@ public class MessageExtractor {
         String body = message.getBody();
         try {
             base64DecoderProcessor.process(message);
-            fastInfosetDecompressorProcessor.process(message);
         } catch (SystemException | ApplicationException e) {
             String loggerID = message.getWilmaMessageLoggerId();
             LOGGER.info("Failed to extract message content! ID: " + loggerID + ". Restoring original content...", e);

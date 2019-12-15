@@ -81,7 +81,7 @@ public class JettyServerTest {
         MockitoAnnotations.initMocks(this);
         given(configurationAccess.getProperties()).willReturn(properties);
         given(properties.getServerProperties()).willReturn(serverProperties);
-        given(serverProperties.getProxyPort()).willReturn(PORT);
+        given(serverProperties.getServerPort()).willReturn(PORT);
         given(serverProperties.getRequestBufferSize()).willReturn(REQUEST_BUFFER_SIZE);
         given(serverProperties.getResponseBufferSize()).willReturn(RESPONSE_BUFFER_SIZE);
         //this is necessary because the start method of the jettyServer is final

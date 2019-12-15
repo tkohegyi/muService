@@ -107,5 +107,5 @@ public class StubDescriptorStatusServletTest {
         order.verify(out).write("{\"Name\": \"InterceptorDescriptor1\"}");
         order.verify(out).write("]");
     }
-    
+
 }

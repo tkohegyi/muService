@@ -272,9 +272,9 @@ Request-response pairs are stored in 'D:\wilma\messages' folder.
                     configuration:</p>
                 <code><pre>
 -Dhttp.proxyHost=[wilma-host]
--Dhttp.proxyPort=[wilma-port]
+-Dhttp.serverPort=[wilma-port]
 -Dhttps.proxyHost=[wilma-host]
--Dhttps.proxyPort=[wilma-port]
+-Dhttps.serverPort=[wilma-port]
 -Djavax.net.ssl.trustStore=[path/to/wilma.jks]
 -Djavax.net.ssl.trustStorePassword=vvilma</pre></code>
                 <ul>
@@ -306,7 +306,7 @@ Request-response pairs are stored in 'D:\wilma\messages' folder.
                     See example below (for http protocol only):</p>
                 <code><pre>
 ...
-applicationDefaultJvmArgs = ["-Dhttp.proxyHost=127.0.0.1", "-Dhttp.proxyPort=9092"]
+applicationDefaultJvmArgs = ["-Dhttp.proxyHost=127.0.0.1", "-Dhttp.serverPort=9092"]
 ...</pre></code>
 
                 <h2>Using Wilma Message Search</h2>

@@ -29,12 +29,7 @@ public class PropertyDTO {
     private MaintainerProperties maintainerProperties;
     private Readme readme;
     private ServerProperties serverProperties;
-    private SequenceResponseGuardProperties sequenceResponseGuardProperties;
     private FileListJsonProperties fileListProperties;
-
-    public SequenceResponseGuardProperties getSequenceResponseGuardProperties() {
-        return sequenceResponseGuardProperties;
-    }
 
     public ServerProperties getServerProperties() {
         return serverProperties;
@@ -61,7 +56,6 @@ public class PropertyDTO {
         private MaintainerProperties maintainerProperties;
         private Readme readme;
         private ServerProperties serverProperties;
-        private SequenceResponseGuardProperties sequenceResponseGuardProperties;
         private FileListJsonProperties fileListProperties;
 
         /**
@@ -95,16 +89,6 @@ public class PropertyDTO {
         }
 
         /**
-         * Sets the sequenceResponseGuardProperties value.
-         * @param sequenceResponseGuardProperties holds properties for SequenceResponseGuard.
-         * @return the {@link Builder} for chaining
-         */
-        public Builder sequenceResponseGuardProperties(final SequenceResponseGuardProperties sequenceResponseGuardProperties) {
-            this.sequenceResponseGuardProperties = sequenceResponseGuardProperties;
-            return this;
-        }
-
-        /**
          * Sets the fileListProperties value.
          * @param fileListProperties holds properties for FileListJsonBuilder.
          * @return the {@link Builder} for chaining
@@ -128,7 +112,6 @@ public class PropertyDTO {
             propertyDTO.maintainerProperties = maintainerProperties;
             propertyDTO.readme = readme;
             propertyDTO.serverProperties = serverProperties;
-            propertyDTO.sequenceResponseGuardProperties = sequenceResponseGuardProperties;
             propertyDTO.fileListProperties = fileListProperties;
         }
     }

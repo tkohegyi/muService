@@ -33,7 +33,7 @@ import com.epam.wilma.webapp.helper.IpAddressResolver;
 
 /**
  * Class which determines if the request originates from an admin host or not.
- * @author Adam_Csaba_Kiraly
+ * @author Adam_Csaba_Kiraly, Tamas Kohegyi
  *
  */
 @Component
@@ -57,8 +57,11 @@ public class HostValidatorService implements ApplicationListener<ContextRefreshe
 
     private void initializeAllowedHosts() {
         allowedHosts = new ArrayList<>();
-        for (String ipOrHost : wilmaAdminHostsDTO.getWilmaAdminHosts()) {
-            allowedHosts.add(ipAddressResolver.resolveToHostName(ipOrHost));
+        List<String> adminHosts = wilmaAdminHostsDTO.getWilmaAdminHosts();
+        if (adminHosts != null) {
+            for (String ipOrHost : wilmaAdminHostsDTO.getWilmaAdminHosts()) {
+                allowedHosts.add(ipAddressResolver.resolveToHostName(ipOrHost));
+            }
         }
     }
 

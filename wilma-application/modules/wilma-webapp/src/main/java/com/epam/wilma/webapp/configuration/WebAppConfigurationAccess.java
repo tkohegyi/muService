@@ -28,7 +28,6 @@ import com.epam.wilma.webapp.configuration.domain.FileListJsonProperties;
 import com.epam.wilma.webapp.configuration.domain.MaintainerProperties;
 import com.epam.wilma.webapp.configuration.domain.PropertyDTO;
 import com.epam.wilma.webapp.configuration.domain.Readme;
-import com.epam.wilma.webapp.configuration.domain.SequenceResponseGuardProperties;
 import com.epam.wilma.webapp.configuration.domain.ServerProperties;
 
 /**
@@ -49,10 +48,9 @@ public class WebAppConfigurationAccess implements ConfigurationAccessBase {
         MaintainerProperties maintainerProperties = getMaintainerProperties();
         Readme readme = getReadme();
         ServerProperties serverProperties = getServerProperties();
-        SequenceResponseGuardProperties sequenceResponseGuardProperties = getSequenceResponseGuardProperties();
         FileListJsonProperties fileListProperties = getFileListJsonProperties();
         properties = new PropertyDTO.Builder().maintainerProperties(maintainerProperties).readme(readme)
-                .sequenceResponseGuardProperties(sequenceResponseGuardProperties).serverProperties(serverProperties)
+                .serverProperties(serverProperties)
                 .fileListProperties(fileListProperties).build();
     }
 
@@ -69,17 +67,11 @@ public class WebAppConfigurationAccess implements ConfigurationAccessBase {
         return new FileListJsonProperties(maximumValue);
     }
 
-    private SequenceResponseGuardProperties getSequenceResponseGuardProperties() {
-        int proxyTimeout = propertyHolder.getInt("proxy.request.timeout");
-        int waitInterval = propertyHolder.getInt("sequence.response.wait.interval");
-        return new SequenceResponseGuardProperties(proxyTimeout, waitInterval);
-    }
-
     private ServerProperties getServerProperties() {
-        int proxyPort = propertyHolder.getInt("internal.wilma.port");
+        int serverPort = propertyHolder.getInt("internal.wilma.port");
         int requestBufferSize = propertyHolder.getInt("internal.wilma.request.buffer.size");
         int responseBufferSize = propertyHolder.getInt("internal.wilma.response.buffer.size");
-        return new ServerProperties(proxyPort, requestBufferSize, responseBufferSize);
+        return new ServerProperties(serverPort, requestBufferSize, responseBufferSize);
     }
 
     private Readme getReadme() {

@@ -18,14 +18,8 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.epam.wilma.domain.exception.ApplicationException;
 import com.epam.wilma.domain.http.WilmaHttpEntity;
-import com.epam.wilma.domain.http.WilmaHttpRequest;
-import com.epam.wilma.router.LocalhostRequestRouter;
-import com.epam.wilma.router.helper.LocalhostRequestChecker;
+import org.springframework.stereotype.Component;
 
 /**
  * Reroutes requests which are directed at localhost address, to the Wilma Servlet which will answer it.
@@ -35,23 +29,8 @@ import com.epam.wilma.router.helper.LocalhostRequestChecker;
 @Component
 public class LocalhostRequestProcessor extends ProcessorBase {
 
-    @Autowired
-    private LocalhostRequestChecker localhostRequestChecker;
-    @Autowired
-    private LocalhostRequestRouter localhostRequestRouter;
-
     @Override
-    public void process(final WilmaHttpEntity entity) throws ApplicationException {
-        WilmaHttpRequest request = (WilmaHttpRequest) entity;
-        /**
-         * If this method was called then localhost blocking is turned on,
-         * so we only need to check if the request targets localhost in order to determine if it needs to be rerouted.
-         */
-        boolean requestNeedsRerouting = localhostRequestChecker.checkIfRequestTargetsLocalhost(request);
-        if (requestNeedsRerouting) {
-            localhostRequestRouter.reroute(request);
-            request.setRerouted(true);
-        }
+    public void process(final WilmaHttpEntity entity) {
     }
 
 }

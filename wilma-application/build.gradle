@@ -57,12 +57,12 @@ task deleteRelease(type: Delete) {
 
 def myCopySpec = project.copySpec {
    from(rootProject.rootDir.absolutePath + '/wilma-application/modules/wilma-engine/') {
-       include 'wilma.conf.properties'
+       include 'conf.properties'
        include 'readme.txt'
        include 'stubConfig.json'
    }
    from(rootProject.rootDir.absolutePath + '/wilma-application/modules/wilma-engine/build/libs/') {
-     include "wilma-$appVersion.$buildNumber" + '.jar'
+     include "muService-$appVersion.$buildNumber" + '.jar'
    }
    from(rootProject.rootDir.absolutePath + '/') {
      include 'COPYRIGHT.txt'
@@ -137,7 +137,5 @@ subprojects {
             }
         }
     }
-    
     test.useTestNG()
-
 }

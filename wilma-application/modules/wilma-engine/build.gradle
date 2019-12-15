@@ -1,22 +1,3 @@
-/*==========================================================================
-Copyright since 2013, EPAM Systems
-
-This file is part of Wilma.
-
-Wilma is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Wilma is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
-===========================================================================*/
-
 ext.componentDescription = "muService - Service that hosts several microServices"
 buildscript {
     repositories { jcenter() }
@@ -28,9 +9,9 @@ buildscript {
 apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-mainClassName = 'com.epam.wilma.engine.WilmaApplication'
+mainClassName = 'com.epam.wilma.engine.MuServiceApplication'
 
-def configFileDefaultPath = "$project.projectDir/wilma.conf.properties";
+def configFileDefaultPath = "$project.projectDir/conf.properties";
 if (!hasProperty("configFilePath")) {
     project.ext.configFilePath = configFileDefaultPath
 }
@@ -56,7 +37,7 @@ shadowJar {
         'activemq.xsd.*',
         'about.html']
 
-    archiveName = "wilma-$version"+'.jar'
+    archiveName = "muService-$version"+'.jar'
 }
 
 jar {

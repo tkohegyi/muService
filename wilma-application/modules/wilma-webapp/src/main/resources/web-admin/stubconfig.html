@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Wilma Stub Configuration</title>
+<title>muService - Service Configuration</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <!-- Bootstrap -->
@@ -17,41 +17,36 @@
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand">Wilma</a>
+          <a class="brand">muService</a>
           <ul class="nav">
             <li id="nav-home"><a href="/index">Home</a></li>
-            <li id="nav-stub"><a href="/stubconfig">Stub Configuration</a></li>
-            <li id="nav-msg-log"><a href="/messages">Message Logs</a></li>
-            <li id="nav-wilma-log"><a href="/logs">Wilma Application Log</a></li>
-            <li id="nav-guide"><a href="/readme">Wilma User's Guide</a></li>
+            <li id="nav-stub"><a href="/stubconfig">Service Configuration</a></li>
+            <li id="nav-wilma-log"><a href="/logs">muService Administration</a></li>
+            <li id="nav-guide"><a href="/readme">muService User's Guide</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <h1>Wilma Stub Configuration</h1>
+    <h1>Service Configuration</h1>
     <span id="span-version" class="badge badge-info"></span>
     <div class="config-set">
       <h3>Update configuration</h3><br/><br/>
       <ul class="nav nav-tabs" id="configuration-uploader-tabs">
-        <li class="active"><a href="#stubconfig">Stub configuration groups</a></li>
+        <li class="active"><a href="#stubconfig">Service configuration groups</a></li>
           <li><a href="#interceptors">Interceptors</a></li>
-          <li><a href="#conditionCheckers">Condition checkers</a></li>
-          <li><a href="#responseFormatters">Response formatters</a></li>
-          <li><a href="#templates">Templates</a></li>
-          <li><a href="#sequenceHandlers">Sequence handlers</a></li>
           <li><a href="#jar">Jars</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="stubconfig">
         <br/>
           <fieldset class="form-horizontal">
-            <legend>Loaded stub configuration groups</legend>
+            <legend>Loaded Service groups</legend>
             <div id="tables">
             </div>
           </fieldset>
           <br/>
           <fieldset>
-            <legend>Upload a new stub configuration</legend>
+            <legend>Upload a new Service configuration</legend>
             <span class="btn btn-success fileinput-button"> <i class="icon-upload icon-white"></i> <span>Select config JSON file</span> <input
               name="stub-configuration" type="file" data-url="../config/admin/stub/multiPartConfigFileUpload" />
             </span>

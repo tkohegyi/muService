@@ -44,14 +44,11 @@ public class StubResourceHandlerServlet extends HttpServlet {
 
     private static final String TEMPLATE = "template";
     private static final String INTERCEPTOR = "interceptor";
-    private static final String CONDITION_CHECKER = "condition-checker";
-    private static final String RESPONSE_FORMATTER = "response-formatter";
-    private static final String SEQUENCE_HANDLER = "sequence-handler";
     private static final String NO_TYPE_ERR_MSG = "Please provide a type parameter in the url!";
     private static final String APPLICATION_JSON = "application/json";
     private static final String JAR = "jar";
     private static final String HTML = "text/html";
-    private static final String ERROR_MESSAGE_TEMPLATE = "Invalid type %s ! Valid types are: %s, %s, %s, %s, %s and %s!";
+    private static final String ERROR_MESSAGE_TEMPLATE = "Invalid type %s ! Valid types are: %s, %s and %s!";
 
     private final FileListJsonBuilder fileListJsonBuilder;
     private final StubResourcePathProvider stubResourcePathProvider;
@@ -78,8 +75,7 @@ public class StubResourceHandlerServlet extends HttpServlet {
             if (path != null) {
                 writeResponse(req, resp, path);
             } else {
-                writeError(resp, String.format(ERROR_MESSAGE_TEMPLATE, type, INTERCEPTOR, CONDITION_CHECKER, RESPONSE_FORMATTER, TEMPLATE, JAR,
-                        SEQUENCE_HANDLER));
+                writeError(resp, String.format(ERROR_MESSAGE_TEMPLATE, type, INTERCEPTOR, TEMPLATE, JAR));
             }
         } else {
             writeError(resp, NO_TYPE_ERR_MSG);
@@ -101,18 +97,12 @@ public class StubResourceHandlerServlet extends HttpServlet {
 
     private Path getResourcePath(final String type) {
         Path path = null;
-        if (CONDITION_CHECKER.equals(type)) {
-            path = stubResourcePathProvider.getConditionCheckerPath();
-        } else if (RESPONSE_FORMATTER.equals(type)) {
-            path = stubResourcePathProvider.getResponseFormatterPath();
-        } else if (TEMPLATE.equals(type)) {
+        if (TEMPLATE.equals(type)) {
             path = stubResourcePathProvider.getTemplatesPath();
         } else if (INTERCEPTOR.equals(type)) {
             path = stubResourcePathProvider.getInterceptorPath();
         } else if (JAR.equals(type)) {
             path = stubResourcePathProvider.getJarPath();
-        } else if (SEQUENCE_HANDLER.equals(type)) {
-            path = stubResourcePathProvider.getSequenceHandlerPath();
         }
         return path;
     }

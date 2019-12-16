@@ -20,9 +20,6 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.testng.Assert.assertEquals;
-
-import java.util.ArrayList;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -32,8 +29,6 @@ import org.testng.annotations.Test;
 
 import com.epam.wilma.domain.stubconfig.StubResourcePathProvider;
 import com.epam.wilma.properties.PropertyHolder;
-import com.epam.wilma.stubconfig.configuration.domain.PropertyDto;
-import com.epam.wilma.stubconfig.dom.parser.node.helper.ClassNameMapper;
 
 /**
  * Tests for {@link StubConfigurationAccess} class.
@@ -42,14 +37,10 @@ import com.epam.wilma.stubconfig.dom.parser.node.helper.ClassNameMapper;
  */
 public class StubConfigurationAccessTest {
 
-    private static final int MAX_DEPTH = 10;
-
     @Mock
     private PropertyHolder propertyHolder;
     @Mock
     private StubResourcePathProvider stubResourcePathProvider;
-    @Mock
-    private ClassNameMapper classNameMapper;
 
     @InjectMocks
     private StubConfigurationAccess underTest;
@@ -57,17 +48,6 @@ public class StubConfigurationAccessTest {
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void testLoadPropertiesShouldSetMaxDepth() {
-        //GIVEN
-        given(propertyHolder.getInt("stub.descriptor.max.depth")).willReturn(MAX_DEPTH);
-        //WHEN
-        underTest.loadProperties();
-        //THEN
-        PropertyDto actual = underTest.getProperties();
-        assertEquals(actual.getMaxDepthOfTree(), MAX_DEPTH);
     }
 
     @Test
@@ -79,28 +59,6 @@ public class StubConfigurationAccessTest {
         underTest.setProperties();
         //THEN
         verify(stubResourcePathProvider).setTemplatesPath(templatePath);
-    }
-
-    @Test
-    public void testOnApplicationEventShouldSetResponseFormatterPath() {
-        //GIVEN
-        String responseFormatterPath = "responseFormatterPath";
-        given(propertyHolder.get("stub.response.formatter.path")).willReturn(responseFormatterPath);
-        //WHEN
-        underTest.setProperties();
-        //THEN
-        verify(stubResourcePathProvider).setResponseFormatterPath(responseFormatterPath);
-    }
-
-    @Test
-    public void testOnApplicationEventShouldSetConditionCheckerPath() {
-        //GIVEN
-        String conditionCheckerPath = "conditionCheckerPath";
-        given(propertyHolder.get("stub.condition.checker.path")).willReturn(conditionCheckerPath);
-        //WHEN
-        underTest.setProperties();
-        //THEN
-        verify(stubResourcePathProvider).setConditionCheckerPath(conditionCheckerPath);
     }
 
     @Test
@@ -123,17 +81,6 @@ public class StubConfigurationAccessTest {
         underTest.setProperties();
         //THEN
         verify(stubResourcePathProvider).setJarPath(jarPath);
-    }
-
-    @Test
-    public void testOnApplicationEventShouldSetSequenceHandlerPath() {
-        //GIVEN
-        String sequenceHandlerPath = "sequenceHandlerPath";
-        given(propertyHolder.get("stub.sequence.handler.path")).willReturn(sequenceHandlerPath);
-        //WHEN
-        underTest.setProperties();
-        //THEN
-        verify(stubResourcePathProvider).setSequenceHandlerPath(sequenceHandlerPath);
     }
 
 }

@@ -95,21 +95,12 @@ public class MultiPartFileProcessor {
     private String processUploadedClasses(final InputStream resource, final String contentType, final String fieldName, final String resFileName) {
         String result = null;
 
-        if ("stub-condition-checker".equals(fieldName) && isContentTypeJava(contentType)) {
-            writeResourceToFile(resource, resFileName, stubResourcePathProvider.getConditionCheckerPathAsString());
-            result = "External condition checker class '" + resFileName + "' was uploaded to Wilma.";
-        } else if ("stub-response-formatter".equals(fieldName) && isContentTypeJava(contentType)) {
-            writeResourceToFile(resource, resFileName, stubResourcePathProvider.getResponseFormattersPathAsString());
-            result = "External response formatter class '" + resFileName + "' was uploaded to Wilma.";
-        } else if ("stub-interceptor".equals(fieldName)) {
+        if ("stub-interceptor".equals(fieldName)) {
             writeResourceToFile(resource, resFileName, stubResourcePathProvider.getInterceptorPathAsString());
             result = "External interceptor '" + resFileName + "' was uploaded to Wilma.";
         } else if ("stub-jar".equals(fieldName)) {
             writeResourceToFile(resource, resFileName, stubResourcePathProvider.getJarPathAsString());
             result = "External jar '" + resFileName + "' was uploaded to Wilma.";
-        } else if ("stub-sequence-handler".equals(fieldName)) {
-            writeResourceToFile(resource, resFileName, stubResourcePathProvider.getSequenceHandlerPathAsString());
-            result = "External sequence handler '" + resFileName + "' was uploaded to Wilma.";
         }
 
         return result;

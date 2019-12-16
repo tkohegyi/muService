@@ -79,9 +79,9 @@ task copyToReleaseRoot (type: Copy) {
 task createDir {
 	dependsOn copyToReleaseRoot
 	doLast{
-        file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/interceptors').mkdirs()
-        file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/cache/stub_descriptors').mkdirs()
-        file(rootProject.rootDir.absolutePath + '/wilma-application/release/config/jar').mkdirs()
+        file(rootProject.rootDir.absolutePath + '/muService-application/release/config/interceptors').mkdirs()
+        file(rootProject.rootDir.absolutePath + '/muService-application/release/config/cache/stub_descriptors').mkdirs()
+        file(rootProject.rootDir.absolutePath + '/muService-application/release/config/jar').mkdirs()
 	}
 }
 

@@ -25,7 +25,6 @@ import org.springframework.stereotype.Component;
 import com.epam.wilma.common.configuration.ConfigurationAccessBase;
 import com.epam.wilma.domain.stubconfig.StubResourcePathProvider;
 import com.epam.wilma.properties.PropertyHolder;
-import com.epam.wilma.stubconfig.configuration.domain.PropertyDto;
 
 /**
  * Sets the module appropriate configurations.
@@ -35,8 +34,6 @@ import com.epam.wilma.stubconfig.configuration.domain.PropertyDto;
 @Component
 public class StubConfigurationAccess implements ConfigurationAccessBase {
 
-    private PropertyDto properties;
-
     @Autowired
     private PropertyHolder propertyHolder;
     @Autowired
@@ -44,17 +41,6 @@ public class StubConfigurationAccess implements ConfigurationAccessBase {
 
     @Override
     public void loadProperties() {
-        Integer maxDepth = propertyHolder.getInt("stub.descriptor.max.depth");
-        long defaultSequenceTimeout = propertyHolder.getLong("sequence.timeout");
-        properties = new PropertyDto(maxDepth, defaultSequenceTimeout);
-    }
-
-    /**
-     * Returns a {@link PropertyDto} holding all module specific properties.
-     * @return the propertiesDTO object
-     */
-    public PropertyDto getProperties() {
-        return properties;
     }
 
     /**
@@ -62,19 +48,13 @@ public class StubConfigurationAccess implements ConfigurationAccessBase {
      */
     public void setProperties() {
         String templatePath = propertyHolder.get("stub.template.path");
-        String conditionCheckerPath = propertyHolder.get("stub.condition.checker.path");
-        String responseFormatterPath = propertyHolder.get("stub.response.formatter.path");
         String interceptorPath = propertyHolder.get("stub.interceptor.path");
         String jarPath = propertyHolder.get("stub.jar.path");
         String cachePath = propertyHolder.get("stub.descriptors.cache.path");
-        String sequenceHandlerPath = propertyHolder.get("stub.sequence.handler.path");
         stubResourcePathProvider.setTemplatesPath(templatePath);
-        stubResourcePathProvider.setConditionCheckerPath(conditionCheckerPath);
-        stubResourcePathProvider.setResponseFormatterPath(responseFormatterPath);
         stubResourcePathProvider.setInterceptorPath(interceptorPath);
         stubResourcePathProvider.setJarPath(jarPath);
         stubResourcePathProvider.setCachePath(cachePath);
-        stubResourcePathProvider.setSequenceHandlerPath(sequenceHandlerPath);
     }
 
 }

@@ -3,7 +3,7 @@
     "groupName": "ServerService",
     "interceptors": [
       {
-        "name": "Main Server Service",
+        "name": "Server Service",
         "class": "org.rockhill.muService.serverService.ServerServiceInterceptor"
       }
     ]

@@ -34,8 +34,8 @@ public class ServerServiceInterceptor extends ServerServiceCore implements Reque
         boolean myCall = request.toLowerCase().startsWith(myService);
 
         //set default response
-        String response = "{ \"serverServiceCall\": \"" + myMethod + ":" + request + "\" }";
-        httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        String response = "{ \"serverServiceCall\": \"" + myMethod + ":" + request + "\", \"ping\": \"OK\" }";
+        httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
         //get command
         try {

@@ -52,10 +52,7 @@ public class StubResourceHandlerServletTest {
     private static final String TYPE_PARAMETER = "type";
     private static final String TEMPLATE = "template";
     private static final String INTERCEPTOR = "interceptor";
-    private static final String CONDITION_CHECKER = "condition-checker";
-    private static final String RESPONSE_FORMATTER = "response-formatter";
     private static final String JAR = "jar";
-    private static final String SEQUENCE_HANDLER = "sequence-handler";
     private static final String APPLICATION_JSON = "application/json";
     private static final String ERROR_MESSAGE_TEMPLATE = "Invalid type %s ! Valid types are: %s, %s, %s, %s, %s and %s!";
 
@@ -114,35 +111,6 @@ public class StubResourceHandlerServletTest {
     }
 
     @Test
-    public void testDoGetWhenTypeIsConditionCheckerShouldWriteResourceToResponse() throws ServletException, IOException {
-        //GIVEN
-        String expectedResult = "{\"files\":[\"ConditionChecker.class\"]}";
-        given(request.getParameter(TYPE_PARAMETER)).willReturn(CONDITION_CHECKER);
-        given(stubResourcePathProvider.getConditionCheckerPath()).willReturn(path);
-        given(path.toFile()).willReturn(file);
-        given(fileListJsonBuilder.buildFileListJson(file)).willReturn(expectedResult);
-        //WHEN
-        underTest.doGet(request, response);
-        //THEN
-        verify(writer).write(expectedResult);
-        verify(response).setContentType(APPLICATION_JSON);
-    }
-
-    @Test
-    public void testDoGetWhenTypeIsResponseFormatterShouldWriteResourceToResponse() throws ServletException, IOException {
-        //GIVEN
-        String expectedResult = "{\"files\":[\"ResponseFormatter.class\"]}";
-        given(request.getParameter(TYPE_PARAMETER)).willReturn(RESPONSE_FORMATTER);
-        given(stubResourcePathProvider.getResponseFormatterPath()).willReturn(path);
-        given(path.toFile()).willReturn(file);
-        given(fileListJsonBuilder.buildFileListJson(file)).willReturn(expectedResult);
-        //WHEN
-        underTest.doGet(request, response);
-        //THEN
-        verify(writer).write(expectedResult);
-    }
-
-    @Test
     public void testDoGetWhenTypeIsTemplateShouldWriteResourceToResponse() throws ServletException, IOException {
         //GIVEN
         String expectedResult = "{\"files\":[\"template.xml\"]}";
@@ -168,32 +136,6 @@ public class StubResourceHandlerServletTest {
         underTest.doGet(request, response);
         //THEN
         verify(writer).write(expectedResult);
-    }
-
-    @Test
-    public void testDoGetWhenTypeIsSequenceHandlerShouldWriteResourceToResponse() throws ServletException, IOException {
-        //GIVEN
-        String expectedResult = "{\"files\":[\"SequenceHandler.class\"]}";
-        given(request.getParameter(TYPE_PARAMETER)).willReturn(SEQUENCE_HANDLER);
-        given(stubResourcePathProvider.getSequenceHandlerPath()).willReturn(path);
-        given(path.toFile()).willReturn(file);
-        given(fileListJsonBuilder.buildFileListJson(file)).willReturn(expectedResult);
-        //WHEN
-        underTest.doGet(request, response);
-        //THEN
-        verify(writer).write(expectedResult);
-    }
-
-    @Test
-    public void testDoGetWhenTypeIsSomethingElseShouldWriteResourceToResponse() throws ServletException, IOException {
-        //GIVEN
-        String type = "templ";
-        given(request.getParameter(TYPE_PARAMETER)).willReturn(type);
-        //WHEN
-        underTest.doGet(request, response);
-        //THEN
-        verify(writer).write(
-                String.format(ERROR_MESSAGE_TEMPLATE, type, INTERCEPTOR, CONDITION_CHECKER, RESPONSE_FORMATTER, TEMPLATE, JAR, SEQUENCE_HANDLER));
     }
 
     @Test

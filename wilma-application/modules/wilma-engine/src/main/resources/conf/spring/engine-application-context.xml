@@ -19,9 +19,9 @@
     <constructor-arg index="0" value="yyyyMMddHHmmss" />
   </bean>
   <bean id="sLF4JBridgeConfigurer" class="com.epam.wilma.engine.slf4j.SLF4JBridgeConfigurer" init-method="configure" />
+
   <import resource="classpath:conf/spring/maintainer-application-context.xml"/>
   <import resource="classpath:conf/spring/webapp-application-context.xml"/>
   <import resource="classpath:conf/spring/stub-config-application-context.xml"/>
-  <import resource="classpath:conf/spring/logger-application-context.xml"/>
 
 </beans>

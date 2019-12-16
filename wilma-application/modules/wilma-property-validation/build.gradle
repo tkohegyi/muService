@@ -21,6 +21,5 @@ description = 'Wilma Property Validation'
 dependencies {
   compile project(':wilma-application:wilma-domain')
   compile project(':wilma-application:wilma-common')
-  compile project(':wilma-application:wilma-safeguard')
   compile project(':wilma-application:wilma-core')
 }

@@ -92,34 +92,12 @@ public class MultiPartFileProcessorTest {
         //THEN exception is thrown
     }
 
-    @Test
-    public void testProcessUploadedFileShouldReturnWhenConditionCheckerUploaded() {
-        //GIVEN
-        given(stubResourcePathProvider.getConditionCheckerPathAsString()).willReturn("");
-        //WHEN
-        String actual = underTest.processUploadedFile(resource, APPLICATION_JAVA, "stub-condition-checker", FILE_PATH);
-        //THEN
-        verify(fileWriter).write(resource, "/" + FILE_PATH, EXCEPTION_MESSAGE);
-        assertEquals(actual, "External condition checker class '" + FILE_PATH + "' was uploaded to Wilma.");
-    }
-
     @Test(expectedExceptions = CannotUploadExternalResourceException.class)
     public void testProcessUploadedFileShouldThrowExceptionWhenUploadedFileContentTypeNotJavaOrOctetStream() {
         //GIVEN in setUp
         //WHEN
         underTest.processUploadedFile(resource, JSON_CONTENT_TYPE, "stub-condition-checker", FILE_PATH);
         //THEN exception is thrown
-    }
-
-    @Test
-    public void testProcessUploadedFileShouldReturnWhenResponseFormatterUploaded() {
-        //GIVEN
-        given(stubResourcePathProvider.getResponseFormattersPathAsString()).willReturn("");
-        //WHEN
-        String actual = underTest.processUploadedFile(resource, OCTET_STREAM_CONTENT_TYPE, "stub-response-formatter", FILE_PATH);
-        //THEN
-        verify(fileWriter).write(resource, "/" + FILE_PATH, EXCEPTION_MESSAGE);
-        assertEquals(actual, "External response formatter class '" + FILE_PATH + "' was uploaded to Wilma.");
     }
 
     @Test(expectedExceptions = CannotUploadExternalResourceException.class)

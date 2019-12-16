@@ -1,4 +1,12 @@
 {
   "wilmaStubConfiguration": {
+    "groupName": "ServerService",
+    "interceptors": [
+      {
+        "name": "Main Server Service",
+        "class": "org.rockhill.muService.serverService.ServerServiceInterceptor"
+      }
+    ]
   }
 }
+

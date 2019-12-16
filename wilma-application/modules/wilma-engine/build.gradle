@@ -50,6 +50,7 @@ jar {
 }
 
 dependencies {
+    compile project(':wilma-application:muService-services')
     compile project(':wilma-application:wilma-webapp')
     compile project(':wilma-application:wilma-message-maintainer')
     compile project(':wilma-application:wilma-safeguard')

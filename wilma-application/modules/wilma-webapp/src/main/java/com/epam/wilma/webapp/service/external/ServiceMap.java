@@ -21,7 +21,6 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 import com.epam.wilma.domain.stubconfig.StubDescriptor;
 import com.epam.wilma.domain.stubconfig.interceptor.InterceptorDescriptor;
 import com.epam.wilma.domain.stubconfig.interceptor.RequestInterceptor;
-import com.epam.wilma.domain.stubconfig.interceptor.ResponseInterceptor;
 import com.epam.wilma.router.RoutingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,13 +103,6 @@ public class ServiceMap {
                     RequestInterceptor requestInterceptor = interceptorDescriptor.getRequestInterceptor();
                     if (requestInterceptor instanceof ExternalWilmaService) {
                         ExternalWilmaService service = (ExternalWilmaService) requestInterceptor;
-                        for (String handler : service.getHandlers()) {
-                            newServiceMap.putIfAbsent(handler, service);
-                        }
-                    }
-                    ResponseInterceptor responseInterceptor = interceptorDescriptor.getResponseInterceptor();
-                    if (responseInterceptor instanceof ExternalWilmaService) {
-                        ExternalWilmaService service = (ExternalWilmaService) responseInterceptor;
                         for (String handler : service.getHandlers()) {
                             newServiceMap.putIfAbsent(handler, service);
                         }

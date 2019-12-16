@@ -17,6 +17,7 @@ include 'wilma-application:wilma-stub-configuration-parser'
 include 'wilma-application:wilma-stub-configuration-domain'
 include 'wilma-application:wilma-stub-configuration-support'
 include 'wilma-application:wilma-properties'
+include 'wilma-application:muService-services'
 
 for (subproject in (project(':wilma-application')).children){
 	subproject.projectDir = file("$rootDir/wilma-application/modules/$subproject.name")

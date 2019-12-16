@@ -29,7 +29,6 @@ public class InterceptorDescriptor {
 
     private final String name;
     private final RequestInterceptor requestInterceptor;
-    private final ResponseInterceptor responseInterceptor;
     private final ParameterList params;
 
     /**
@@ -44,7 +43,6 @@ public class InterceptorDescriptor {
             final ParameterList params) {
         this.name = name;
         this.requestInterceptor = requestInterceptor;
-        this.responseInterceptor = responseInterceptor;
         this.params = params;
     }
 
@@ -54,10 +52,6 @@ public class InterceptorDescriptor {
 
     public RequestInterceptor getRequestInterceptor() {
         return requestInterceptor;
-    }
-
-    public ResponseInterceptor getResponseInterceptor() {
-        return responseInterceptor;
     }
 
     public ParameterList getParams() {

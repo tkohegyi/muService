@@ -44,6 +44,7 @@
         <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="wilmaReadmeServlet" p:name="wilmaReadmeServlet" />
         <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="adminStatusServlet" p:name="adminStatusServlet" />
         <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="shutdownServlet" p:name="shutdownServlet" />
+        <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="multiPartFormUploadServlet" p:name="multiPartFormUploadServlet" />
       </list>
     </property>
     <property name="servletMappings">
@@ -64,6 +65,7 @@
         <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="wilmaReadmeServlet" p:pathSpec="/public/readme" />
         <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="adminStatusServlet" p:pathSpec="/public/adminstatus" />
         <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="shutdownServlet" p:pathSpec="/admin/shutdown" />
+        <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="multiPartFormUploadServlet" p:pathSpec="/admin/stub/multiPartConfigFileUpload" />
       </list>
     </property>
     <property name="filters">

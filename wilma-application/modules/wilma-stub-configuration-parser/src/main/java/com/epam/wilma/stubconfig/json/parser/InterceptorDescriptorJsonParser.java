@@ -67,24 +67,17 @@ public class InterceptorDescriptorJsonParser implements ObjectParser<Interceptor
         }
         ParameterList params = parameterListParser.parseObject(interceptorObject, root);
         RequestInterceptor requestInterceptor = null;
-        ResponseInterceptor responseInterceptor = null;
         try {
             requestInterceptor = requestInterceptorInitializer.getExternalClassObject(clazz);
         } catch (InterfaceValidationFailedException e) {
             // don't worry
             LOGGER.debug("No Request interceptor in class:" + clazz, e);
         }
-        try {
-            responseInterceptor = responseInterceptorInitializer.getExternalClassObject(clazz);
-        } catch (InterfaceValidationFailedException e) {
-            //don't worry
-            LOGGER.debug("No Response interceptor in class:" + clazz, e);
-        }
-        if (requestInterceptor == null && responseInterceptor == null) {
+        if (requestInterceptor == null) {
             throw new DescriptorValidationFailedException("Validation of stub descriptor failed - Class '" + clazz
-                    + "' does not implement any of the necessary interfaces.");
+                    + "' does not implement the necessary request interceptor interface.");
         }
-        interceptorDescriptor = new InterceptorDescriptor(name, requestInterceptor, responseInterceptor, params);
+        interceptorDescriptor = new InterceptorDescriptor(name, requestInterceptor, null, params);
 
         return interceptorDescriptor;
     }

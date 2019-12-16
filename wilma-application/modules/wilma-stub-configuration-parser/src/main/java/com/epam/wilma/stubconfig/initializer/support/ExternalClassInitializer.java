@@ -79,7 +79,7 @@ public class ExternalClassInitializer {
     }
 
     private <T> T initializeBean(final String externalClassName, final String classPath, final Class<T> interfaceToCast, final String className) {
-        LOGGER.info("Initializing class {} of type {}, using classpath {}.", externalClassName + "/" + className, interfaceToCast, classPath);
+        LOGGER.info("Initializing class '{}' of type '{}', using classpath '{}'.", externalClassName + "/" + className, interfaceToCast, classPath);
         T result = instantiateExternalClass(externalClassName, classPath, interfaceToCast);
         beanRegistryService.register(className, result);
         return result;
@@ -102,6 +102,9 @@ public class ExternalClassInitializer {
         } catch (ClassFormatError e) {
             throw new DescriptorValidationFailedException("Validation of stub descriptor failed - External class '" + classPath + "/"
                     + externalClassName + "' has invalid class format.", e);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DescriptorValidationFailedException("Validation of stub descriptor failed - External class '" + classPath + "/"
+                    + externalClassName + "' has no usable constructor (is it public?).", e);
         }
         return result;
     }

@@ -1,0 +1,7 @@
+description = 'muService-services'
+dependencies {
+    compile project(':wilma-application:wilma-webapp')
+    compile group: 'org.apache.derby', name: 'derby', version:'10.11.1.1'
+    compile group: 'org.springframework', name: 'spring-jms', version:'4.1.6.RELEASE'
+    compile group: 'org.apache.bcel', name: 'bcel', version:'5.2'
+}

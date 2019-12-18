@@ -65,7 +65,7 @@ public class LocalhostRequestRouterTest {
     public void testWhenOnApplicationEventReceivedShouldSetInternalPort() {
         //GIVEN
         given(routeEngineConfigurationAccess.getProperties()).willReturn(propertyDTO);
-        given(propertyDTO.getProxyPort()).willReturn(9876);
+        given(propertyDTO.getPort()).willReturn(9876);
         //WHEN
         underTest.onApplicationEvent(null);
         //THEN

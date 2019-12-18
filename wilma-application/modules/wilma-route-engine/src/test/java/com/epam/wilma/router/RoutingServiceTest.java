@@ -86,7 +86,6 @@ public class RoutingServiceTest {
         stubDescriptors = new LinkedHashMap<>();
         stubDescriptors.put("test", stubDescriptor);
         Whitebox.setInternalState(underTest, "stubDescriptors", stubDescriptors);
-        Whitebox.setInternalState(underTest, "operationMode", null);
     }
 
     @Test
@@ -110,18 +109,6 @@ public class RoutingServiceTest {
         boolean actual = underTest.redirectRequestToStub(request);
         //THEN
         assertEquals(actual, false);
-    }
-
-    @Test
-    public void testRedirectRequestToStubShouldCallStubModeEvaluatorGetResponseDescriptorForStubModeMethod() {
-        //GIVEN
-        Whitebox.setInternalState(underTest, "operationMode", OperationMode.STUB);
-        given(request.getBody()).willReturn(requestBody);
-        given(stubDescriptorEvaluator.findResponseDescriptor(stubDescriptors, request)).willReturn(null);
-        //WHEN
-        underTest.redirectRequestToStub(request);
-        //THEN
-        verify(stubModeEvaluator).getResponseDescriptorForStubMode(request, OperationMode.STUB);
     }
 
     @Test
@@ -178,79 +165,6 @@ public class RoutingServiceTest {
         ResponseDescriptorDTO actual = underTest.getResponseDescriptorDTOAndRemove(key);
         //THEN
         assertEquals(actual, expected);
-    }
-
-    @Test
-    public void testSetOperationModeShouldSetStubMode() {
-        //GIVEN
-        operationMode = OperationMode.STUB;
-        given(configurationAccess.getProperties()).willReturn(properties);
-        given(properties.getOperationMode()).willReturn(operationMode);
-        //WHEN
-        underTest.setOperationMode(operationMode);
-        //THEN
-        OperationMode result = (OperationMode) Whitebox.getInternalState(underTest, "operationMode");
-        Assert.assertEquals(result, operationMode);
-    }
-
-    @Test
-    public void testSetOperationModeShouldSetProxyMode() {
-        //GIVEN
-        operationMode = OperationMode.PROXY;
-        given(configurationAccess.getProperties()).willReturn(properties);
-        given(properties.getOperationMode()).willReturn(operationMode);
-        //WHEN
-        underTest.setOperationMode(operationMode);
-        //THEN
-        OperationMode result = (OperationMode) Whitebox.getInternalState(underTest, "operationMode");
-        Assert.assertEquals(result, operationMode);
-    }
-
-    @Test
-    public void testSetOperationModeShouldSetWilmaMode() {
-        //GIVEN
-        operationMode = OperationMode.WILMA;
-        given(configurationAccess.getProperties()).willReturn(properties);
-        given(properties.getOperationMode()).willReturn(operationMode);
-        //WHEN
-        underTest.setOperationMode(operationMode);
-        //THEN
-        OperationMode result = (OperationMode) Whitebox.getInternalState(underTest, "operationMode");
-        Assert.assertEquals(result, operationMode);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    public void testInitStubDescriptorWhenOperationModeIsStubShouldSwitchOnStubMode() throws ClassNotFoundException {
-        //GIVEN
-        operationMode = OperationMode.STUB;
-        given(configurationAccess.getProperties()).willReturn(properties);
-        given(properties.getOperationMode()).willReturn(operationMode);
-        given(command.modify(stubDescriptors)).willReturn(stubDescriptors);
-        //WHEN
-        underTest.performModification(command);
-        //THEN
-        Map<String, StubDescriptor> actual = (Map<String, StubDescriptor>) Whitebox.getInternalState(underTest, "stubDescriptors");
-        assertEquals(actual, stubDescriptors);
-        OperationMode result = (OperationMode) Whitebox.getInternalState(underTest, "operationMode");
-        Assert.assertEquals(result, operationMode);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    public void testInitStubDescriptorWhenOperationModeIsNotStubShouldDoNothing() throws ClassNotFoundException {
-        //GIVEN
-        operationMode = OperationMode.WILMA;
-        given(configurationAccess.getProperties()).willReturn(properties);
-        given(properties.getOperationMode()).willReturn(operationMode);
-        given(command.modify(stubDescriptors)).willReturn(stubDescriptors);
-        //WHEN
-        underTest.performModification(command);
-        //THEN
-        Map<String, StubDescriptor> actual = (Map<String, StubDescriptor>) Whitebox.getInternalState(underTest, "stubDescriptors");
-        assertEquals(actual, stubDescriptors);
-        OperationMode result = (OperationMode) Whitebox.getInternalState(underTest, "operationMode");
-        Assert.assertEquals(result, operationMode);
     }
 
 }

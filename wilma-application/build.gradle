@@ -59,7 +59,7 @@ def myCopySpec = project.copySpec {
    from(rootProject.rootDir.absolutePath + '/wilma-application/modules/wilma-engine/') {
        include 'conf.properties'
        include 'readme.txt'
-       include 'stubConfig.json'
+       include 'serviceConfiguration.json'
    }
    from(rootProject.rootDir.absolutePath + '/wilma-application/modules/wilma-engine/build/libs/') {
      include "muService-$appVersion.$buildNumber" + '.jar'

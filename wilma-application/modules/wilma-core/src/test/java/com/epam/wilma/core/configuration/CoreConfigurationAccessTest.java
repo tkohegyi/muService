@@ -28,7 +28,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.epam.wilma.common.helper.BlockLocalhostUsage;
-import com.epam.wilma.common.helper.OperationMode;
 import com.epam.wilma.common.helper.SequenceHandlingState;
 import com.epam.wilma.core.configuration.domain.PropertyDto;
 import com.epam.wilma.properties.PropertyHolder;
@@ -68,16 +67,6 @@ public class CoreConfigurationAccessTest {
     }
 
     @Test
-    public void testLoadPropertiesShouldSetOperationMode() {
-        //GIVEN in setUp
-        //WHEN
-        underTest.loadProperties();
-        //THEN
-        PropertyDto actual = underTest.getProperties();
-        assertEquals(actual.getOperationMode(), OperationMode.WILMA);
-    }
-
-    @Test
     public void testLoadPropertiesShouldSetBlockLocalhostUsage() {
         //GIVEN in setUp
         //WHEN
@@ -87,13 +76,4 @@ public class CoreConfigurationAccessTest {
         assertEquals(actual.getBlockLocalhostUsage(), BlockLocalhostUsage.ON);
     }
 
-    @Test
-    public void testLoadPropertiesShouldSetSequenceHandlingUsage() {
-        //GIVEN in setUp
-        //WHEN
-        underTest.loadProperties();
-        //THEN
-        PropertyDto actual = underTest.getProperties();
-        assertEquals(actual.getSequenceHandlingUsage(), SequenceHandlingState.ON);
-    }
 }

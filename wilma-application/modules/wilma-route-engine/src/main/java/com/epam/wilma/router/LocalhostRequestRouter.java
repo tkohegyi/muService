@@ -65,7 +65,7 @@ public class LocalhostRequestRouter implements ApplicationListener<ContextRefres
     @Override
     public void onApplicationEvent(final ContextRefreshedEvent event) {
         PropertyDTO propertyDTO = routeEngineConfigurationAccess.getProperties();
-        internalPort = propertyDTO.getProxyPort();
+        internalPort = propertyDTO.getPort();
     }
 
     private URI createUri() throws URISyntaxException {

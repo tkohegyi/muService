@@ -42,10 +42,8 @@ public class RouteEngineConfigurationAccess implements ConfigurationAccessBase {
 
     @Override
     public void loadProperties() {
-        Integer proxyPort = propertyHolder.getInt("internal.wilma.port");
-        String operationModeProperty = propertyHolder.get("switch");
-        OperationMode operationMode = OperationMode.valueOf(operationModeProperty.toUpperCase());
-        properties = new PropertyDTO(proxyPort, operationMode);
+        Integer port = propertyHolder.getInt("internal.wilma.port");
+        properties = new PropertyDTO(port);
     }
 
     /**

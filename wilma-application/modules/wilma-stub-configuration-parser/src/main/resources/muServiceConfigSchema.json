@@ -3,23 +3,23 @@
   "description": "Representation of muService configuration possibilities",
   "type": "object",
   "properties": {
-    "wilmaStubConfiguration": {
+    "muServiceConfiguration": {
       "type": "object",
       "properties": {
         "groupName": {
-          "description": "The name of the Stub Configuration, if it is missing, the name will be considered as: 'Default'",
+          "description": "The name of the Configuration, if it is missing, the name will be considered as: 'Default'",
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
           "default": "Default"
         },
         "active": {
-          "description": "Whether the Stub Configuration is active or not, by default: true",
+          "description": "Whether the Configuration is active or not, by default: true",
           "type": "boolean",
           "default": true
         },
-        "interceptors": {
-          "$ref": "#/definitions/interceptorDefinition"
+        "services": {
+          "$ref": "#/definitions/serviceDefinition"
         }
       },
       "additionalProperties": false
@@ -27,7 +27,7 @@
   },
   "additionalProperties": false,
   "required": [
-    "wilmaStubConfiguration"
+    "muServiceConfiguration"
   ],
   "definitions": {
     "parameterDefinition": {
@@ -59,20 +59,20 @@
       "minItems": 1,
       "maxItems": 25
     },
-    "interceptorDefinition": {
-      "description": "Interceptors",
+    "serviceDefinition": {
+      "description": "Service Definition",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "name": {
-            "description": "The name of the interceptor",
+            "description": "The name of the service",
             "type": "string",
             "minLength": 1,
             "maxLength": 512
           },
           "class": {
-            "description": "The name of the interceptor class, will be used to load the class itself",
+            "description": "The name of the service class, will be used to load the class itself",
             "type": "string",
             "minLength": 1,
             "maxLength": 1024

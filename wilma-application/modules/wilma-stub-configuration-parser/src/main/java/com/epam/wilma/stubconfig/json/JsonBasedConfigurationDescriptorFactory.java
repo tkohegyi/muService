@@ -1,22 +1,4 @@
 package com.epam.wilma.stubconfig.json;
-/*==========================================================================
-Copyright since 2013, EPAM Systems
-
-This file is part of Wilma.
-
-Wilma is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Wilma is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
-===========================================================================*/
 
 import com.epam.wilma.domain.stubconfig.StubDescriptor;
 import com.epam.wilma.domain.stubconfig.StubDescriptorAttributes;
@@ -26,7 +8,7 @@ import com.epam.wilma.stubconfig.StubDescriptorJsonFactory;
 import com.epam.wilma.stubconfig.configuration.StubConfigurationAccess;
 import com.epam.wilma.stubconfig.dom.parser.StubResourceHolderUpdater;
 import com.epam.wilma.stubconfig.json.parser.StubDescriptorJsonParser;
-import com.epam.wilma.stubconfig.json.schema.StubConfigJsonSchemaParser;
+import com.epam.wilma.stubconfig.json.schema.ServiceConfigurationJsonSchemaParser;
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.ValidationException;
 import org.json.JSONArray;
@@ -47,7 +29,7 @@ import java.util.Set;
  * @author Tamas Kohegyi
  */
 @Component
-public class JsonBasedStubDescriptorFactory implements StubDescriptorJsonFactory {
+public class JsonBasedConfigurationDescriptorFactory implements StubDescriptorJsonFactory {
 
     @Autowired
     private StubDescriptorJsonParser descriptorParser;
@@ -56,7 +38,7 @@ public class JsonBasedStubDescriptorFactory implements StubDescriptorJsonFactory
     @Autowired
     private StubConfigurationAccess configurationAccess;
     @Autowired
-    private StubConfigJsonSchemaParser stubConfigJsonSchemaParser;
+    private ServiceConfigurationJsonSchemaParser serviceConfigurationJsonSchemaParser;
 
     /**
      * Loads the stub descriptor from an {@link InputStream}.
@@ -72,7 +54,7 @@ public class JsonBasedStubDescriptorFactory implements StubDescriptorJsonFactory
             //load the json file
             JSONObject jsonStubDescriptor = new JSONObject(new JSONTokener(inputStream));
             //load the json schema file
-            Schema jsonSchema = stubConfigJsonSchemaParser.parseSchema();
+            Schema jsonSchema = serviceConfigurationJsonSchemaParser.parseSchema();
             //validate against schema
             jsonSchema.validate(jsonStubDescriptor);
             //validate against extra rules (those cannot be im schema)
@@ -109,37 +91,17 @@ public class JsonBasedStubDescriptorFactory implements StubDescriptorJsonFactory
     }
 
     private void extraValidation(final JSONObject jsonStubDescriptor) {
-        JSONObject root = jsonStubDescriptor.getJSONObject("wilmaStubConfiguration");
+        JSONObject root = jsonStubDescriptor.getJSONObject("muServiceConfiguration");
         String key;
-        // - name in sequenceDescriptor array must be unique
-        checkUniqueName("sequenceDescriptor", root, "Sequence Descriptors");
-        // - name in conditionSets array must be unique
-        checkUniqueName("conditionSets", root, "Condition Sets");
-        // - name in template array must be unique
-        checkUniqueName("templates", root, "Templates");
-        // - name in dialog descriptors must be unique
-        checkUniqueName("dialogDescriptors", root, "Dialog Descriptors");
-        // - name in responseFormatterSets must be unique
-        checkUniqueName("responseFormatterSets", root, "Response Formatter Sets");
-        // - wilma stub groupName shall not contain chars: "|" ";"
+        // - name in services array must be unique
+        checkUniqueName("services", root, "Services");
+        // - configuration groupName shall not contain chars: "|" ";"
         key = "groupName";
         if (root.has(key)) {
             String name = root.getString(key);
             if (name.contains("|") || name.contains(";")) {
                 throw new StubConfigJsonSchemaException("Stub Descriptor groupName='"
                         + name + "' contains invalid character ('|' or ';')");
-            }
-        }
-        // - sequenceDescriptor name shall not contain chars: "|" ";"
-        key = "sequenceDescriptor";
-        if (root.has(key)) {
-            JSONArray sequenceDescriptor = root.getJSONArray(key);
-            for (int i = 0; i < sequenceDescriptor.length(); i++) {
-                String name = sequenceDescriptor.getJSONObject(i).getString("name");
-                if (name.contains("|") || name.contains(";")) {
-                    throw new StubConfigJsonSchemaException("Sequence Descriptor name='"
-                            + name + "' contains invalid character ('|' or ';')");
-                }
             }
         }
         // - all class name must be valid/loadable

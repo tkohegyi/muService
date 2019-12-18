@@ -126,7 +126,7 @@ public class RouterTest {
     public void testOnApplicationEventShouldSetInternalPort() {
         //GIVEN
         given(configurationAccess.getProperties()).willReturn(properties);
-        given(properties.getProxyPort()).willReturn(internalPort);
+        given(properties.getPort()).willReturn(internalPort);
         //WHEN
         underTest.onApplicationEvent(event);
         //THEN

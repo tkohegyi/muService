@@ -1,5 +1,5 @@
 {
-  "wilmaStubConfiguration": {
+  "muServiceConfiguration": {
     "templates": [
       {
         "name": "template 1 - errorResponse",

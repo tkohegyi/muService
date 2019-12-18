@@ -1,8 +1,7 @@
 {
-  "wilmaStubConfiguration": {
-    "interceptors": [
+  "muServiceConfiguration": {
+    "services": [
       {
-        "name": "",
         "class": "com.epam.wilma.test.stubConfig.schema"
       }
     ]

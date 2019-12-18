@@ -1,6 +1,6 @@
 {
-  "wilmaStubConfiguration": {
-    "interceptors": [
+  "muServiceConfiguration": {
+    "services": [
       {
         "name": "test"
       }

@@ -25,7 +25,6 @@ import com.epam.wilma.domain.http.WilmaHttpRequest;
 import com.epam.wilma.domain.stubconfig.StubDescriptor;
 import com.epam.wilma.router.command.StubDescriptorModificationCommand;
 import com.epam.wilma.router.configuration.RouteEngineConfigurationAccess;
-import com.epam.wilma.router.configuration.domain.PropertyDTO;
 import com.epam.wilma.router.domain.ResponseDescriptorDTO;
 import com.epam.wilma.router.evaluation.StubDescriptorEvaluator;
 import com.epam.wilma.router.evaluation.StubModeEvaluator;
@@ -48,7 +47,6 @@ public class RoutingService {
     private final Map<String, ResponseDescriptorDTO> responseDescriptorMap = new HashMap<>();
     private final Object guard = new Object();
     private Map<String, StubDescriptor> stubDescriptors = new LinkedHashMap<>();
-    private OperationMode operationMode;
     @Autowired
     private StubDescriptorEvaluator stubDescriptorEvaluator;
     @Autowired
@@ -67,7 +65,8 @@ public class RoutingService {
         boolean redirect;
         ResponseDescriptorDTO responseDescriptorDTO = stubDescriptorEvaluator.findResponseDescriptor(stubDescriptors, request);
         if (responseDescriptorDTO == null) {
-            responseDescriptorDTO = stubModeEvaluator.getResponseDescriptorForStubMode(request, operationMode);
+            //todo
+            responseDescriptorDTO = stubModeEvaluator.getResponseDescriptorForStubMode(request, OperationMode.STUB);
         }
         redirect = responseDescriptorDTO != null;
         if (redirect) {
@@ -93,28 +92,8 @@ public class RoutingService {
         return responseDescriptor;
     }
 
-    /**
-     * Sets the new operation mode.
-     *
-     * @param operationMode the new operation mode coming from a UI config
-     */
-    public void setOperationMode(final OperationMode operationMode) {
-        this.operationMode = operationMode;
-    }
-
     public Map<String, StubDescriptor> getStubDescriptors() {
         return stubDescriptors;
-    }
-
-    public boolean isStubModeOn() {
-        return operationMode == OperationMode.STUB;
-    }
-
-    private void getOperationMode() {
-        if (operationMode == null) {
-            PropertyDTO properties = configurationAccess.getProperties();
-            operationMode = properties.getOperationMode();
-        }
     }
 
     private void saveInResponseDescriptorMap(final WilmaHttpRequest request, final ResponseDescriptorDTO responseDescriptorDTO) {
@@ -131,6 +110,5 @@ public class RoutingService {
         synchronized (guard) {
             stubDescriptors = command.modify(stubDescriptors);
         }
-        getOperationMode();
     }
 }

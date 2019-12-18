@@ -46,14 +46,12 @@ public class CoreConfigurationAccess implements ConfigurationAccessBase {
     public void loadProperties() {
         String messageLogging = propertyHolder.get("message.logging");
         String operationModeProperty = propertyHolder.get("switch");
-        OperationMode operationMode = OperationMode.valueOf(operationModeProperty.toUpperCase());
+        //OperationMode operationMode = OperationMode.valueOf(operationModeProperty.toUpperCase());
         String interceptorMode = propertyHolder.get("interceptor");
         String blockLocalhostUsageProperty = propertyHolder.get("block.localhost.usage");
-        String sequenceHandlingUsageProperty = propertyHolder.get("sequence.handling.state");
         BlockLocalhostUsage blockLocalhostUsage = BlockLocalhostUsage.valueOf(blockLocalhostUsageProperty.toUpperCase());
-        SequenceHandlingState sequenceHandlingUsage = SequenceHandlingState.valueOf(sequenceHandlingUsageProperty.toUpperCase());
-        properties = new PropertyDto.Builder().messageLogging(messageLogging).operationMode(operationMode).interceptorMode(interceptorMode)
-                .blockLocalhostUsage(blockLocalhostUsage).sequenceHandlingState(sequenceHandlingUsage).build();
+        properties = new PropertyDto.Builder().messageLogging(messageLogging).interceptorMode(interceptorMode)
+                .blockLocalhostUsage(blockLocalhostUsage).build();
     }
 
     /**

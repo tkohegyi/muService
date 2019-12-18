@@ -60,17 +60,7 @@ public class RouteEngineConfigurationAccessTest {
         underTest.loadProperties();
         //THEN
         PropertyDTO actual = underTest.getProperties();
-        assertEquals(actual.getProxyPort(), port);
-    }
-
-    @Test
-    public void testLoadPropertiesShouldSetOperationMode() {
-        //GIVEN in setUp
-        //WHEN
-        underTest.loadProperties();
-        //THEN
-        PropertyDTO actual = underTest.getProperties();
-        assertEquals(actual.getOperationMode(), OperationMode.WILMA);
+        assertEquals(actual.getPort(), port);
     }
 
 }

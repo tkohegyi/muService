@@ -101,7 +101,7 @@ public class StubConfigHandlerServlet extends HttpServlet {
             resp.setContentType(JSON);
         } else {
             resp.setContentType(TEXT);
-            resp.setHeader(CONTENT_DISPOSITION, "attachment;filename=" + groupname + "StubConfig.json");
+            resp.setHeader(CONTENT_DISPOSITION, "attachment;filename=" + groupname + "muServiceConfigSchema.json");
         }
     }
 

@@ -32,14 +32,8 @@ import com.google.common.base.Preconditions;
 public final class PropertyDto {
 
     private String messageLogging;
-    private OperationMode operationMode;
     private String interceptorMode;
     private BlockLocalhostUsage blockLocalhostUsage;
-    private SequenceHandlingState sequenceHandlingState;
-
-    public SequenceHandlingState getSequenceHandlingUsage() {
-        return sequenceHandlingState;
-    }
 
     public BlockLocalhostUsage getBlockLocalhostUsage() {
         return blockLocalhostUsage;
@@ -47,10 +41,6 @@ public final class PropertyDto {
 
     public String getMessageLogging() {
         return messageLogging;
-    }
-
-    public OperationMode getOperationMode() {
-        return operationMode;
     }
 
     public String getInterceptorMode() {
@@ -133,16 +123,12 @@ public final class PropertyDto {
 
         private void setFields(final PropertyDto propertyDto) {
             propertyDto.messageLogging = messageLogging;
-            propertyDto.operationMode = operationMode;
             propertyDto.interceptorMode = interceptorMode;
             propertyDto.blockLocalhostUsage = blockLocalhostUsage;
-            propertyDto.sequenceHandlingState = sequenceHandlingState;
         }
 
         private void validateFields() {
-            Preconditions.checkNotNull(operationMode);
             Preconditions.checkNotNull(blockLocalhostUsage);
-            Preconditions.checkNotNull(sequenceHandlingState);
         }
     }
 

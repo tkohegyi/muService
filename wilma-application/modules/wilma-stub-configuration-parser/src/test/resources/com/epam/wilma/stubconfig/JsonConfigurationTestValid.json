@@ -1,8 +1,8 @@
 {
-  "wilmaStubConfiguration": {
+  "muServiceConfiguration": {
     "groupName": "Non-Default",
     "active": false,
-    "interceptors": [
+    "services": [
       {
         "name": "Circuit Breaker Response Investigator - CB_1",
         "class": "com.epam.wilma.extras.circuitBreaker.CircuitBreakerInterceptor",

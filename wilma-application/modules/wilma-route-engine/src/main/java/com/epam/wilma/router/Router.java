@@ -66,7 +66,7 @@ public class Router implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(final ContextRefreshedEvent event) {
         PropertyDTO properties = configurationAccess.getProperties();
-        internalPort = properties.getProxyPort();
+        internalPort = properties.getPort();
     }
 
     public Integer getInternalPort() {

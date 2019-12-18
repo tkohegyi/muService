@@ -27,27 +27,20 @@ import com.epam.wilma.common.helper.OperationMode;
  */
 public class PropertyDTO {
 
-    private final Integer proxyPort;
-    private final OperationMode operationMode;
+    private final Integer port;
 
     /**
      * Constructs a new property holding object with the given fields.
-     * @param proxyPort internal jetty port on which web application is deployed
-     * @param operationMode switch between the following operation modes:
+     * @param port internal jetty port on which web application is deployed
      * proxy mode, stub mode and normal mode (valid inputs are: stub, proxy, wilma)
      */
-    public PropertyDTO(final Integer proxyPort, final OperationMode operationMode) {
+    public PropertyDTO(final Integer port) {
         super();
-        this.proxyPort = proxyPort;
-        this.operationMode = operationMode;
+        this.port = port;
     }
 
-    public Integer getProxyPort() {
-        return proxyPort;
-    }
-
-    public OperationMode getOperationMode() {
-        return operationMode;
+    public Integer getPort() {
+        return port;
     }
 
 }

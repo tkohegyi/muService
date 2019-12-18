@@ -1,21 +1,21 @@
 rootProject.name = 'muService'
 
-include 'wilma-application'
-include 'wilma-application:wilma-engine'
-include 'wilma-application:wilma-common'
-include 'wilma-application:wilma-route-engine'
-include 'wilma-application:wilma-webapp'
-include 'wilma-application:wilma-core'
-include 'wilma-application:wilma-domain'
-include 'wilma-application:wilma-message-maintainer'
-include 'wilma-application:wilma-compression'
-include 'wilma-application:wilma-property-validation'
-include 'wilma-application:wilma-stub-configuration-parser'
-include 'wilma-application:wilma-stub-configuration-domain'
-include 'wilma-application:wilma-stub-configuration-support'
-include 'wilma-application:wilma-properties'
-include 'wilma-application:muService-services'
+include 'muService-application'
+include 'muService-application:wilma-engine'
+include 'muService-application:wilma-common'
+include 'muService-application:wilma-route-engine'
+include 'muService-application:wilma-webapp'
+include 'muService-application:wilma-core'
+include 'muService-application:wilma-domain'
+include 'muService-application:wilma-message-maintainer'
+include 'muService-application:wilma-compression'
+include 'muService-application:wilma-property-validation'
+include 'muService-application:wilma-stub-configuration-parser'
+include 'muService-application:wilma-stub-configuration-domain'
+include 'muService-application:wilma-stub-configuration-support'
+include 'muService-application:wilma-properties'
+include 'muService-application:muService-services'
 
-for (subproject in (project(':wilma-application')).children){
-	subproject.projectDir = file("$rootDir/wilma-application/modules/$subproject.name")
+for (subproject in (project(':muService-application')).children){
+	subproject.projectDir = file("$rootDir/muService-application/modules/$subproject.name")
 }

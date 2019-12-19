@@ -6,6 +6,7 @@ import com.epam.wilma.domain.stubconfig.parameter.ParameterList;
 import com.epam.wilma.webapp.service.external.ExternalWilmaService;
 import com.google.common.collect.Sets;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,9 +42,11 @@ public class ServerServiceInterceptor extends ServerServiceCore implements Reque
 
         //get command
         try {
-            if ("POST".equalsIgnoreCase(myMethod)) {
+            if (myCall && "POST".equalsIgnoreCase(myMethod)) {
                 String requestBody = IOUtils.toString(httpServletRequest.getReader());
-                response = workWithCommand(requestBody);
+                if (utilities.isJsonMessage(requestBody)) {
+                    response = workWithCommand(new JSONObject(requestBody));
+                }
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             }
         } catch (IOException e) {

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.epam.wilma.common.configuration.ConfigurationAccessBase;
-import com.epam.wilma.common.helper.BlockLocalhostUsage;
 import com.epam.wilma.core.configuration.domain.PropertyDto;
 import com.epam.wilma.properties.PropertyHolder;
 

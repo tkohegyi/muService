@@ -1,10 +1,14 @@
 {
   "muServiceConfiguration": {
-    "groupName": "ServerService",
+    "groupName": "Services",
     "services": [
       {
+        "name": "Authenticator Service",
+        "class": "org.rockhill.muService.authenticatorService.AuthenticatorService"
+      },
+      {
         "name": "Server Service",
-        "class": "org.rockhill.muService.serverService.ServerServiceInterceptor"
+        "class": "org.rockhill.muService.serverService.ServerService"
       }
     ]
   }

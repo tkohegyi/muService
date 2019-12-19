@@ -1,7 +1,7 @@
-package org.rockhill.muService.serverService;
+package org.rockhill.muService.authenticatorService.helper;
 
 /**
- * Data transfer object for Test Heads in Server Service.
+ * Data transfer object for Test Heads in Authenticator Service.
  * @author Tamas_Kohegyi
  *
  */

@@ -1,9 +1,10 @@
-package org.rockhill.muService.serverService;
+package org.rockhill.muService.authenticatorService;
 
 import com.epam.wilma.domain.stubconfig.interceptor.ExternalService;
 import com.google.common.collect.Sets;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
+import org.rockhill.muService.common.Utilities;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,14 +14,14 @@ import java.util.Set;
 /**
  * @author tkohegyi
  */
-public class ServerServiceInterceptor extends ServerServiceCore implements ExternalService {
+public class AuthenticatorService extends AuthenticatorServiceCore implements ExternalService {
 
-    private static final String HANDLED_SERVICE = "/server-service";
+    private static final String HANDLED_SERVICE = "/authenticator-service";
 
     Utilities utilities = new Utilities();
 
     /**
-     * ExternalWilmaService method implementation - entry point to handle the request by the external service.
+     * ExternalService method implementation - entry point to handle the request by the external service.
      *
      * @param httpServletRequest  is the original request
      * @param request             is the request string itself (part of the URL, focusing on the requested service)
@@ -34,7 +35,7 @@ public class ServerServiceInterceptor extends ServerServiceCore implements Exter
         boolean myCall = request.toLowerCase().startsWith(myService);
 
         //set default response
-        String response = "{ \"serverServiceCall\": \"" + myMethod + ":" + request + "\", \"ping\": \"OK\" }";
+        String response = "{ \"authenticatorServiceCall\": \"" + myMethod + ":" + request + "\", \"ping\": \"OK\" }";
         httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
         //get command

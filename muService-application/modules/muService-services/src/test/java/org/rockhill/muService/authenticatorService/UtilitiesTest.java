@@ -1,5 +1,6 @@
-package org.rockhill.muService.serverService;
+package org.rockhill.muService.authenticatorService;
 
+import org.rockhill.muService.common.Utilities;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

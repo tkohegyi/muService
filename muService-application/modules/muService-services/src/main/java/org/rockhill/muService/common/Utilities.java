@@ -1,4 +1,4 @@
-package org.rockhill.muService.serverService;
+package org.rockhill.muService.common;
 
 import org.json.JSONException;
 import org.json.JSONObject;

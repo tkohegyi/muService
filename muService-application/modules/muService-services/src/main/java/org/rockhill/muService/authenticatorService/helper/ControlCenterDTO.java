@@ -1,4 +1,4 @@
-package org.rockhill.muService.serverService;
+package org.rockhill.muService.authenticatorService.helper;
 
 /**
  * Data transfer object for Control Centers in Server Service.

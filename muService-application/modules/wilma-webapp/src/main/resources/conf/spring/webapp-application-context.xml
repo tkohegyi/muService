@@ -94,8 +94,7 @@
       </list>
     </property>
   </bean>
-  <bean class="org.eclipse.jetty.servlet.ServletContextHandler" id="stubContextHandler" p:contextPath="/stub" p:servletHandler-ref="stubServletHandler" />
-  
+
   <bean class="org.eclipse.jetty.servlet.ServletHandler" id="blockLocalhostUsageResponseHandler" >
   	<property name="servlets">
       <list>
@@ -163,7 +162,6 @@
         <ref bean="wilmaLogPageContextHandler" />
         <ref bean="readmePageContextHandler" />
         <ref bean="configContextHandler" />
-        <ref bean="stubContextHandler" />
         <ref bean="blockLocalhostUsageResponseContextHandler" />
       </list>
     </property>

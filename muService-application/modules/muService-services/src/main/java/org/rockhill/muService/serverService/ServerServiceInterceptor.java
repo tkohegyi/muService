@@ -19,6 +19,8 @@ public class ServerServiceInterceptor extends ServerServiceCore implements Reque
 
     private static final String HANDLED_SERVICE = "/server-service";
 
+    Utilities utilities = new Utilities();
+
     /**
      * ExternalWilmaService method implementation - entry point to handle the request by the external service.
      *

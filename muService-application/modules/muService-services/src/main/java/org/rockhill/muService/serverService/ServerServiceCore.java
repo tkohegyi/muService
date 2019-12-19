@@ -1,4 +1,7 @@
 package org.rockhill.muService.serverService;
+
+import java.util.UUID;
+
 /**
  * The main class of the Server Service.
  *
@@ -6,6 +9,7 @@ package org.rockhill.muService.serverService;
  */
 public class ServerServiceCore {
 
+    private UUID randomUUID;
     /**
      * The main method of this service - generates the Server Service answer.
      *
@@ -13,7 +17,8 @@ public class ServerServiceCore {
      * @return with the result of the iteration
      */
     protected String workWithCommand(final String input) {
-        String response = "{ \"result\": \"I am alive\" }";
+        randomUUID = UUID.randomUUID();
+        String response = "{ \"result\": \"" + randomUUID.toString() + "\" }";
         return response;
     }
 

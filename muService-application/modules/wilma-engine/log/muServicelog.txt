@@ -2,3 +2,7 @@
 11:29:03.079 [Test worker] INFO  o.s.b.f.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [test-application-context.xml]
 11:29:03.365 [Test worker] INFO  o.s.c.s.ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@5ba8157d: startup date [Wed Dec 18 11:29:03 CET 2019]; root of context hierarchy
 11:29:03.370 [Test worker] INFO  o.s.b.f.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [test-application-context.xml]
+17:13:26.126 [Test worker] INFO  o.s.c.s.ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@361255b0: startup date [Wed Dec 18 17:13:26 CET 2019]; root of context hierarchy
+17:13:26.233 [Test worker] INFO  o.s.b.f.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [test-application-context.xml]
+17:13:26.572 [Test worker] INFO  o.s.c.s.ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@50fddf11: startup date [Wed Dec 18 17:13:26 CET 2019]; root of context hierarchy
+17:13:26.573 [Test worker] INFO  o.s.b.f.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [test-application-context.xml]

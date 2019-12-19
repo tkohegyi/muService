@@ -18,14 +18,13 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import com.epam.wilma.core.processor.WilmaEntityProcessorInterface;
 
 /**
  * This abstract class gives an Enabled/Disabled state to those classes which extend this.
  * @author Tamas_Kohegyi
  *
  */
-public abstract class ProcessorBase implements WilmaEntityProcessorInterface {
+public abstract class ProcessorBase {
     private boolean isEnabled = true;
 
     public boolean isEnabled() {

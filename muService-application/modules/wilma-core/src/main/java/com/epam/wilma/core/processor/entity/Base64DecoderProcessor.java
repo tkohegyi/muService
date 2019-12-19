@@ -43,7 +43,6 @@ public class Base64DecoderProcessor extends ProcessorBase {
     @Autowired
     private Base64Decoder decompressor;
 
-    @Override
     public void process(final WilmaHttpEntity entity) throws ApplicationException {
         if (isBinaryContent(entity)) {
             String responseBody = entity.getBody();

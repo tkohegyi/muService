@@ -42,7 +42,6 @@ public class GzipDecompressorProcessor extends ProcessorBase {
     @Autowired
     private GzipCompressionService decompressor;
 
-    @Override
     public void process(final WilmaHttpEntity entity) throws ApplicationException {
         if (isContentGzipEncoded(entity)) {
             ByteArrayOutputStream baos = decompressor.decompress(entity.getInputStream());

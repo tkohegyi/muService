@@ -12,7 +12,6 @@ include 'muService-application:wilma-compression'
 include 'muService-application:wilma-property-validation'
 include 'muService-application:wilma-stub-configuration-parser'
 include 'muService-application:wilma-stub-configuration-domain'
-include 'muService-application:wilma-stub-configuration-support'
 include 'muService-application:wilma-properties'
 include 'muService-application:muService-services'
 

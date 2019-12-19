@@ -22,6 +22,6 @@ dependencies {
     compile project(':muService-application:wilma-domain')
     compile project(':muService-application:wilma-common')
     compile project(':muService-application:wilma-core')
-    compile project(':muService-application:wilma-stub-configuration-support')
     compile group: 'org.reflections', name: 'reflections', version:'0.9.9'
+    compile group: "com.github.everit-org.json-schema", name: "org.everit.json.schema", version: "1.9.1"
 }

@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.epam.wilma.common.helper.VersionTitleProvider;
-import com.epam.wilma.domain.exception.SystemException;
+import com.epam.wilma.common.exception.SystemException;
 import com.epam.wilma.engine.configuration.EngineConfigurationAccess;
 import com.epam.wilma.engine.configuration.domain.PropertyDTO;
 import com.google.common.util.concurrent.Service.State;

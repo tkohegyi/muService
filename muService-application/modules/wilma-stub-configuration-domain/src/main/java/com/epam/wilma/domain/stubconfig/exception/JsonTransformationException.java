@@ -18,7 +18,8 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import com.epam.wilma.domain.exception.ApplicationException;
+
+import com.epam.wilma.common.exception.ApplicationException;
 
 /**
  * Exception for JSON transformation.

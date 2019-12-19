@@ -19,6 +19,8 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
+import com.epam.wilma.webapp.domain.exception.CannotUploadExternalResourceException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -29,7 +31,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.epam.wilma.webapp.domain.exception.CannotUploadExternalResourceException;
 
 /**
  * Abstract class implementing the common functionality of the various External...UploadServlets.

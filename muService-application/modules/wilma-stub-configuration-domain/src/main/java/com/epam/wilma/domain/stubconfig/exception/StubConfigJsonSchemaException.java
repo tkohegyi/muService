@@ -18,7 +18,8 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import com.epam.wilma.domain.exception.SystemException;
+
+import com.epam.wilma.common.exception.SystemException;
 
 /**
  * Exception that is thrown when stub configuration json schema has issues.

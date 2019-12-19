@@ -23,13 +23,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.epam.wilma.common.exception.SchedulingCannotBeStartedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
 import com.epam.wilma.common.helper.CronTriggerFactory;
-import com.epam.wilma.domain.exception.SchedulingCannotBeStartedException;
 import com.epam.wilma.maintainer.configuration.MaintainerConfigurationAccess;
 import com.epam.wilma.maintainer.configuration.domain.MaintainerProperties;
 import com.epam.wilma.maintainer.domain.MaintainerMethod;

@@ -1,4 +1,4 @@
-package com.epam.wilma.domain.exception;
+package com.epam.wilma.common.exception;
 /*==========================================================================
 Copyright since 2013, EPAM Systems
 
@@ -19,17 +19,17 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
 /**
- * General exception that wraps all exceptions not related to the business logic.
+ * General exception that wraps all exceptions related to the business logic.
  * @author Marton_Sereg
  *
  */
-public class SystemException extends RuntimeException {
+public class ApplicationException extends Exception {
 
     /**
-     * Constructor that takes the exception message as input.
+     * Constructor that takes a message as input.
      * @param message of the exception
      */
-    public SystemException(final String message) {
+    public ApplicationException(final String message) {
         super(message);
     }
 
@@ -38,7 +38,7 @@ public class SystemException extends RuntimeException {
      * @param message of the exception
      * @param throwable is the parent or wrapped exception.
      */
-    public SystemException(final String message, final Throwable throwable) {
+    public ApplicationException(final String message, final Throwable throwable) {
         super(message, throwable);
     }
 

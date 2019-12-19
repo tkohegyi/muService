@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 
 import javax.servlet.http.HttpServlet;
 
+import com.epam.wilma.common.exception.SystemException;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -38,7 +39,6 @@ import org.slf4j.Logger;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.domain.exception.SystemException;
 import com.epam.wilma.webapp.configuration.WebAppConfigurationAccess;
 import com.epam.wilma.webapp.configuration.domain.PropertyDTO;
 import com.epam.wilma.webapp.configuration.domain.ServerProperties;

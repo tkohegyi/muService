@@ -1,4 +1,4 @@
-package com.epam.wilma.webapp.domain.exception;
+package com.epam.wilma.common.exception;
 /*==========================================================================
 Copyright since 2013, EPAM Systems
 
@@ -18,29 +18,27 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import com.epam.wilma.domain.exception.SystemException;
-
 /**
- * It is thrown when a response cannot be formatted.
- * @author Tunde_Kovacs
+ * General exception that wraps all exceptions not related to the business logic.
+ * @author Marton_Sereg
  *
  */
-public class ResponseFormattingFailedException extends SystemException {
+public class SystemException extends RuntimeException {
 
     /**
-     * Exception constructor with a message.
-     * @param message the message of the exception
+     * Constructor that takes the exception message as input.
+     * @param message of the exception
      */
-    public ResponseFormattingFailedException(final String message) {
+    public SystemException(final String message) {
         super(message);
     }
 
     /**
-     * Exception constructor with a message and its cause.
-     * @param message the message of the exception
-     * @param throwable the cause of the exception
+     * Constructor that takes a message and wrapped or parent exception as input.
+     * @param message of the exception
+     * @param throwable is the parent or wrapped exception.
      */
-    public ResponseFormattingFailedException(final String message, final Throwable throwable) {
+    public SystemException(final String message, final Throwable throwable) {
         super(message, throwable);
     }
 

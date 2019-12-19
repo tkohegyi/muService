@@ -53,7 +53,6 @@ dependencies {
     compile project(':muService-application:muService-services')
     compile project(':muService-application:wilma-webapp')
     compile project(':muService-application:wilma-message-maintainer')
-    compile project(':muService-application:wilma-domain')
     compile project(':muService-application:wilma-common')
     compile project(':muService-application:wilma-core')
     compile project(':muService-application:wilma-stub-configuration-parser')

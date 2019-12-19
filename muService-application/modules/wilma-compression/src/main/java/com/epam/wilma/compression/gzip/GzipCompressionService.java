@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import com.epam.wilma.common.exception.SystemException;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,6 @@ import com.epam.wilma.common.stream.helper.ByteArrayOutputStreamFactory;
 import com.epam.wilma.compression.CompressionService;
 import com.epam.wilma.compression.gzip.helper.GzipInputStreamFactory;
 import com.epam.wilma.compression.gzip.helper.GzipOutputStreamFactory;
-import com.epam.wilma.domain.exception.SystemException;
 
 /**
  * Responsible for compressing and decompressing an input stream into/from gzip.

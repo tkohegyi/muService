@@ -18,10 +18,9 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
+import com.epam.wilma.common.exception.SchedulingCannotBeStartedException;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
-
-import com.epam.wilma.domain.exception.SchedulingCannotBeStartedException;
 
 /**
  * Factory class to create a new CronTrigger.

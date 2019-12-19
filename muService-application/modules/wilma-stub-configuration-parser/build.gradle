@@ -19,7 +19,6 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 description = 'Wilma Stub Configuration Parser'
 dependencies {
-    compile project(':muService-application:wilma-domain')
     compile project(':muService-application:wilma-common')
     compile project(':muService-application:wilma-core')
     compile group: 'org.reflections', name: 'reflections', version:'0.9.9'

@@ -29,8 +29,8 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.domain.exception.ApplicationException;
-import com.epam.wilma.domain.exception.SystemException;
+import com.epam.wilma.common.exception.ApplicationException;
+import com.epam.wilma.common.exception.SystemException;
 import com.epam.wilma.properties.InvalidPropertyException;
 
 /**

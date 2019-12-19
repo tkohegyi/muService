@@ -1,4 +1,4 @@
-package com.epam.wilma.domain.stubconfig.exception;
+package com.epam.wilma.common.exception;
 /*==========================================================================
 Copyright since 2013, EPAM Systems
 
@@ -18,29 +18,28 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import com.epam.wilma.domain.exception.SystemException;
-
 /**
- * It is thrown if a condition in the stub config cannot be evaluated.
- * @author Tunde_Kovacs
+ * Thrown when scheduling cannot be started.
+ * @author Marton_Sereg
  *
  */
-public class ConditionEvaluationFailedException extends SystemException {
+public class SchedulingCannotBeStartedException extends SystemException {
 
     /**
-     * Exception constructor with a message.
-     * @param message the message of the exception
+     * Constructor with a message.
+     * @param message of the exception
      */
-    public ConditionEvaluationFailedException(final String message) {
+    public SchedulingCannotBeStartedException(final String message) {
         super(message);
     }
 
     /**
-     * Exception constructor with a message and its cause.
-     * @param message the message of the exception
-     * @param throwable the cause of the exception
+     * Constructor with a message and a cause.
+     * @param message of the exception
+     * @param throwable cause of the exception
      */
-    public ConditionEvaluationFailedException(final String message, final Throwable throwable) {
+    public SchedulingCannotBeStartedException(final String message, final Throwable throwable) {
         super(message, throwable);
     }
+
 }

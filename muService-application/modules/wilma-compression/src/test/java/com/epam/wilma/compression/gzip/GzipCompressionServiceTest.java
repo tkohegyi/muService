@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import com.epam.wilma.common.exception.SystemException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -39,7 +40,6 @@ import org.testng.annotations.Test;
 import com.epam.wilma.common.stream.helper.ByteArrayOutputStreamFactory;
 import com.epam.wilma.compression.gzip.helper.GzipInputStreamFactory;
 import com.epam.wilma.compression.gzip.helper.GzipOutputStreamFactory;
-import com.epam.wilma.domain.exception.SystemException;
 
 /**
  * Provides unit tests for the {@link GzipCompressionService} class.

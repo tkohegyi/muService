@@ -26,6 +26,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import com.epam.wilma.common.exception.SystemException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -49,7 +50,7 @@ public class ClassPathExtender {
         try {
             addFile(f);
         } catch (IOException e) {
-            throw new com.epam.wilma.domain.exception.SystemException("could not put class file to classpath", e);
+            throw new SystemException("could not put class file to classpath", e);
         }
     }
 

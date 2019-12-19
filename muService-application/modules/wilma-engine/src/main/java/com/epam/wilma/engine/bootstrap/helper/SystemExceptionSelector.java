@@ -21,7 +21,7 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.core.NestedRuntimeException;
 
-import com.epam.wilma.domain.exception.SystemException;
+import com.epam.wilma.common.exception.SystemException;
 
 /**
  * Class for selecting {@link SystemException} from exception causes to be able to get a user-readable exception message.

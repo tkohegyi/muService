@@ -37,7 +37,7 @@ import org.springframework.core.env.MutablePropertySources;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.domain.exception.SchedulingCannotBeStartedException;
+import com.epam.wilma.common.exception.SchedulingCannotBeStartedException;
 import com.epam.wilma.engine.bootstrap.helper.ApplicationContextFactory;
 import com.epam.wilma.engine.bootstrap.helper.SystemExceptionSelector;
 import com.epam.wilma.engine.bootstrap.helper.WilmaServiceListener;

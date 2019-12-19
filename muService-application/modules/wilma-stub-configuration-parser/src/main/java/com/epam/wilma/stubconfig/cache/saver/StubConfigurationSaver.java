@@ -69,7 +69,7 @@ public class StubConfigurationSaver {
 
     private void tryToSaveActualStubConfig(final StubDescriptor descriptor, final int index, final String groupname) throws JsonTransformationException {
         try {
-            JSONObject actualObject = stubResourceHolder.getActualStubConfigJsonObject(groupname);
+            JSONObject actualObject = stubResourceHolder.getActualConfigJsonObject(groupname);
             if (actualObject != null) {
                 jsonBasedObjectTransformer.transformToFile(actualObject, cacheFolderPath + "/" + index + STUB_CONFIG_JSON_POSTFIX, descriptor.getAttributes()
                         .isActive());

@@ -20,7 +20,7 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 import com.epam.wilma.common.stream.helper.FileInputStreamFactory;
 import com.epam.wilma.router.command.StubDescriptorModificationCommand;
-import com.epam.wilma.stubconfig.StubDescriptorJsonFactory;
+import com.epam.wilma.stubconfig.ConfigurationDescriptorJsonFactory;
 import com.epam.wilma.webapp.service.command.NewStubDescriptorCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -46,7 +46,7 @@ public class NewStubDescriptorJsonCommandFactory {
      * @return the new instance
      * @throws FileNotFoundException if no file is found on the given file path
      */
-    public StubDescriptorModificationCommand create(final String filePath, final StubDescriptorJsonFactory stubConfigurationBuilder) throws FileNotFoundException {
+    public StubDescriptorModificationCommand create(final String filePath, final ConfigurationDescriptorJsonFactory stubConfigurationBuilder) throws FileNotFoundException {
         InputStream inputStream = fileInputStreamFactory.createFileInputStream(filePath);
         return create(inputStream, stubConfigurationBuilder);
     }
@@ -57,7 +57,7 @@ public class NewStubDescriptorJsonCommandFactory {
      * @param stubConfigurationBuilder creates a StubDescriptor object from a inputStream
      * @return the new instance
      */
-    public StubDescriptorModificationCommand create(final InputStream inputStream, final StubDescriptorJsonFactory stubConfigurationBuilder) {
+    public StubDescriptorModificationCommand create(final InputStream inputStream, final ConfigurationDescriptorJsonFactory stubConfigurationBuilder) {
         return new NewStubDescriptorCommand(inputStream, stubConfigurationBuilder);
     }
 }

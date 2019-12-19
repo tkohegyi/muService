@@ -4,10 +4,10 @@ import com.epam.wilma.domain.stubconfig.StubDescriptor;
 import com.epam.wilma.domain.stubconfig.StubDescriptorAttributes;
 import com.epam.wilma.domain.stubconfig.exception.DescriptorCannotBeParsedException;
 import com.epam.wilma.domain.stubconfig.exception.StubConfigJsonSchemaException;
-import com.epam.wilma.stubconfig.StubDescriptorJsonFactory;
+import com.epam.wilma.stubconfig.ConfigurationDescriptorJsonFactory;
 import com.epam.wilma.stubconfig.configuration.StubConfigurationAccess;
 import com.epam.wilma.stubconfig.dom.parser.StubResourceHolderUpdater;
-import com.epam.wilma.stubconfig.json.parser.StubDescriptorJsonParser;
+import com.epam.wilma.stubconfig.json.parser.ConfigurationDescriptorJsonParser;
 import com.epam.wilma.stubconfig.json.schema.ServiceConfigurationJsonSchemaParser;
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.ValidationException;
@@ -29,10 +29,10 @@ import java.util.Set;
  * @author Tamas Kohegyi
  */
 @Component
-public class JsonBasedConfigurationDescriptorFactory implements StubDescriptorJsonFactory {
+public class JsonBasedConfigurationDescriptorFactory implements ConfigurationDescriptorJsonFactory {
 
     @Autowired
-    private StubDescriptorJsonParser descriptorParser;
+    private ConfigurationDescriptorJsonParser descriptorParser;
     @Autowired
     private StubResourceHolderUpdater stubResourceHolderUpdater;
     @Autowired

@@ -79,7 +79,7 @@ public class StubConfigHandlerServletTest {
     @Test
     public void testDoPostShouldCallDoGet() throws ServletException, IOException {
         //GIVEN
-        given(stubResourceHolder.getActualStubConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(null);
+        given(stubResourceHolder.getActualConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(null);
         //WHEN
         underTest.doPost(request, response);
         //THEN doGet was called
@@ -92,7 +92,7 @@ public class StubConfigHandlerServletTest {
     public void testDoGetShouldWriteActualJsonToResponse() throws ServletException, IOException, JsonTransformationException {
         //GIVEN
         given(request.getHeader("User-Agent")).willReturn("windows");
-        given(stubResourceHolder.getActualStubConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
+        given(stubResourceHolder.getActualConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
         byte[] jsonAsByteArray = "DOCUMENT".getBytes();
         given(jsonBasedObjectTransformer.transform(jsonObject)).willReturn(jsonAsByteArray);
         given(byteArrayConverter.toString(jsonAsByteArray)).willReturn(FILE_CONTENT);
@@ -107,7 +107,7 @@ public class StubConfigHandlerServletTest {
     @Test
     public void testDoGetShouldWriteErrorResponseWhenActualJsonIsNull() throws ServletException, IOException {
         //GIVEN
-        given(stubResourceHolder.getActualStubConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(null);
+        given(stubResourceHolder.getActualConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(null);
         //WHEN
         underTest.doGet(request, response);
         //THEN
@@ -118,7 +118,7 @@ public class StubConfigHandlerServletTest {
     public void testDoGetShouldNotReplaceNewLineWhenNotOnWindows() throws ServletException, IOException, JsonTransformationException {
         //GIVEN
         given(request.getHeader("User-Agent")).willReturn("mac");
-        given(stubResourceHolder.getActualStubConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
+        given(stubResourceHolder.getActualConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
         byte[] xmlAsByteArray = "DOCUMENT".getBytes();
         given(jsonBasedObjectTransformer.transform(jsonObject)).willReturn(xmlAsByteArray);
         given(byteArrayConverter.toString(xmlAsByteArray)).willReturn(FILE_CONTENT);
@@ -132,7 +132,7 @@ public class StubConfigHandlerServletTest {
     public void testDoGetShouldNotReplaceNewLineWhenUserAgentIsNull() throws ServletException, IOException, JsonTransformationException {
         //GIVEN
         given(request.getHeader("User-Agent")).willReturn(null);
-        given(stubResourceHolder.getActualStubConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
+        given(stubResourceHolder.getActualConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
         byte[] xmlAsByteArray = "DOCUMENT".getBytes();
         given(jsonBasedObjectTransformer.transform(jsonObject)).willReturn(xmlAsByteArray);
         given(byteArrayConverter.toString(xmlAsByteArray)).willReturn(FILE_CONTENT);
@@ -147,7 +147,7 @@ public class StubConfigHandlerServletTest {
         //GIVEN
         given(request.getParameter("source")).willReturn("true");
         given(request.getHeader("User-Agent")).willReturn(null);
-        given(stubResourceHolder.getActualStubConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
+        given(stubResourceHolder.getActualConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
         byte[] xmlAsByteArray = "DOCUMENT".getBytes();
         given(jsonBasedObjectTransformer.transform(jsonObject)).willReturn(xmlAsByteArray);
         given(byteArrayConverter.toString(xmlAsByteArray)).willReturn(FILE_CONTENT);
@@ -163,7 +163,7 @@ public class StubConfigHandlerServletTest {
         //GIVEN
         given(request.getParameter("source")).willReturn("");
         given(request.getHeader("User-Agent")).willReturn(null);
-        given(stubResourceHolder.getActualStubConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
+        given(stubResourceHolder.getActualConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
         byte[] xmlAsByteArray = "DOCUMENT".getBytes();
         given(jsonBasedObjectTransformer.transform(jsonObject)).willReturn(xmlAsByteArray);
         given(byteArrayConverter.toString(xmlAsByteArray)).willReturn(FILE_CONTENT);
@@ -178,7 +178,7 @@ public class StubConfigHandlerServletTest {
         //GIVEN
         given(request.getParameter("source")).willReturn(null);
         given(request.getHeader("User-Agent")).willReturn(null);
-        given(stubResourceHolder.getActualStubConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
+        given(stubResourceHolder.getActualConfigJsonObject(DEFAULT_GROUPNAME)).willReturn(jsonObject);
         byte[] xmlAsByteArray = "DOCUMENT".getBytes();
         given(jsonBasedObjectTransformer.transform(jsonObject)).willReturn(xmlAsByteArray);
         given(byteArrayConverter.toString(xmlAsByteArray)).willReturn(FILE_CONTENT);

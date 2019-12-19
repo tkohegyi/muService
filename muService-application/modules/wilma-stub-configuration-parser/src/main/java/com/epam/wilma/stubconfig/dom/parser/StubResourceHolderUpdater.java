@@ -19,20 +19,18 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
 import com.epam.wilma.domain.stubconfig.StubResourceHolder;
-import com.epam.wilma.domain.stubconfig.TemporaryStubResourceHolder;
+import com.epam.wilma.domain.stubconfig.TemporaryConfigResourceHolder;
 import com.epam.wilma.domain.stubconfig.helper.InternalResourceHolder;
-import com.epam.wilma.domain.stubconfig.interceptor.RequestInterceptor;
-import com.epam.wilma.domain.stubconfig.interceptor.ResponseInterceptor;
+import com.epam.wilma.domain.stubconfig.interceptor.ExternalService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Updates the {@link StubResourceHolder} from the {@link TemporaryStubResourceHolder}.
+ * Updates the {@link StubResourceHolder} from the {@link TemporaryConfigResourceHolder}.
  * @author Tunde_Kovacs
  *
  */
@@ -42,47 +40,29 @@ public class StubResourceHolderUpdater {
     @Autowired
     private StubResourceHolder stubResourceHolder;
     @Autowired
-    private TemporaryStubResourceHolder temporaryStubResourceHolder;
+    private TemporaryConfigResourceHolder temporaryConfigResourceHolder;
     @Autowired
     private InternalResourceHolder internalResourceHolder;
 
     /**
-     * Copies the resources from the {@link TemporaryStubResourceHolder} to the {@link StubResourceHolder}.
+     * Copies the resources from the {@link TemporaryConfigResourceHolder} to the {@link StubResourceHolder}.
      */
     public void updateResourceHolder() {
         updateRequestInterceptors();
-        updateResponseInterceptors();
     }
 
     private void updateRequestInterceptors() {
-        List<RequestInterceptor> requestInterceptors = temporaryStubResourceHolder.getRequestInterceptors();
-        if (requestInterceptors != null) {
-            stubResourceHolder.setRequestInterceptors(new ArrayList<>(requestInterceptors));
-        }
-    }
-
-    private void updateResponseInterceptors() {
-        List<ResponseInterceptor> responseInterceptors = temporaryStubResourceHolder.getResponseInterceptors();
-        if (responseInterceptors != null) {
-            stubResourceHolder.setResponseInterceptors(new ArrayList<>(responseInterceptors));
+        List<ExternalService> externalServices = temporaryConfigResourceHolder.getExternalServices();
+        if (externalServices != null) {
+            stubResourceHolder.setExternalServices(new ArrayList<>(externalServices));
         }
     }
 
     /**
-     * Clears the resources in the {@link TemporaryStubResourceHolder}.
+     * Clears the resources in the {@link TemporaryConfigResourceHolder}.
      */
     public void clearTemporaryResourceHolder() {
-        temporaryStubResourceHolder.clearRequestInterceptors();
-        temporaryStubResourceHolder.clearResponseInterceptors();
-    }
-
-    /**
-     * Add the XML document to {@link StubResourceHolder}.
-     * @param groupName is the group name attribute of stub configuration
-     * @param document is the XML document
-     */
-    public void addDocumentToResourceHolder(final String groupName, final Document document) {
-        //stubResourceHolder.setActualStubConfigDocument(groupName, document);
+        temporaryConfigResourceHolder.clearExternalServices();
     }
 
     /**
@@ -91,30 +71,22 @@ public class StubResourceHolderUpdater {
      * @param jsonObject is the json object
      */
     public void addDocumentToResourceHolder(final String groupName, final JSONObject jsonObject) {
-        stubResourceHolder.setActualStubConfigJsonObject(groupName, jsonObject);
+        stubResourceHolder.setActualConfigJsonObject(groupName, jsonObject);
     }
 
     /**
-     * Copies internal condition checker, template formatter classes
-     * and request/response interceptors
-     * into the {@link TemporaryStubResourceHolder}.
+     * Copies internal services.
+     * into the {@link TemporaryConfigResourceHolder}.
      */
     public void initializeTemporaryResourceHolder() {
-        initializeRequestInterceptors();
-        initializeResponseInterceptors();
+        initializeExternalServices();
     }
 
-    private void initializeRequestInterceptors() {
-        List<RequestInterceptor> requestInterceptors = internalResourceHolder.getRequestInterceptors();
-        if (requestInterceptors != null) {
-            temporaryStubResourceHolder.setRequestInterceptors(new ArrayList<>(requestInterceptors));
+    private void initializeExternalServices() {
+        List<ExternalService> externalServices = internalResourceHolder.getExternalServices();
+        if (externalServices != null) {
+            temporaryConfigResourceHolder.setExternalServices(new ArrayList<>(externalServices));
         }
     }
 
-    private void initializeResponseInterceptors() {
-        List<ResponseInterceptor> responseInterceptors = internalResourceHolder.getResponseInterceptors();
-        if (responseInterceptors != null) {
-            temporaryStubResourceHolder.setResponseInterceptors(new ArrayList<>(responseInterceptors));
-        }
-    }
 }

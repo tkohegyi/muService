@@ -19,8 +19,8 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
 import com.epam.wilma.domain.stubconfig.StubDescriptor;
+import com.epam.wilma.domain.stubconfig.interceptor.ExternalService;
 import com.epam.wilma.domain.stubconfig.interceptor.InterceptorDescriptor;
-import com.epam.wilma.domain.stubconfig.interceptor.RequestInterceptor;
 import com.epam.wilma.router.RoutingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class ServiceMap {
     private final Object o = new Object();
     @Autowired
     private RoutingService routingService;
-    private Map<String, ExternalWilmaService> serviceMap = new ConcurrentHashMap<>();
+    private Map<String, ExternalService> serviceMap = new ConcurrentHashMap<>();
 
     /**
      * Method to call the proper registered external service, based on the request URI.
@@ -58,7 +58,7 @@ public class ServiceMap {
      * @return with the body of the response (a JSON response)
      */
     public String callExternalService(final HttpServletRequest req, final String requestedService, HttpServletResponse resp) {
-        ExternalWilmaService service;
+        ExternalService service;
         synchronized (o) {
             service = serviceMap.get(requestedService);
             if (service == null) {
@@ -84,7 +84,7 @@ public class ServiceMap {
         return response;
     }
 
-    private void logError(final ExternalWilmaService service, final String requestedService, final Exception e) {
+    private void logError(final ExternalService service, final String requestedService, final Exception e) {
         LOGGER.error("Error during call to external service: " + service.getClass().getCanonicalName()
                 + " with requested service: \"" + requestedService
                 + "\"! Reason:" + e.getMessage(), e);
@@ -94,15 +94,15 @@ public class ServiceMap {
      * Method that collects the available external service entry points. Right now only interceptors can be used for this purpose.
      */
     public void detectServices() {
-        Map<String, ExternalWilmaService> newServiceMap = new ConcurrentHashMap<>();
+        Map<String, ExternalService> newServiceMap = new ConcurrentHashMap<>();
         Map<String, StubDescriptor> descriptors = routingService.getStubDescriptors();
         for (String key : descriptors.keySet()) {
             StubDescriptor stubDescriptor = descriptors.get(key);
             if (stubDescriptor != null) {
                 for (InterceptorDescriptor interceptorDescriptor : stubDescriptor.getInterceptorDescriptors()) {
-                    RequestInterceptor requestInterceptor = interceptorDescriptor.getRequestInterceptor();
-                    if (requestInterceptor instanceof ExternalWilmaService) {
-                        ExternalWilmaService service = (ExternalWilmaService) requestInterceptor;
+                    ExternalService externalService = interceptorDescriptor.getExternalService();
+                    if (externalService instanceof ExternalService) {
+                        ExternalService service = (ExternalService) externalService;
                         for (String handler : service.getHandlers()) {
                             newServiceMap.putIfAbsent(handler, service);
                         }

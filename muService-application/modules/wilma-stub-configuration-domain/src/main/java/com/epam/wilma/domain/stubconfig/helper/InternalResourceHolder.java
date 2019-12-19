@@ -1,48 +1,23 @@
 package com.epam.wilma.domain.stubconfig.helper;
-/*==========================================================================
-Copyright since 2013, EPAM Systems
 
-This file is part of Wilma.
-
-Wilma is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Wilma is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
-===========================================================================*/
-
-import com.epam.wilma.domain.stubconfig.interceptor.RequestInterceptor;
-import com.epam.wilma.domain.stubconfig.interceptor.ResponseInterceptor;
+import com.epam.wilma.domain.stubconfig.interceptor.ExternalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * Holds internal condition checker classes, template formatters and request/response interceptors.
- * @author Tunde_Kovacs
+ * Holds internal services.
+ * @author Tamas_Kohegyi
  *
  */
 @Component
 public class InternalResourceHolder {
     @Autowired(required = false)
-    private List<RequestInterceptor> requestInterceptors;
-    @Autowired(required = false)
-    private List<ResponseInterceptor> responseInterceptors;
+    private List<ExternalService> externalServices;
 
-    public List<RequestInterceptor> getRequestInterceptors() {
-        return requestInterceptors;
-    }
-
-    public List<ResponseInterceptor> getResponseInterceptors() {
-        return responseInterceptors;
+    public List<ExternalService> getExternalServices() {
+        return externalServices;
     }
 
 }

@@ -86,11 +86,11 @@ public class StubConfigurationSaverTest {
     @Test
     public void testSaveAllStubConfigurations() throws TransformerException, JsonTransformationException {
         //GIVEN
-        given(stubResourceHolder.getActualStubConfigJsonObject(TEST_KEY)).willReturn(jsonObject);
+        given(stubResourceHolder.getActualConfigJsonObject(TEST_KEY)).willReturn(jsonObject);
         //WHEN
         underTest.saveAllStubConfigurations(descriptors);
         //THEN
-        verify(stubResourceHolder).getActualStubConfigJsonObject(TEST_KEY);
+        verify(stubResourceHolder).getActualConfigJsonObject(TEST_KEY);
         verify(documentTransformer).transformToFile(jsonObject, TEST_PATH + "/" + 1 + STUB_CONFIG_JSON_POSTFIX, true);
     }
 
@@ -99,10 +99,10 @@ public class StubConfigurationSaverTest {
             TransformerException {
         //GIVEN
         doThrow(new TransformerException("Test")).when(documentTransformer).transformToFile(jsonObject, TEST_PATH + "/" + 1 + STUB_CONFIG_JSON_POSTFIX, true);
-        given(stubResourceHolder.getActualStubConfigJsonObject(TEST_KEY)).willReturn(jsonObject);
+        given(stubResourceHolder.getActualConfigJsonObject(TEST_KEY)).willReturn(jsonObject);
         //WHEN
         underTest.saveAllStubConfigurations(descriptors);
         //THEN
-        verify(stubResourceHolder).getActualStubConfigJsonObject(TEST_KEY);
+        verify(stubResourceHolder).getActualConfigJsonObject(TEST_KEY);
     }
 }

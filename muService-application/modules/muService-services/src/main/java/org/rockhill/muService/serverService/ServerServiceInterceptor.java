@@ -1,9 +1,6 @@
 package org.rockhill.muService.serverService;
 
-import com.epam.wilma.domain.http.WilmaHttpRequest;
-import com.epam.wilma.domain.stubconfig.interceptor.RequestInterceptor;
-import com.epam.wilma.domain.stubconfig.parameter.ParameterList;
-import com.epam.wilma.webapp.service.external.ExternalWilmaService;
+import com.epam.wilma.domain.stubconfig.interceptor.ExternalService;
 import com.google.common.collect.Sets;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
@@ -16,7 +13,7 @@ import java.util.Set;
 /**
  * @author tkohegyi
  */
-public class ServerServiceInterceptor extends ServerServiceCore implements RequestInterceptor, ExternalWilmaService {
+public class ServerServiceInterceptor extends ServerServiceCore implements ExternalService {
 
     private static final String HANDLED_SERVICE = "/server-service";
 
@@ -67,7 +64,4 @@ public class ServerServiceInterceptor extends ServerServiceCore implements Reque
         );
     }
 
-    @Override
-    public void onRequestReceive(WilmaHttpRequest wilmaHttpRequest, ParameterList parameterList) {
-    }
 }

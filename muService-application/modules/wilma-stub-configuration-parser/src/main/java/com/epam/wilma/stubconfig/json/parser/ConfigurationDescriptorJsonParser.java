@@ -17,10 +17,10 @@ import java.util.List;
  * @author Tamas_Kohegyi
  */
 @Component
-public class StubDescriptorJsonParser {
+public class ConfigurationDescriptorJsonParser {
 
     @Autowired
-    private InterceptorDescriptorJsonParser interceptorDescriptorJsonParser;
+    private ServiceDescriptorJsonParser serviceDescriptorJsonParser;
 
     /**
      * Builds a new {@link StubDescriptor} domain model from a given JSON Object.
@@ -53,7 +53,7 @@ public class StubDescriptorJsonParser {
         if (root.has("services")) {
             JSONArray interceptorArray = root.getJSONArray("services");
             for (int i = 0; i < interceptorArray.length(); i++) {
-                InterceptorDescriptor interceptorDescriptor = interceptorDescriptorJsonParser.parseObject(interceptorArray.getJSONObject(i), root);
+                InterceptorDescriptor interceptorDescriptor = serviceDescriptorJsonParser.parseObject(interceptorArray.getJSONObject(i), root);
                 interceptorDescriptors.add(interceptorDescriptor);
             }
         }

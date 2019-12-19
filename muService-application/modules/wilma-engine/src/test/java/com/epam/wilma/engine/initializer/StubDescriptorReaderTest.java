@@ -20,7 +20,7 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
 import com.epam.wilma.router.RoutingService;
-import com.epam.wilma.stubconfig.StubDescriptorJsonFactory;
+import com.epam.wilma.stubconfig.ConfigurationDescriptorJsonFactory;
 import com.epam.wilma.webapp.service.command.NewStubDescriptorCommand;
 import com.epam.wilma.webapp.service.command.factory.NewStubDescriptorJsonCommandFactory;
 import com.epam.wilma.webapp.service.external.ServiceMap;
@@ -46,7 +46,7 @@ import static org.mockito.Mockito.verify;
 public class StubDescriptorReaderTest {
 
     @Mock
-    private StubDescriptorJsonFactory stubConfigurationJsonBuilder;
+    private ConfigurationDescriptorJsonFactory stubConfigurationJsonBuilder;
     @Mock
     private RoutingService routingService;
     @Mock

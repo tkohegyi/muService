@@ -89,7 +89,7 @@ public class StubConfigHandlerServlet extends HttpServlet {
 
     private byte[] getActualUsedJson(final String groupName) {
         //get file from stubResourceHolder and transform it
-        JSONObject actualObject = stubResourceHolder.getActualStubConfigJsonObject(groupName);
+        JSONObject actualObject = stubResourceHolder.getActualConfigJsonObject(groupName);
         byte[] json = jsonBasedObjectTransformer.transform(actualObject);
         return json;
     }

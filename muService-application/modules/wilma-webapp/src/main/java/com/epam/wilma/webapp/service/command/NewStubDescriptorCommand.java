@@ -21,7 +21,7 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 import com.epam.wilma.domain.stubconfig.StubDescriptor;
 import com.epam.wilma.domain.stubconfig.StubDescriptorAttributes;
 import com.epam.wilma.router.command.StubDescriptorModificationCommand;
-import com.epam.wilma.stubconfig.StubDescriptorJsonFactory;
+import com.epam.wilma.stubconfig.ConfigurationDescriptorJsonFactory;
 
 import java.io.InputStream;
 import java.util.LinkedHashMap;
@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public class NewStubDescriptorCommand implements StubDescriptorModificationCommand {
 
-    private final StubDescriptorJsonFactory stubConfigurationJsonBuilder;
+    private final ConfigurationDescriptorJsonFactory stubConfigurationJsonBuilder;
     private final InputStream inputStream;
 
     /**
@@ -43,7 +43,7 @@ public class NewStubDescriptorCommand implements StubDescriptorModificationComma
      * @param inputStream              is the stream of new stub configuration
      * @param stubConfigurationJsonBuilder creates a StubDescriptor object from a inputStream
      */
-    public NewStubDescriptorCommand(final InputStream inputStream, final StubDescriptorJsonFactory stubConfigurationJsonBuilder) {
+    public NewStubDescriptorCommand(final InputStream inputStream, final ConfigurationDescriptorJsonFactory stubConfigurationJsonBuilder) {
         this.inputStream = inputStream;
         this.stubConfigurationJsonBuilder = stubConfigurationJsonBuilder;
     }

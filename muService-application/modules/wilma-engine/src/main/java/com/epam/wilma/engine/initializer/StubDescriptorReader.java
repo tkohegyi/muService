@@ -22,7 +22,7 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 import com.epam.wilma.domain.stubconfig.exception.DescriptorCannotBeParsedException;
 import com.epam.wilma.router.RoutingService;
 import com.epam.wilma.router.command.StubDescriptorModificationCommand;
-import com.epam.wilma.stubconfig.StubDescriptorJsonFactory;
+import com.epam.wilma.stubconfig.ConfigurationDescriptorJsonFactory;
 import com.epam.wilma.webapp.service.command.factory.NewStubDescriptorJsonCommandFactory;
 import com.epam.wilma.webapp.service.external.ServiceMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ import java.util.List;
 public class StubDescriptorReader {
 
     @Autowired
-    private StubDescriptorJsonFactory stubConfigurationJsonBuilder;
+    private ConfigurationDescriptorJsonFactory stubConfigurationJsonBuilder;
     @Autowired
     private RoutingService routingService;
     @Autowired

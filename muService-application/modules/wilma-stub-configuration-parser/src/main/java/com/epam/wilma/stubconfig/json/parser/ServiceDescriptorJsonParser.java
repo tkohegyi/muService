@@ -21,12 +21,10 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 import com.epam.wilma.domain.stubconfig.exception.DescriptorValidationFailedException;
 import com.epam.wilma.domain.stubconfig.exception.InterfaceValidationFailedException;
+import com.epam.wilma.domain.stubconfig.interceptor.ExternalService;
 import com.epam.wilma.domain.stubconfig.interceptor.InterceptorDescriptor;
-import com.epam.wilma.domain.stubconfig.interceptor.RequestInterceptor;
-import com.epam.wilma.domain.stubconfig.interceptor.ResponseInterceptor;
 import com.epam.wilma.domain.stubconfig.parameter.ParameterList;
-import com.epam.wilma.stubconfig.initializer.interceptor.RequestInterceptorInitializer;
-import com.epam.wilma.stubconfig.initializer.interceptor.ResponseInterceptorInitializer;
+import com.epam.wilma.stubconfig.initializer.interceptor.ExternalServiceInitializer;
 import com.epam.wilma.stubconfig.json.parser.helper.ObjectParser;
 import com.epam.wilma.stubconfig.json.parser.helper.ParameterListParser;
 import org.json.JSONObject;
@@ -41,14 +39,12 @@ import org.springframework.stereotype.Component;
  * @author Tamas_Kohegyi
  */
 @Component
-public class InterceptorDescriptorJsonParser implements ObjectParser<InterceptorDescriptor> {
+public class ServiceDescriptorJsonParser implements ObjectParser<InterceptorDescriptor> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(InterceptorDescriptorJsonParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceDescriptorJsonParser.class);
 
     @Autowired
-    private RequestInterceptorInitializer requestInterceptorInitializer;
-    @Autowired
-    private ResponseInterceptorInitializer responseInterceptorInitializer;
+    private ExternalServiceInitializer externalServiceInitializer;
     @Autowired
     private ParameterListParser parameterListParser;
 
@@ -66,18 +62,18 @@ public class InterceptorDescriptorJsonParser implements ObjectParser<Interceptor
                     + "' should not contain 'class' at its end.");
         }
         ParameterList params = parameterListParser.parseObject(interceptorObject, root);
-        RequestInterceptor requestInterceptor = null;
+        ExternalService externalService = null;
         try {
-            requestInterceptor = requestInterceptorInitializer.getExternalClassObject(clazz);
+            externalService = externalServiceInitializer.getExternalClassObject(clazz);
         } catch (InterfaceValidationFailedException e) {
             // don't worry
             LOGGER.debug("No Request interceptor in class:" + clazz, e);
         }
-        if (requestInterceptor == null) {
-            throw new DescriptorValidationFailedException("Validation of stub descriptor failed - Class '" + clazz
-                    + "' does not implement the necessary request interceptor interface.");
+        if (externalService == null) {
+            throw new DescriptorValidationFailedException("Validation of Service description failed - Class '" + clazz
+                    + "' does not implement the necessary interface.");
         }
-        interceptorDescriptor = new InterceptorDescriptor(name, requestInterceptor, null, params);
+        interceptorDescriptor = new InterceptorDescriptor(name, externalService, params);
 
         return interceptorDescriptor;
     }

@@ -20,7 +20,7 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 import com.epam.wilma.domain.stubconfig.StubDescriptor;
 import com.epam.wilma.domain.stubconfig.StubDescriptorAttributes;
-import com.epam.wilma.stubconfig.StubDescriptorJsonFactory;
+import com.epam.wilma.stubconfig.ConfigurationDescriptorJsonFactory;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -50,7 +50,7 @@ public class NewStubDescriptorCommandTest {
     @Mock
     private InputStream inputStream;
     @Mock
-    private StubDescriptorJsonFactory stubConfigurationJsonBuilder;
+    private ConfigurationDescriptorJsonFactory stubConfigurationJsonBuilder;
     @Mock
     private StubDescriptorAttributes attributes;
 

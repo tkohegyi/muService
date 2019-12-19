@@ -28,21 +28,20 @@ import com.epam.wilma.domain.stubconfig.parameter.ParameterList;
 public class InterceptorDescriptor {
 
     private final String name;
-    private final RequestInterceptor requestInterceptor;
+    private final ExternalService externalService;
     private final ParameterList params;
 
     /**
      * Constructs a new instance of request interceptor descriptor.
      * @param name the name of the request interceptor
-     * @param requestInterceptor the class used to intercept and process a request
-     * @param responseInterceptor the class used to intercept and process a response
+     * @param externalService the class used to intercept and process a request
      * @param params the list of parameters set in the stub configuration and used
      * by the request interceptor
      */
-    public InterceptorDescriptor(final String name, final RequestInterceptor requestInterceptor, final ResponseInterceptor responseInterceptor,
+    public InterceptorDescriptor(final String name, final ExternalService externalService,
             final ParameterList params) {
         this.name = name;
-        this.requestInterceptor = requestInterceptor;
+        this.externalService = externalService;
         this.params = params;
     }
 
@@ -50,8 +49,8 @@ public class InterceptorDescriptor {
         return name;
     }
 
-    public RequestInterceptor getRequestInterceptor() {
-        return requestInterceptor;
+    public ExternalService getExternalService() {
+        return externalService;
     }
 
     public ParameterList getParams() {

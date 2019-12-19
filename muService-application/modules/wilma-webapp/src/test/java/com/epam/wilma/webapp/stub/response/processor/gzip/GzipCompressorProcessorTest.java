@@ -36,7 +36,7 @@ import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.compression.gzip.GzipCompressionService;
+import com.epam.wilma.common.helper.compression.gzip.GzipCompressionService;
 import com.epam.wilma.webapp.stub.servlet.helper.ByteArrayInputStreamFactory;
 
 /**

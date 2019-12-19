@@ -1,4 +1,4 @@
-package com.epam.wilma.compression.gzip.helper;
+package com.epam.wilma.common.helper.compression.gzip;
 /*==========================================================================
 Copyright since 2013, EPAM Systems
 
@@ -18,27 +18,27 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.zip.GZIPInputStream;
-
-import org.springframework.stereotype.Component;
 
 /**
- * Factory for creating new instances of {@link GZIPInputStream}.
+ * Provides compression/decompression of an {@link InputStream}.
  * @author Tunde_Kovacs
  *
  */
-@Component
-public class GzipInputStreamFactory {
+public interface CompressionService {
 
     /**
-     * Creates a new {@link GZIPInputStream}.
-     * @param inputStream the {@link InputStream} from which the new instance will be created
-     * @return the new instance
-     * @throws IOException if an I/O error has occurred
+     * Does the compression of an InputStream.
+     * @param inputStream the {@link InputStream} that will be compressed.
+     * @return a ByteArrayOutputStream  containing the compressed information
      */
-    public GZIPInputStream createInputStream(final InputStream inputStream) throws IOException {
-        return new GZIPInputStream(inputStream);
-    }
+    ByteArrayOutputStream compress(InputStream inputStream);
+
+    /**
+     * Does the decompression of an InputStream.
+     * @param inputStream the {@link InputStream} that will be decompressed.
+     * @return a ByteArrayOutputStream  containing the decompressed information
+     */
+    ByteArrayOutputStream decompress(InputStream inputStream);
 }

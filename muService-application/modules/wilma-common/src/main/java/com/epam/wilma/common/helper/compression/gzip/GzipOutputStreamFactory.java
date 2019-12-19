@@ -1,4 +1,4 @@
-package com.epam.wilma.compression;
+package com.epam.wilma.common.helper.compression.gzip;
 /*==========================================================================
 Copyright since 2013, EPAM Systems
 
@@ -19,26 +19,27 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
+import java.io.IOException;
+import java.util.zip.GZIPOutputStream;
+
+import org.springframework.stereotype.Component;
 
 /**
- * Provides compression/decompression of an {@link InputStream}.
+ * Factory for creating new instances of {@link GZIPOutputStream}.
  * @author Tunde_Kovacs
  *
  */
-public interface CompressionService {
+@Component
+public class GzipOutputStreamFactory {
 
     /**
-     * Does the compression of an InputStream.
-     * @param inputStream the {@link InputStream} that will be compressed.
-     * @return a ByteArrayOutputStream  containing the compressed information
+     * Creates a new instance of {@link GZIPOutputStream}.
+     * @param baos the byteArrayOutpuStream that is given as argument
+     * to the GZIPOutputStream's constructor
+     * @return the new instance
+     * @throws IOException if an I/O error has occurred
      */
-    ByteArrayOutputStream compress(InputStream inputStream);
-
-    /**
-     * Does the decompression of an InputStream.
-     * @param inputStream the {@link InputStream} that will be decompressed.
-     * @return a ByteArrayOutputStream  containing the decompressed information
-     */
-    ByteArrayOutputStream decompress(InputStream inputStream);
+    public GZIPOutputStream createOutputStream(final ByteArrayOutputStream baos) throws IOException {
+        return new GZIPOutputStream(baos);
+    }
 }

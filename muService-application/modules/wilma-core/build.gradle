@@ -19,7 +19,6 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 description='wilma core'
 dependencies {
-    compile project(':muService-application:wilma-compression')
     compile project(':muService-application:wilma-route-engine')
     compile project(':muService-application:wilma-stub-configuration-domain')
     compile project(':muService-application:wilma-message-maintainer')

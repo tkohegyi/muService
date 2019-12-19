@@ -1,4 +1,4 @@
-package com.epam.wilma.compression.gzip;
+package com.epam.wilma.common.helper.compression.gzip;
 /*==========================================================================
 Copyright since 2013, EPAM Systems
 
@@ -30,6 +30,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import com.epam.wilma.common.exception.SystemException;
+import com.epam.wilma.common.helper.compression.gzip.GzipCompressionService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -38,8 +39,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.epam.wilma.common.stream.helper.ByteArrayOutputStreamFactory;
-import com.epam.wilma.compression.gzip.helper.GzipInputStreamFactory;
-import com.epam.wilma.compression.gzip.helper.GzipOutputStreamFactory;
+import com.epam.wilma.common.helper.compression.gzip.GzipInputStreamFactory;
+import com.epam.wilma.common.helper.compression.gzip.GzipOutputStreamFactory;
 
 /**
  * Provides unit tests for the {@link GzipCompressionService} class.

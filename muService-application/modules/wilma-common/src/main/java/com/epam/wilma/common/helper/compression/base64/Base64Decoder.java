@@ -1,4 +1,4 @@
-package com.epam.wilma.compression.base64;
+package com.epam.wilma.common.helper.compression.base64;
 
 /*==========================================================================
 Copyright since 2013, EPAM Systems

@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.epam.wilma.compression.gzip.GzipCompressionService;
+import com.epam.wilma.common.helper.compression.gzip.GzipCompressionService;
 import com.epam.wilma.webapp.stub.response.processor.ResponseProcessor;
 import com.epam.wilma.webapp.stub.servlet.helper.ByteArrayInputStreamFactory;
 

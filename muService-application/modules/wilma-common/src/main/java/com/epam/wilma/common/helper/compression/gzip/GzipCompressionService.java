@@ -1,4 +1,4 @@
-package com.epam.wilma.compression.gzip;
+package com.epam.wilma.common.helper.compression.gzip;
 /*==========================================================================
 Copyright since 2013, EPAM Systems
 
@@ -31,9 +31,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.epam.wilma.common.stream.helper.ByteArrayOutputStreamFactory;
-import com.epam.wilma.compression.CompressionService;
-import com.epam.wilma.compression.gzip.helper.GzipInputStreamFactory;
-import com.epam.wilma.compression.gzip.helper.GzipOutputStreamFactory;
 
 /**
  * Responsible for compressing and decompressing an input stream into/from gzip.

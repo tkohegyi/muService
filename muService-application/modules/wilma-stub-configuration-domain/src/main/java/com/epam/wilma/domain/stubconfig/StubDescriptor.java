@@ -20,14 +20,10 @@ along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 
 import java.util.List;
 
-import com.epam.wilma.domain.stubconfig.dialog.DialogDescriptor;
 import com.epam.wilma.domain.stubconfig.interceptor.InterceptorDescriptor;
 
 /**
- * The stub configuration contains several {@link DialogDescriptor}s that describe a request-response pair
- * - with what kind of response the stub should answer in case of a specific request.
- * It also contains interceptors that can be configured for the stub and cass process
- * requests and responses.
+ * The stub configuration contains interceptors.
  * @author Marton_Sereg
  * @author Tunde_Kovacs
  * @author Balazs_Berkes

@@ -49,7 +49,6 @@ public class RouteEngineConfigurationAccessTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         given(propertyHolder.getInt("internal.wilma.port")).willReturn(port);
-        given(propertyHolder.get("switch")).willReturn("wilma");
     }
 
     @Test

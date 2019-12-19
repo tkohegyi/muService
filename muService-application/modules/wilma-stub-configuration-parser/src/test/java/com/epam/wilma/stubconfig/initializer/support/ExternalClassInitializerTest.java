@@ -26,7 +26,6 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.testng.Assert.assertEquals;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -34,7 +33,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.domain.stubconfig.dialog.response.template.TemplateGenerator;
+import com.epam.wilma.domain.stubconfig.dialog.response.template.Template;
 import com.epam.wilma.stubconfig.dom.parser.node.helper.ClassNameMapper;
 import com.epam.wilma.domain.stubconfig.exception.DescriptorValidationFailedException;
 import com.epam.wilma.stubconfig.initializer.condition.helper.ClassFactory;
@@ -78,11 +77,11 @@ public class ExternalClassInitializerTest {
     @Test
     public void testLoadExternalClassShouldCallClassPathExtenderAddFileFunction() throws ClassNotFoundException {
         //GIVEN
-        given(beanRegistryService.getBean(SIMPLE_CLASS_NAME, TemplateGenerator.class)).willThrow(new NoSuchBeanDefinitionException(""));
+        given(beanRegistryService.getBean(SIMPLE_CLASS_NAME, Template.class)).willThrow(new NoSuchBeanDefinitionException(""));
         given(classFactory.getClassToLoad(CLASS)).willReturn(Object.class);
         ignoreInterfaceTypeValidation();
         //WHEN
-        underTest.loadExternalClass(SIMPLE_CLASS_NAME, PATH, TemplateGenerator.class);
+        underTest.loadExternalClass(SIMPLE_CLASS_NAME, PATH, Template.class);
         //THEN
         verify(classPathExtender).addFile(PATH);
         verify(classNameMapper).get(SIMPLE_CLASS_NAME);
@@ -91,34 +90,23 @@ public class ExternalClassInitializerTest {
     @Test
     public void testLoadExternalClassShouldBeRegisteredToApplicationContext() throws ClassNotFoundException {
         //GIVEN
-        given(beanRegistryService.getBean(SIMPLE_CLASS_NAME, TemplateGenerator.class)).willThrow(new NoSuchBeanDefinitionException(""));
+        given(beanRegistryService.getBean(SIMPLE_CLASS_NAME, Template.class)).willThrow(new NoSuchBeanDefinitionException(""));
         given(classFactory.getClassToLoad(CLASS)).willReturn(Object.class);
         ignoreInterfaceTypeValidation();
         //WHEN
-        underTest.loadExternalClass(SIMPLE_CLASS_NAME, PATH, TemplateGenerator.class);
+        underTest.loadExternalClass(SIMPLE_CLASS_NAME, PATH, Template.class);
         //THEN
         verify(beanRegistryService).register(eq(SIMPLE_CLASS_NAME), any(Object.class));
         verify(classNameMapper).get(SIMPLE_CLASS_NAME);
     }
 
-    @Test
-    public void testLoadExternalClassShouldReturnTheClassWhenAlreadyInApplicationContexg() throws ClassNotFoundException {
-        //GIVEN
-        TemplateGenerator generator = new DummyGenerator();
-        given(beanRegistryService.getBean(SIMPLE_CLASS_NAME, TemplateGenerator.class)).willReturn(generator);
-        //WHEN
-        TemplateGenerator actual = underTest.loadExternalClass(CLASS, PATH, TemplateGenerator.class);
-        //THEN
-        assertEquals(actual, generator);
-    }
-
     @Test(expectedExceptions = DescriptorValidationFailedException.class)
     public void testLoadExternalClassShouldThrowExceptionWhenClassFactoryThrowException() throws ClassNotFoundException {
         //GIVEN
-        given(beanRegistryService.getBean(SIMPLE_CLASS_NAME, TemplateGenerator.class)).willThrow(new NoSuchBeanDefinitionException(""));
+        given(beanRegistryService.getBean(SIMPLE_CLASS_NAME, Template.class)).willThrow(new NoSuchBeanDefinitionException(""));
         given(classFactory.getClassToLoad(CLASS)).willThrow(new ClassNotFoundException());
         //WHEN
-        underTest.loadExternalClass(SIMPLE_CLASS_NAME, PATH, TemplateGenerator.class);
+        underTest.loadExternalClass(SIMPLE_CLASS_NAME, PATH, Template.class);
         //THEN exception is thrown
         verify(classNameMapper).get(SIMPLE_CLASS_NAME);
     }
@@ -126,10 +114,10 @@ public class ExternalClassInitializerTest {
     @Test(expectedExceptions = DescriptorValidationFailedException.class)
     public void testLoadExternalClassShouldThrowExceptionWhenClassFactoryThrowClassFormatException() throws ClassNotFoundException {
         //GIVEN
-        given(beanRegistryService.getBean(SIMPLE_CLASS_NAME, TemplateGenerator.class)).willThrow(new NoSuchBeanDefinitionException(""));
+        given(beanRegistryService.getBean(SIMPLE_CLASS_NAME, Template.class)).willThrow(new NoSuchBeanDefinitionException(""));
         given(classFactory.getClassToLoad(CLASS)).willThrow(new ClassFormatError());
         //WHEN
-        underTest.loadExternalClass(SIMPLE_CLASS_NAME, PATH, TemplateGenerator.class);
+        underTest.loadExternalClass(SIMPLE_CLASS_NAME, PATH, Template.class);
         //THEN exception is thrown
         verify(classNameMapper).get(SIMPLE_CLASS_NAME);
     }
@@ -139,11 +127,4 @@ public class ExternalClassInitializerTest {
         doNothing().when(classValidator).validateInterface(any(), any(Class.class), anyString());
     }
 
-    private static final class DummyGenerator implements TemplateGenerator {
-
-        @Override
-        public byte[] generateTemplate() {
-            return null;
-        }
-    }
 }

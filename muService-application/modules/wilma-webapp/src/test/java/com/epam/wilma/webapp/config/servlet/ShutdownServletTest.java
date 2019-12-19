@@ -37,7 +37,7 @@ import org.slf4j.Logger;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.common.helper.WilmaService;
+import com.epam.wilma.common.helper.muService;
 import com.epam.wilma.webapp.helper.UrlAccessLogMessageAssembler;
 
 /**
@@ -47,13 +47,13 @@ import com.epam.wilma.webapp.helper.UrlAccessLogMessageAssembler;
  */
 public class ShutdownServletTest {
 
-    private static final String SHUTDOWN_MESSAGE = "Shutting down Wilma.";
+    private static final String SHUTDOWN_MESSAGE = "Shutting down muService.";
 
     @Mock
     private Logger logger;
 
     @Mock
-    private WilmaService wilmaService;
+    private muService muService;
     @Mock
     private UrlAccessLogMessageAssembler urlAccessLogMessageAssembler;
 
@@ -71,7 +71,7 @@ public class ShutdownServletTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         Whitebox.setInternalState(underTest, "logger", logger);
-        Whitebox.setInternalState(underTest, "wilmaService", wilmaService);
+        Whitebox.setInternalState(underTest, "muService", muService);
         Whitebox.setInternalState(underTest, "urlAccessLogMessageAssembler", urlAccessLogMessageAssembler);
         given(resp.getWriter()).willReturn(printWriter);
     }
@@ -82,7 +82,7 @@ public class ShutdownServletTest {
         //WHEN
         underTest.doGet(req, resp);
         //THEN
-        verify(wilmaService).stop();
+        verify(muService).stop();
     }
 
     @Test
@@ -111,7 +111,7 @@ public class ShutdownServletTest {
         //WHEN
         underTest.doPost(req, resp);
         //THEN
-        verify(wilmaService).stop();
+        verify(muService).stop();
         verify(logger).info("logmessage");
         verify(printWriter).write(SHUTDOWN_MESSAGE);
     }

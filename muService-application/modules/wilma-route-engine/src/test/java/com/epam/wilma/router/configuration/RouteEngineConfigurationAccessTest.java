@@ -27,7 +27,6 @@ import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.common.helper.OperationMode;
 import com.epam.wilma.properties.PropertyHolder;
 import com.epam.wilma.router.configuration.domain.PropertyDTO;
 

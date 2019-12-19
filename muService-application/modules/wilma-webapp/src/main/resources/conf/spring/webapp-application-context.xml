@@ -95,20 +95,6 @@
     </property>
   </bean>
 
-  <bean class="org.eclipse.jetty.servlet.ServletHandler" id="blockLocalhostUsageResponseHandler" >
-  	<property name="servlets">
-      <list>
-        <bean class="org.eclipse.jetty.servlet.ServletHolder" p:servlet-ref="blockLocalhostUsageResponseServlet" p:name="blockLocalhostUsageResponseServlet" />
-      </list>
-    </property>
-    <property name="servletMappings">
-      <list>
-        <bean class="org.eclipse.jetty.servlet.ServletMapping" p:servletName="blockLocalhostUsageResponseServlet" p:pathSpec="/*" />
-      </list>
-    </property>
-  </bean>
-  <bean class="org.eclipse.jetty.servlet.ServletContextHandler" id="blockLocalhostUsageResponseContextHandler" p:contextPath="/local" p:servletHandler-ref="blockLocalhostUsageResponseHandler" />
-
   <bean class="org.eclipse.jetty.server.handler.ResourceHandler" id="messagesResourceHandler">
     <property name="directoriesListed" value="true" />
     <property name="welcomeFiles">
@@ -162,7 +148,6 @@
         <ref bean="wilmaLogPageContextHandler" />
         <ref bean="readmePageContextHandler" />
         <ref bean="configContextHandler" />
-        <ref bean="blockLocalhostUsageResponseContextHandler" />
       </list>
     </property>
   </bean>

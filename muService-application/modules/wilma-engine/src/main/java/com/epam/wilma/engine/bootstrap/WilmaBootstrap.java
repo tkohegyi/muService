@@ -59,7 +59,7 @@ public class WilmaBootstrap {
         ClassPathXmlApplicationContext applicationContext = null;
         try {
             applicationContext = getApplicationContext();
-            WilmaEngine wilmaEngine = applicationContext.getBean(WilmaEngine.class);
+            muEngine wilmaEngine = applicationContext.getBean(muEngine.class);
             WilmaServiceListener wilmaServiceListener = applicationContext.getBean(WilmaServiceListener.class);
             wilmaEngine.addListener(wilmaServiceListener, MoreExecutors.directExecutor());
             wilmaEngine.start();

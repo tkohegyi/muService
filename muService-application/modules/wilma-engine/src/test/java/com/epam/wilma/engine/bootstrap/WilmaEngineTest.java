@@ -32,7 +32,7 @@ import com.epam.wilma.maintainer.LogFileMaintainer;
 import com.epam.wilma.webapp.jetty.JettyServer;
 
 /**
- * Provides unit tests for the class {@link WilmaEngine}.
+ * Provides unit tests for the class {@link muEngine}.
  */
 public class WilmaEngineTest {
 
@@ -44,11 +44,11 @@ public class WilmaEngineTest {
     private ApplicationContextCloser applicationCloser;
 
     @InjectMocks
-    private WilmaEngine underTest;
+    private muEngine underTest;
 
     @BeforeMethod
     public void setUp() {
-        underTest = new WilmaEngine();
+        underTest = new muEngine();
         MockitoAnnotations.initMocks(this);
     }
 

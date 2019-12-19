@@ -3,7 +3,6 @@ package com.epam.wilma.engine.bootstrap.helper;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
-import org.mockito.Answers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -13,7 +12,6 @@ import org.slf4j.Logger;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.common.helper.LogFilePathProvider;
 import com.epam.wilma.common.helper.VersionTitleProvider;
 import com.epam.wilma.domain.exception.SystemException;
 import com.epam.wilma.engine.configuration.EngineConfigurationAccess;
@@ -21,10 +19,10 @@ import com.epam.wilma.engine.configuration.domain.PropertyDTO;
 import com.google.common.util.concurrent.Service.State;
 
 /**
- * Unit test for {@link WilmaServiceListenerTest}.
+ * Unit test for {@link muServiceListenerTest}.
  * @author Adam_Csaba_Kiraly, Tamas Kohegyi
  */
-public class WilmaServiceListenerTest {
+public class muServiceListenerTest {
 
     private static final String FAILED_MESSAGE = "Error occurred in muService";
     private static final String ERR_MSG = "System error";

@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.epam.wilma.common.configuration.ConfigurationAccessBase;
-import com.epam.wilma.common.helper.OperationMode;
 import com.epam.wilma.properties.PropertyHolder;
 import com.epam.wilma.router.configuration.domain.PropertyDTO;
 

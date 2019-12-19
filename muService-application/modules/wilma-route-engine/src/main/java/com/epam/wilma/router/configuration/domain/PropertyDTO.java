@@ -18,8 +18,6 @@ You should have received a copy of the GNU General Public License
 along with Wilma.  If not, see <http://www.gnu.org/licenses/>.
 ===========================================================================*/
 
-import com.epam.wilma.common.helper.OperationMode;
-
 /**
  * Holds module specific properties.
  * @author Tunde_Kovacs

@@ -22,7 +22,7 @@ package com.epam.wilma.engine.bootstrap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.epam.wilma.common.helper.WilmaService;
+import com.epam.wilma.common.helper.muService;
 import com.epam.wilma.engine.bootstrap.helper.ApplicationContextCloser;
 import com.epam.wilma.maintainer.LogFileMaintainer;
 import com.epam.wilma.webapp.jetty.JettyServer;
@@ -33,7 +33,7 @@ import com.google.common.util.concurrent.AbstractIdleService;
  * @author Marton_Sereg
  */
 @Component
-public class WilmaEngine extends AbstractIdleService implements WilmaService {
+public class muEngine extends AbstractIdleService implements muService {
 
     @Autowired
     private JettyServer webAppServer;

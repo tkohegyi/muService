@@ -58,7 +58,7 @@ public class WilmaBootstrapTest {
     @Mock
     private MutablePropertySources propertyResources;
     @Mock
-    private WilmaEngine wilmaEngine;
+    private muEngine wilmaEngine;
     @Mock
     private WilmaServiceListener wilmaServiceListener;
     @Mock
@@ -90,7 +90,7 @@ public class WilmaBootstrapTest {
     @Test
     public void testBootstrapShouldStartWilmaEngine() {
         //GIVEN
-        given(applicationContext.getBean(WilmaEngine.class)).willReturn(wilmaEngine);
+        given(applicationContext.getBean(muEngine.class)).willReturn(wilmaEngine);
         //WHEN
         underTest.bootstrap();
         //THEN
@@ -100,7 +100,7 @@ public class WilmaBootstrapTest {
     @Test
     public void testBootstrapWhenThrowsSchedulingCannotBeStartedExceptionShouldLogException() {
         //GIVEN
-        given(applicationContext.getBean(WilmaEngine.class)).willThrow(beanCreationException);
+        given(applicationContext.getBean(muEngine.class)).willThrow(beanCreationException);
         given(beanCreationException.getMostSpecificCause()).willReturn(schedulingCannotBeStartedException);
         given(beanCreationException.contains(SchedulingCannotBeStartedException.class)).willReturn(true);
         given(beanCreationException.getCause()).willReturn(schedulingCannotBeStartedException);
@@ -116,7 +116,7 @@ public class WilmaBootstrapTest {
     @Test
     public void testBootstrapWhenThrowsInvalidPropertyExceptionShouldLogException() {
         //GIVEN
-        given(applicationContext.getBean(WilmaEngine.class)).willThrow(beanCreationException);
+        given(applicationContext.getBean(muEngine.class)).willThrow(beanCreationException);
         given(beanCreationException.getMostSpecificCause()).willReturn(invalidPropertyException);
         given(beanCreationException.contains(InvalidPropertyException.class)).willReturn(true);
         given(beanCreationException.getCause()).willReturn(invalidPropertyException);
@@ -131,7 +131,7 @@ public class WilmaBootstrapTest {
     @Test
     public void testBootstrapWhenThrowsPropertiesNotAvailableExceptionShouldLogException() {
         //GIVEN
-        given(applicationContext.getBean(WilmaEngine.class)).willThrow(beanCreationException);
+        given(applicationContext.getBean(muEngine.class)).willThrow(beanCreationException);
         given(beanCreationException.getMostSpecificCause()).willReturn(schedulingCannotBeStartedException);
         given(beanCreationException.contains(PropertiesNotAvailableException.class)).willReturn(true);
         given(beanCreationException.getCause()).willReturn(schedulingCannotBeStartedException);
@@ -147,7 +147,7 @@ public class WilmaBootstrapTest {
     @Test
     public void testBootstrapShouldLogAnyNonWilmaSpecificException() {
         //GIVEN
-        given(applicationContext.getBean(WilmaEngine.class)).willThrow(beanCreationException);
+        given(applicationContext.getBean(muEngine.class)).willThrow(beanCreationException);
         given(beanCreationException.getMostSpecificCause()).willReturn(schedulingCannotBeStartedException);
         given(beanCreationException.contains(RuntimeException.class)).willReturn(true);
         given(systemExceptionSelector.getSystemException(beanCreationException)).willReturn(null);

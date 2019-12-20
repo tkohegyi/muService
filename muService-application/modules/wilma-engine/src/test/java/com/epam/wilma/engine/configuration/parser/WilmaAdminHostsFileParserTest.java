@@ -34,7 +34,7 @@ import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.core.configuration.domain.WilmaAdminHostsDTO;
+import com.epam.wilma.webapp.configuration.domain.WilmaAdminHostsDTO;
 import com.epam.wilma.properties.PropertyHolder;
 import com.epam.wilma.webapp.config.servlet.helper.BufferedReaderFactory;
 

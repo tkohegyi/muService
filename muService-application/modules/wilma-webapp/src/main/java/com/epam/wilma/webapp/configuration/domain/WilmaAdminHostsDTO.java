@@ -1,4 +1,4 @@
-package com.epam.wilma.core.configuration.domain;
+package com.epam.wilma.webapp.configuration.domain;
 /*==========================================================================
 Copyright since 2013, EPAM Systems
 

@@ -26,7 +26,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.epam.wilma.core.configuration.domain.WilmaAdminHostsDTO;
+import com.epam.wilma.webapp.configuration.domain.WilmaAdminHostsDTO;
 import com.epam.wilma.properties.PropertyHolder;
 import com.epam.wilma.webapp.config.servlet.helper.BufferedReaderFactory;
 

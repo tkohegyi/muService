@@ -35,7 +35,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.epam.wilma.core.configuration.domain.WilmaAdminHostsDTO;
+import com.epam.wilma.webapp.configuration.domain.WilmaAdminHostsDTO;
 import com.epam.wilma.webapp.helper.IpAddressResolver;
 
 /**

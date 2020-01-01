@@ -1,0 +1,57 @@
+ext.componentDescription = "muService Test Head Core"
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'application'
+apply from: '../../common.gradle'
+
+mainClassName = 'org.rockhill.muService.testHead.core.MuServiceTestHeadCoreApplication'
+
+import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
+shadowJar {
+    excludes = [
+		'META-INF/*.SF',
+		'META-INF/*.DSA',
+		'META-INF/*.RSA'
+		]
+    transform(ServiceFileTransformer) {
+        path = 'META-INF/services'
+        include 'org.eclipse.jetty.http.HttpFieldPreEncoder'
+    }
+    archiveName = "$componentName-$version"+'.jar'
+}
+
+jar {
+    manifest.attributes( 'provider': 'gradle')
+    manifest.attributes( 'Main-Class': mainClassName)
+    manifest.attributes( 'Implementation-Title': "$componentDescription - V$version")
+    archiveName = "$componentName-$version"+'.jar'
+
+    finalizedBy shadowJar
+}
+
+dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.5'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version:'1.0.12'
+    compile group: 'org.eclipse.jetty', name: 'jetty-server', version:'9.4.25.v20191220'
+    compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version:'9.4.25.v20191220'
+    compile group: 'org.eclipse.jetty', name: 'jetty-webapp', version:'9.4.25.v20191220'
+    compile group: 'org.eclipse.jetty', name: 'jetty-servlets', version:'9.4.25.v20191220'
+    compile group: 'commons-io', name: 'commons-io', version:'2.4'
+    testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
+    testCompile(group: 'org.testng', name: 'testng', version:'6.8.5') {
+        exclude(module: 'junit')
+    }
+    testCompile group: 'cglib', name: 'cglib', version:'3.0'
+}
+
+
+run {
+    args 'muService.TestHead.properties'
+}

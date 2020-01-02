@@ -39,14 +39,11 @@
 
         my $who = $cgi->param('name');
 
-        print $cgi->header,
-            $cgi->start_html("Hello"),
-            $cgi->h1("Hello $who!"),
-            $cgi->end_html;
+        print $cgi->header('application/json'),'{ "response": "blah" }';
     }
 
 }
 
-# start the server on port 8080
-my $pid = MyWebServer->new(8080)->background();
+# start the server on port 31820
+my $pid = MyWebServer->new(31820)->background();
 print "Use 'kill $pid' to stop server.\n";

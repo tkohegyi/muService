@@ -4,7 +4,7 @@ import org.eclipse.jetty.http.HttpVersion;
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.util.security.Password;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.rockhill.muService.testHead.core.handlers.ExampleHandler;
+import org.rockhill.muService.testHead.core.handlers.GetInformationHandler;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class JettyServer {
             ServerConnector httpConnector = createHttpConnector(server, httpPort);
             ServerConnector sslConnector = createSslConnector(server, httpsPort);
             server.setConnectors(new Connector[]{httpConnector, sslConnector});
-            server.setHandler(new CompositeHandler(new ExampleHandler()));
+            server.setHandler(new CompositeHandler(new GetInformationHandler()));
             startServer(server);
             server.join();
         } catch (Exception e) {

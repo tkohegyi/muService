@@ -21,4 +21,5 @@ description = 'Wilma Message Maintainer'
 dependencies {
   compile project(':muService-application:wilma-common')
   compile project(':muService-application:wilma-properties')
+  compile 'javax.annotation:javax.annotation-api:1.3.2'
 }

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# skip in favour of systemd timer
+if [ -d /run/systemd/system ]; then
+    exit 0
+fi
+
+# check command existence
+if [ ! -x /opt/mu-service/wanipcheck/renew.sh ]; then
+    exit 0
+fi
+
+/opt/mu-service/wanipcheck/renew.sh
+EXITVALUE=$?
+if [ $EXITVALUE != 0 ]; then
+    /usr/bin/logger -t mu-service-wanip-renew "ALERT exited abnormally with [$EXITVALUE]"
+fi
+exit $EXITVALUE

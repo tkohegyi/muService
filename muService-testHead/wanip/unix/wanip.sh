@@ -29,7 +29,7 @@ if [ "$MYIP" == "" ]; then
     echo "CRITICAL, Cannot detect My WAN IP|0.0.0.0"
     mv -f myip.txt myip.txt.old
     mv -f index.html index.html.old
-    exit 2
+    exit 1
 fi
 
 #if my ip is new: WARNING
@@ -43,7 +43,7 @@ if [ "$MYIP" != "$OLDIP" ]; then
     MYSTATEMENT=`echo -n "{ \"id\": \"";echo -n $MYID;echo -n "\", \"head\":\"wanipcheck\", \"status\": \"OK\", \"information\": \"";echo -n $MYIP;echo -n "\" }"`
     echo "MYSTATEMENT $MYSTATEMENT"
     curl -X POST -H "Content-Type: application/json" -d "$MYSTATEMENT" $MYSERVER
-    exit 1
+    exit 0
 fi
 
 echo "OK, My WAN IP is:$MYIP|$MYIP"

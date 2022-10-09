@@ -1,4 +1,6 @@
 #!/bin/bash
+#this script checks the WAN IP address and uploads the data to the server
+#this script should work via crontab in every hour
 
 #need libs installed:
 # - wget

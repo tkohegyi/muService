@@ -1,9 +1,0 @@
-{
-  "muServiceConfiguration": {
-    "services": [
-      {
-        "class": "com.epam.wilma.test.stubConfig.schema"
-      }
-    ]
-  }
-}

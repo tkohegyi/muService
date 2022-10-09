@@ -1,0 +1,60 @@
+ext.componentDescription = "Engine"
+
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
+    }
+}
+
+mainClassName="website.magyar.muService.engine.AdorationApplication"
+
+def configFileDefaultPath = "$project.projectDir/mu-service.conf.properties";
+if (!hasProperty("configFilePath")) {
+    project.ext.configFilePath = configFileDefaultPath
+}
+
+run {
+    args = ["$configFilePath"];
+}
+
+dependencies {
+    implementation(group: 'org.slf4j', name: 'jcl-over-slf4j', version: "${orgSfl4jVersion}")
+    implementation "$javaxAnnotationApi"
+    implementation project(':mu-service-application:mu-service-database')
+    implementation project(':mu-service-application:mu-service-core')
+    implementation project(':mu-service-application:mu-service-webapp')
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes('Main-Class': 'website.magyar.muService.engine.MuServiceApplication')
+        attributes('Implementation-Title': "$componentDescription - ${rootProject.version}")
+        attributes('Application-Version': "${rootProject.version}")
+    }
+}
+
+shadowJar {
+        append('META-INF/spring.handlers')
+        append('META-INF/spring.schemas')
+
+        excludes = [
+            'META-INF/*.SF',
+            'META-INF/*.DSA',
+            'META-INF/*.RSA',
+            'images/',
+            '*.txt',
+            '*.gif',
+            '*.png',
+            '*.dtd',
+            '*.xcf',
+            'build.properties',
+            'about.html']
+}
+
+jar.finalizedBy shadowJar

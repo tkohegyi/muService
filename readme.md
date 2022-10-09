@@ -1,18 +1,11 @@
 muService
 ===========
-muService is a proof-of-concept to host microservices. Just for fun. Do not expect a lot, however it has an interesting approach...
-# License - GPLv3.0
-Copyright Tamas Kohegyi
+muService is a proof-of-concept of a personal security system. Just for fun. Do not expect a lot, however it has an interesting approach...
 
-muService is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+# License - Apache V2.0
+Copyright (c) Tamas Kohegyi
 
-muService is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+See [Apache license](LICENSE.txt)
 
-You should have received a copy of the GNU General Public License
-along with muService.  If not, see <http://www.gnu.org/licenses/>.
+#Build status
+Actual build status: [![Build](https://github.com/tkohegyi/muService/actions/workflows/main.yml/badge.svg)](https://github.com/tkohegyi/muService/actions/workflows/main.yml)

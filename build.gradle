@@ -1,27 +1,85 @@
-apply from: 'common.gradle'
+plugins {
+    id "org.sonarqube" version "3.2.0"
+}
+
+if ( !hasProperty('buildNumber') ) {
+    rootProject.ext.buildNumber = 'SNAPSHOT'
+}
+version = "V2.0." + "${rootProject.ext.buildNumber}"
+
+ext {
+    jUnitVersion = '4.13.2'
+    springFrameworkVersion = '5.0.19.RELEASE'
+    springSecurityVersion = '5.0.19.RELEASE'
+    mockitoCoreVersion = '3.3.3'
+    orgSfl4jVersion = '1.7.30'
+    jettyVersion = '9.4.43.v20210629'
+    javaxAnnotationApi='javax.annotation:javax.annotation-api:1.3.2'
+    orgJsonApi='org.json:json:20210307'
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "website-magyar_orokimadas"
+        property "sonar.organization", "website-magyar"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.java.checkstyle.reportPaths", "build/reports/checkstyle/main.xml"
+        property "sonar.exclusions", "**/external/**/*";
+    }
+}
 
 subprojects {
-    apply from: rootProject.projectDir.toString() + '/common.gradle'
+    group = 'website.magyar.adorapp'
+    apply plugin: 'idea'
+    apply plugin: 'checkstyle'
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+
+    jacoco {
+        toolVersion = "0.8.7"
+    }
+    jacocoTestReport {
+        reports {
+            xml.required = true
+        }
+    }
+    test.finalizedBy jacocoTestReport
+
+    // Source and target info
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    // checkstyle settings
+    // general checkstyle availability:  https://checkstyle.sourceforge.io/releasenotes.html
+    // compatibility with sonar https://docs.sonarqube.org/latest/instance-administration/plugin-version-matrix/
+    checkstyle.toolVersion = '8.40'
+    checkstyle.ignoreFailures = true
+    checkstyle.configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+    checkstyle.configProperties = ['samedir' : "${rootDir}/config/checkstyle"]
+    tasks.withType(Checkstyle) {
+        reports {
+            xml.required = false
+            html.required = true
+            html.stylesheet resources.text.fromFile("${rootDir}/config/checkstyle/checkstyle-noframes-sorted.xsl")
+        }
+    }
 
     subprojects {
         task allDeps(type: DependencyReportTask) {}
     }
 }
 
-repositories {
-    jcenter()
-    maven { url "http://repo.maven.apache.org/maven2" }
-}
-
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2"
+if (hasProperty('buildScan')) {
+    buildScan {
+        termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+        termsOfServiceAgree = 'yes'
     }
 }
-
-apply plugin: "org.sonarqube"

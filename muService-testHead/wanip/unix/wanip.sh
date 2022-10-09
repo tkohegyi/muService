@@ -7,7 +7,7 @@
 # - curl
 # and this script installed at /opt/mu-service/wanipcheck folder
 # and fill the settings below properly
-MYID=<INSTERT_TEST_HEAD_ID_HERE>
+MYID=
 MYSERVER=https://muService.magyar.website/secure/uploadData
 
 #clean up
@@ -40,8 +40,9 @@ if [ "$MYIP" != "$OLDIP" ]; then
     mv -f myip.txt myip.txt.old
     mv -f index.html index.html.old
     #upload new info
-    MYSTATEMENT=`echo -n "{ \"id\": \"";echo -n $MYID;echo "\", \"head\":\"wanipcheck\", \"status\": \"OK\", \"information\": \"";echo -n $MYIP;echo -n "\" }"`
-    curl -X POST -H "Content-Type: application/json" -d $MYSTATEMENT $MYSERVER
+    MYSTATEMENT=`echo -n "{ \"id\": \"";echo -n $MYID;echo -n "\", \"head\":\"wanipcheck\", \"status\": \"OK\", \"information\": \"";echo -n $MYIP;echo -n "\" }"`
+    echo "MYSTATEMENT $MYSTATEMENT"
+    curl -X POST -H "Content-Type: application/json" -d "$MYSTATEMENT" $MYSERVER
     exit 1
 fi
 

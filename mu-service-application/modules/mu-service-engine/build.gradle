@@ -12,7 +12,7 @@ buildscript {
     }
 }
 
-mainClassName="website.magyar.muService.engine.AdorationApplication"
+mainClassName="website.magyar.muservice.engine.Application"
 
 def configFileDefaultPath = "$project.projectDir/mu-service.conf.properties";
 if (!hasProperty("configFilePath")) {
@@ -33,7 +33,7 @@ dependencies {
 
 tasks.named('jar') {
     manifest {
-        attributes('Main-Class': 'website.magyar.muService.engine.MuServiceApplication')
+        attributes('Main-Class': 'website.magyar.muservice.engine.Application')
         attributes('Implementation-Title': "$componentDescription - ${rootProject.version}")
         attributes('Application-Version': "${rootProject.version}")
     }

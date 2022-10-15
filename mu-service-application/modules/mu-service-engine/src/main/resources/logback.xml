@@ -1,8 +1,8 @@
 <configuration>
   <appender name="FILE-APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>log/adorApplog.txt</file>
+    <file>log/appLog.txt</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>log/adorApplog%d{yyyyMMdd}.txt</fileNamePattern>
+      <fileNamePattern>log/appLog%d{yyyyMMdd}.txt</fileNamePattern>
       <maxHistory>5</maxHistory>
     </rollingPolicy>
     <encoder>
@@ -44,7 +44,7 @@
     </encoder>
   </appender>
 
-  <logger name="website.magyar.adoration" level="INFO">
+  <logger name="website.magyar.muservice" level="INFO">
     <appender-ref ref="CONSOLE-APPENDER" />
   </logger>
 

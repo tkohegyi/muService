@@ -10,14 +10,12 @@
     <http pattern="/resources/**" security="none"/>
 
     <http auto-config="true">
-        <!-- <intercept-url pattern="/adorationSecure/**" access="ROLE_USER" / -->
-        <!-- custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" / -->
         <!-- enable csrf protection -->
         <csrf/>
     </http>
 
     <authentication-manager>
-        <authentication-provider ref="adorationCustomAuthenticationProvider" />
+        <authentication-provider ref="appCustomAuthenticationProvider" />
     </authentication-manager>
 
 </beans:beans>

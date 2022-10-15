@@ -5,31 +5,18 @@
             <tr>
                 <td class="textLeft">
     			<ul class="nav">
-	    			<li id="nav-home"><a class="menu-item-text" href="/adoration/"><ex:i18n messageId="navbar.html.nav-home"/></a></li>
-                    <li id="nav-ador-registration" style="display:none"><a class="menu-item-text" href="/adoration/adorRegistration"><ex:i18n messageId="navbar.html.nav-ador-registration"/></a></li>
-                    <li id="nav-ador-live"><a class="menu-item-text" href="/adorationSecure/live"><ex:i18n messageId="navbar.html.nav-ador-live"/></a></li>
-                    <li id="nav-information" style="display:none"><a class="menu-item-text" href="/adorationSecure/information"><ex:i18n messageId="navbar.html.nav-information"/></a></li>
-			    	<li id="nav-ador-list" style="display:none"><a class="menu-item-text" href="/adorationSecure/adorationList"><ex:i18n messageId="navbar.html.nav-ador-list"/></a></li>
-				    <li id="nav-application-log" style="display:none"><a class="menu-item-text" href="/adorationSecure/applog"><ex:i18n messageId="navbar.html.nav-application-log"/></a></li>
+	    			<li id="nav-home"><a class="menu-item-text" href="/">Home</a></li>
+                    <li id="nav-information" style="display:none"><a class="menu-item-text" href="/adorationSecure/information">Information</a></li>
+			    	<li id="nav-list" style="display:none"><a class="menu-item-text" href="/appSecure/list">List</a></li>
+				    <li id="nav-admin" style="display:none"><a class="menu-item-text" href="/appSecure/applog">Administration</a></li>
                 </ul>
                 </td>
                 <td class="textRight">
                 <ul class="nav">
                     <li id="loggedInUserLegend" style="color: #E05050"></li>
-                    <li id="nav-login" style="display:none"><a class="menu-item-text" href="/adoration/login"><ex:i18n messageId="navbar.html.nav-login"/></a></li>
-                    <li id="nav-exit" style="display:none"><a class="menu-item-text" href="/adorationSecure/exit"><ex:i18n messageId="navbar.html.nav-exit"/></a></li>
-                    <li id="nav-language"><a class="menu-item-text" onClick="toggleLanguageBar()"><img alt="Language selection" src="/resources/img/1-2-globe-transparent-thumb.png" style="max-width:27px"/></a></li>
+                    <li id="nav-login" style="display:none"><a class="menu-item-text" href="/login">Login</a></li>
+                    <li id="nav-exit" style="display:none"><a class="menu-item-text" href="/appSecure/exit">Logout</a></li>
                 </ul>
-                </td>
-            </tr>
-            <tr id="languageBar" style="display:none">
-                <td colspan="2">
-                    <div class="centerDiv" style="padding-top:6px">
-                    <ul class="nav" style="width:fit-content">
-                        <li><a class="menu-item-text" onClick="setLanguage('hu')"><img style="padding:4px" alt="Magyar" src="/resources/img/hu.png">MAGYAR</img></a></li>
-                        <li><a class="menu-item-text" onClick="setLanguage('en')"><img style="padding:4px" alt="English" src="/resources/img/en.png"/>ENGLISH</a></li>
-                    </ul>
-                    </div>
                 </td>
             </tr>
             </tbody></table>

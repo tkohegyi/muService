@@ -5,11 +5,11 @@
        xmlns:util="http://www.springframework.org/schema/util"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
-  <context:component-scan base-package="website.magyar.adoration">
+  <context:component-scan base-package="website.magyar.muservice">
     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
   </context:component-scan>
   
-  <util:constant id="programArgs" static-field="website.magyar.adoration.engine.AdorationApplication.arguments" />
+  <util:constant id="programArgs" static-field="website.magyar.muservice.engine.Application.arguments" />
   <bean id="startMessage"  class="java.lang.String">
     <constructor-arg value="%s %n%nUI is available via URL: https://localhost:%d/ %n"/>
   </bean>

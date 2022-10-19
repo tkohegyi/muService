@@ -28,6 +28,4 @@ jobs:
       with:
         java-version: '15'
     - name: Build with Gradle
-        run: |
-          chmod +x gradlew
-          ./gradlew build release --info
+      run: chmod +x gradlew;./gradlew build release --info

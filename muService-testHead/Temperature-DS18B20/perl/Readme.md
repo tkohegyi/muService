@@ -1,6 +1,11 @@
 DS18B20 Test head - Perl
 =
 
+The Temperature sensor requires some kernel module, so put these lines into /etc/modules file to load them at boot time:
+w1-gpio
+w1-therm
+
+
 It is perl based, so need to install the following linux and perl modules:
 * apt-get install perl
 * apt-get install make

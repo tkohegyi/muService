@@ -82,7 +82,7 @@ public class AppLogControllerTest {
         //when
         String result = underTest.appLog(null, null);
         //then
-        assertEquals("redirect:/adoration/", result);
+        assertEquals("redirect:/app/", result);
     }
 
     @Test

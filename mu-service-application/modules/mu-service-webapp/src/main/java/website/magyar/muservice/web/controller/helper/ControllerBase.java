@@ -18,7 +18,7 @@ public class ControllerBase {
 
     public static final String JSON_RESPONSE_UPDATE = "entityUpdate";
     public static final String JSON_RESPONSE_DELETE = "entityDelete";
-    protected static final String REDIRECT_TO_HOME = "redirect:/adoration/";
+    protected static final String REDIRECT_TO_HOME = "redirect:/app/";
     protected static final String UNAUTHORIZED_ACTION = "Unauthorized action.";
 
     /**

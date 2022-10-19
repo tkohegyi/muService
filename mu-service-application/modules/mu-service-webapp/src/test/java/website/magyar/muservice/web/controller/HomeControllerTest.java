@@ -56,7 +56,7 @@ public class HomeControllerTest {
         //when
         String result = underTest.pseudoHome();
         //then
-        assertEquals("redirect:/adoration/", result); //redirect to real home
+        assertEquals("redirect:/app/", result); //redirect to real home
     }
 
     @Test

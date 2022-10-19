@@ -46,7 +46,7 @@ public class LoginController {
      *
      * @return the name of the jsp to display as result
      */
-    @GetMapping(value = "/adoration/login")
+    @GetMapping(value = "/app/login")
     public String showLoginPage(HttpSession httpSession, @RequestParam(value = "result", defaultValue = "") final String result) {
         currentUserProvider.getUserInformation(httpSession);
         if (result.length() == 0) {
@@ -62,7 +62,7 @@ public class LoginController {
      *
      * @return the name of the jsp to display as result
      */
-    @GetMapping(value = "/adoration/loginGoogle")
+    @GetMapping(value = "/app/loginGoogle")
     public String showGoogleLoginPage(HttpServletResponse httpServletResponse) {
         var loginUrl = googleOauth2Service.getLoginUrlInformation();
         try {
@@ -89,7 +89,7 @@ public class LoginController {
      */
     //https://fuf.me/adoration/loginResult?code=4%2F...eR8&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile
     // +https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&session_state=8ca7cab3c0dd23415b112fae84f84b1cb9957590..dd73&prompt=consent#
-    @GetMapping(value = "/adoration/loginResult")
+    @GetMapping(value = "/app/loginResult")
     public String showLoginResultPage(
             @RequestParam(value = "code", defaultValue = "") final String code,  //google uses this
             @RequestParam(value = "scope", defaultValue = "") final String scope,
@@ -145,7 +145,7 @@ public class LoginController {
      * @param httpServletResponse is used to build up the response
      * @return with a logged-out state and with the home page
      */
-    @GetMapping(value = "/adorationSecure/exit")
+    @GetMapping(value = "/appSecure/exit")
     public String showExitPage(
             HttpSession httpSession,
             HttpServletResponse httpServletResponse

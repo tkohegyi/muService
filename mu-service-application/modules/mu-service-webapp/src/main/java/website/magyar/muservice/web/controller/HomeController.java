@@ -49,7 +49,7 @@ public class HomeController extends ControllerBase {
      *
      * @return with proper content
      */
-    @GetMapping(value = "/adoration/")
+    @GetMapping(value = "/app/")
     public String realHome(HttpSession httpSession) {
         currentUserProvider.getUserInformation(httpSession);
         return "home";
@@ -148,7 +148,7 @@ public class HomeController extends ControllerBase {
      * @return with proper content
      */
     @ResponseBody
-    @GetMapping(value = "/adoration/getLoggedInUserInfo")
+    @GetMapping(value = "/app/getLoggedInUserInfo")
     public ResponseEntity<String> getLoggedInUserInfo(HttpSession httpSession) {
         ResponseEntity<String> result;
         var currentUserInformationJson = currentUserProvider.getUserInformation(httpSession);

@@ -26,8 +26,12 @@ public class TestHeadServiceProvider {
     BusinessWithNextGeneralKey businessWithNextGeneralKey;
 
     public boolean isTestHeadValid(TestHeadUploadDataJson testHeadUploadDataJson) {
-        TestHead testHead = businessWithTestHead.getTestHeadByHeadId(testHeadUploadDataJson.id);
-        return testHead != null;
+        boolean result = false;
+        if (testHeadUploadDataJson.id != null && testHeadUploadDataJson.head != null && testHeadUploadDataJson.information != null && testHeadUploadDataJson.status != null) {
+            TestHead testHead = businessWithTestHead.getTestHeadByHeadId(testHeadUploadDataJson.id);
+            result = testHead != null;
+        }
+        return result;
     }
 
     /**

@@ -52,7 +52,7 @@ public class BusinessWithTestHead extends BusinessBase {
     public TestHead getTestHeadByHeadId(@NotNull final String headId) {
         Session session = SessionFactoryHelper.getOpenedSession();
         session.beginTransaction();
-        String hql = "from TestHead as T where T.headid = :expectedName";
+        String hql = "from TestHead as T where T.headId = :expectedName";
         Query<TestHead> query = session.createQuery(hql, TestHead.class);
         query.setParameter("expectedName", headId);
         List<TestHead> result = query.list();

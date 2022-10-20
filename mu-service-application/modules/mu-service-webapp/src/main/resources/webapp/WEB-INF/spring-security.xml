@@ -8,6 +8,7 @@
     <!-- http pattern="/adoration/**" security="none"/ -->
     <http pattern="/" security="none"/>
     <http pattern="/resources/**" security="none"/>
+    <http pattern="/appService/**" security="none"/>
 
     <http auto-config="true">
         <!-- enable csrf protection -->

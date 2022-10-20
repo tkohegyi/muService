@@ -8,13 +8,18 @@
 <meta name="HandheldFriendly" content="true" />
 <meta name="apple-mobile-web-app-capable" content="YES" />
 <meta name="author" content="Tamas Kohegyi" />
-<meta name="Description" content="Perpetual adoration in Hungary, Vác / Örökimádás a váci Szent Anna Piarista Templomban" />
-<meta name="Keywords" content="örökimádás,vác,perpetual,adoration" />
-<meta property="og:image" content="https://orokimadas.info:9092/resources/img/topimage3.jpg"/>
-<title><ex:i18n messageId="home.jsp.title"/></title>
+<meta name="Description" content="muService - Security System" />
+<meta name="Keywords" content="home security" />
+<meta property="og:image" content="https://muservice.magyar.website/resources/img/topimage3.jpg"/>
+<meta property="og:url" content="https://muservice.magyar.website/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="muService - Security System"/>
+<meta property="og:description" content="muService - Security System"/>
+<script src="/resources/js/external/jquery-3.4.1.js"></script>
+<script src="/resources/js/external/bootstrap-4.3.1.min.js"></script>
+<title>muService - Home Security System</title>
 <link href="/resources/css/external/bootstrap-4.3.1.min.css" rel="stylesheet" media="screen">
 <link href="/resources/css/menu.css" rel="stylesheet" media="screen">
-<link href="/resources/css/coverageBar.css" rel="stylesheet" media="screen">
 <link id="favicon" rel="shortcut icon" type="image/png" href="/resources/img/favicon.png" />
 </head>
 <body class="body">
@@ -23,14 +28,16 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <div class="centerwidediv textWebkitCenter">
 		<br />
-		<ex:i18n messageId="e404.jsp.oops"/>
+		Oops, a mistake has been made.
 		<br />
     </div>
-    <div class="centerwidediv"><ex:i18n messageId="e404.jsp.txt"/>
+    <div class="centerwidediv">We have received a request on this website which unfortunately cannot be fulfilled.
+    The site operators have received a reminder of this error and are working to ensure that this does not happen again.
+    In the meantime, please be patient as it may take several days to correct the error.
 		<br/>
     <hr />
 		<br/>
-		<div class="textWebkitCenter"><ex:i18n messageId="e404.jsp.menu"/></div>
+		<div class="textWebkitCenter">Please select an item from the menu above, or wait 10 seconds and the page will reload with the home page.</div>
 		<br />
 	</div>
   </div>

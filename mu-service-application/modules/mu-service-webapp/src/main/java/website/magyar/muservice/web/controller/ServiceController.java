@@ -47,7 +47,7 @@ public class ServiceController extends ControllerBase {
                 result = buildResponseBodyResult(JSON_RESPONSE_STATUS, resultString, HttpStatus.OK);
             } else {
                 //it is either a trial to break in or just misconfiguration - anyway, refuse it
-                logger.warn("Request from an invalid test head, pls contact to maintainers: {} from {}", testHeadUploadDataJson.id, httpServletRequest.getRemoteHost());
+                logger.warn("Request from an invalid test head, headId: {} from IP:{}", testHeadUploadDataJson.id, httpServletRequest.getRemoteHost());
                 result = buildResponseBodyResult(UNAUTHORIZED_ACTION, UNAUTHORIZED_ACTION, HttpStatus.BAD_REQUEST);
 
             }

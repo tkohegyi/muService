@@ -26,9 +26,9 @@ public class NextGeneralKey {
      *
      * @return with the next key
      */
-    public Long getNextGeneralKay(Session session) {
+    public Long getNextGeneralKey(Session session) {
         ArrayList<BigInteger> values;
-        Query query = session.createSQLQuery("select nextval('\"dbo\".\"AdorationUniqueNumber\"')"); //NOSONAR
+        Query query = session.createSQLQuery("select nextval('\"public\".\"UniqueNumber\"')"); //NOSONAR
         values = (ArrayList<BigInteger>) query.getResultList(); //NOSONAR
         return values.get(0).longValue();
     }

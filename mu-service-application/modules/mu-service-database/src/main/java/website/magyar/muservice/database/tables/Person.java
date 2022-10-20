@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * Technically: People.
  */
 @Entity
-@Table(name = "dbo.person")
+@Table(name = "public.person")
 public class Person {
 
     private Long id;

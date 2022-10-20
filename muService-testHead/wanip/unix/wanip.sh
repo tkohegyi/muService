@@ -8,7 +8,7 @@
 # and this script installed at /opt/mu-service/wanipcheck folder
 # and fill the settings below properly
 MYID=
-MYSERVER=https://muService.magyar.website/secure/uploadData
+MYSERVER=https://muService.magyar.website/appService/uploadData
 
 #clean up
 cd /opt/mu-service/wanipcheck

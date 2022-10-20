@@ -18,8 +18,9 @@ public class ControllerBase {
 
     public static final String JSON_RESPONSE_UPDATE = "entityUpdate";
     public static final String JSON_RESPONSE_DELETE = "entityDelete";
+    public static final String JSON_RESPONSE_STATUS = "status";
     protected static final String REDIRECT_TO_HOME = "redirect:/app/";
-    protected static final String UNAUTHORIZED_ACTION = "Unauthorized action.";
+    protected static final String UNAUTHORIZED_ACTION = "Unauthorized action";
 
     /**
      * Checks if the current user is an authorized user or not.

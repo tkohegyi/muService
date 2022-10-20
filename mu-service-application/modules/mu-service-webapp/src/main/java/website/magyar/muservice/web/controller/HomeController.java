@@ -26,7 +26,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController extends ControllerBase {
     private static final String JSON_LOGGED_IN_USER_INFO = "loggedInUserInfo";
-    private static final String JSON_COVERAGE_INFO = "coverageInfo";
     private final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired

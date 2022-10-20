@@ -3,11 +3,11 @@
 #this script should work via crontab in every minute
 
 #need libs installed:
-# - wget
+# - curl
 # and this script installed at /opt/mu-service/ds18b20 folder
 # and fill the settings below properly
 MYID=
-MYSERVER=https://muService.magyar.website/secure/uploadData
+MYSERVER=https://muService.magyar.website/appService/uploadData
 #ID of the temp sensor
 TEMP_DEV=
 

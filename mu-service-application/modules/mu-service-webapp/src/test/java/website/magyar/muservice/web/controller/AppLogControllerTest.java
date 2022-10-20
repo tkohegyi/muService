@@ -165,7 +165,7 @@ public class AppLogControllerTest {
     @Test
     public void testGetLogFileContentWhenUserIsNotAdministratorShouldReturnErrorString() {
         //GIVEN
-        String expectedBody = "Unauthorized action."; //this is the expected error message
+        String expectedBody = "Unauthorized action"; //this is the expected error message
         String userAgentWindows = "SOMETHINGSOMETHING-WINDOWS";
         String body = "content\n";
         String fileName = "something";

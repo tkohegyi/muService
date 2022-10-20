@@ -26,7 +26,7 @@ public class BusinessWithNextGeneralKey {
         Long id;
         Session session = SessionFactoryHelper.getOpenedSession();
         session.beginTransaction();
-        id = nextGeneralKey.getNextGeneralKay(session);
+        id = nextGeneralKey.getNextGeneralKey(session);
         logger.debug("New sequence arrived: {}", id);
         session.getTransaction().commit();
         session.close();

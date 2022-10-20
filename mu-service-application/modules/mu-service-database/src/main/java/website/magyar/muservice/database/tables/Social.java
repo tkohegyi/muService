@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * Technically: Record of social (oauth2) login possibilities.
  */
 @Entity
-@Table(name = "dbo.social")
+@Table(name = "public.social")
 public class Social {
 
     private Long id;

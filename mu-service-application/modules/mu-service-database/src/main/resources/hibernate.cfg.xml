@@ -32,6 +32,7 @@
         <!-- Names the annotated entity class -->
         <mapping class="website.magyar.muservice.database.tables.Person"/>
         <mapping class="website.magyar.muservice.database.tables.Social"/>
+        <mapping class="website.magyar.muservice.database.tables.TestHeadData"/>
 
     </session-factory>
 

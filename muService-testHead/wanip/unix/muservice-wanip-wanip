@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# skip in favour of systemd timer
-if [ -d /run/systemd/system ]; then
-    exit 0
-fi
-
 # check command existence
 if [ ! -x /opt/mu-service/wanipcheck/wanip.sh ]; then
     exit 0

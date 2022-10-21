@@ -12,8 +12,8 @@ MYSERVER=https://muService.magyar.website/appService/uploadData
 DHT_TYPE=11
 
 cd /opt/mu-service/dht11
-$SENSOR = `python Read_DHT.py $DHT_TYPE $GPIO`
-echo $SENSOR > "$MYID"_temp.txt
+SENSOR=`python Read_DHT.py $DHT_TYPE $GPIO`
+#echo $SENSOR > "$MYID"_temp.txt
 
 #upload new data report
 MYSTATEMENT=`echo -n "{ \"id\": \"";echo -n $MYID;echo -n "\", \"head\":\"dht11\", \"status\": \"OK\", \"information\": \"";echo -n $SENSOR;echo -n "\" }"`

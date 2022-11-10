@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-capable" content="YES" />
 <meta name="author" content="Tamas Kohegyi" />
 <meta name="Description" content="muService - Security System" />
-<meta name="Keywords" content="home security" />
+<meta name="Keywords" content="home,security" />
 <meta property="og:image" content="https://muservice.magyar.website/resources/img/topimage3.jpg"/>
 <meta property="og:url" content="https://muservice.magyar.website/"/>
 <meta property="og:type" content="website"/>

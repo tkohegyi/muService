@@ -11,10 +11,9 @@
 <meta name="HandheldFriendly" content="true" />
 <meta name="apple-mobile-web-app-capable" content="YES" />
 <meta name="author" content="Tamas Kohegyi" />
-<meta name="Description" content="Perpetual adoration in Hungary, Vác / Örökimádás a váci Szent Anna Piarista Templomban" />
-<meta name="Keywords" content="örökimádás,vác,perpetual,adoration" />
-<meta property="og:image" content="https://orokimadas.info:9092/resources/img/topimage3.jpg"/>
-<title><ex:i18n messageId="login.jsp.title"/></title>
+<meta name="Description" content="muService - Security System" />
+<meta name="Keywords" content="home,security" />
+<title>muService - Home Security System - Login</title>
 <link href="/resources/css/external/bootstrap-4.3.1.min.css" rel="stylesheet" media="screen">
 <link href="/resources/css/menu.css" rel="stylesheet" media="screen">
 <link id="favicon" rel="shortcut icon" type="image/png" href="/resources/img/favicon.png" />
@@ -24,14 +23,11 @@
         <%@include file="../include/navbar.html" %>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <fieldset class="form-horizontal">
-            <legend class="message-legend" style="text-align:center; color:#E05050; padding: 0px; font-family: Oswald"><ex:i18n messageId="login.jsp.notLoggedIn"/></legend>
+            <legend class="message-legend" style="text-align:center; color:#E05050; padding: 0px; font-family: Oswald">You are not logged in.</legend>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             <div id="login-possibilities">
-                <br />
-                <p><span style="font-weight:bold"><ex:i18n messageId="login.jsp.firstLoginCase"/></span></p>
-                <br /><ex:i18n messageId="login.jsp.loginText1"/><br />
-                <ex:i18n messageId="login.jsp.loginText2"/><a id="gLoginAnchor" class="login" href="/adoration/loginGoogle"><img src="/resources/img/google_login.png" alt="Google logo"/></a><ex:i18n messageId="login.jsp.loginText3"/><br/>
-                <ex:i18n messageId="login.jsp.loginText4"/><a id="fLoginAnchor" class="login" href="/adoration/loginFacebook"><img src="/resources/img/facebook_login.png" alt="Facebook logo"/></a><ex:i18n messageId="login.jsp.loginText5"/><br/>
+                <br />Login with Google Account:<br />
+                <a id="gLoginAnchor" class="login" href="/app/loginGoogle"><img src="/resources/img/google_login.png" alt="Google logo"/></a><br/>
                 <br /></p>
             </div>
         </fieldset>
@@ -40,7 +36,7 @@
             #adorationVersion {display:inline-block;}
             #sslSign {display:inline-block;}
         </style>
-        <div id="adorationVersion"></div>
+        <div id="appVersion"></div>
         <div id="sslSign" class="right">
             <script type="text/javascript"> //<![CDATA[
               var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");

@@ -10,8 +10,8 @@ def releaseCopySpec = project.copySpec {
         include 'readme.txt'
     }
     from(rootProject.rootDir.absolutePath + '/config/'){
-        include 'security/adorApp.cer'
-        include 'security/adorApp.keystore'
+        include 'security/muservice.cer'
+        include 'security/muservice.keystore'
     }
     from(rootProject.rootDir.absolutePath + '/mu-service-application/modules/mu-service-engine/build/libs/') {
         include "mu-service-engine-all.jar"

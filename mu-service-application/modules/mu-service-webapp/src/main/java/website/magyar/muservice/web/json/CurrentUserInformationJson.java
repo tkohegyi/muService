@@ -14,6 +14,8 @@ public class CurrentUserInformationJson {
     @JsonField
     public boolean isAuthorized;
     @JsonField
+    public Integer personRole;
+    @JsonField
     public Long personId;
     @JsonField
     public Long socialId;
@@ -44,6 +46,7 @@ public class CurrentUserInformationJson {
         socialEmail = "";
         isLoggedIn = false;
         isAuthorized = false;
+        personRole = 0;
         loggedInUserName = "Anonymous";
         userName = loggedInUserName;
         socialServiceUsed = "Undetermined";
@@ -59,6 +62,7 @@ public class CurrentUserInformationJson {
         isAuthorized = true; //not just logged in, but since the person is known, authorized too
         personId = person.getId();
         userName = person.getName();
+        personRole = person.getRole();
     }
 
     /**
@@ -69,9 +73,6 @@ public class CurrentUserInformationJson {
     public void fillIdentifiedSocialFields(Social social) {
         socialId = social.getId();
         String email = social.getGoogleEmail();
-        if (email.length() == 0) {
-            email = social.getFacebookEmail();
-        }
         socialEmail = email;
     }
 

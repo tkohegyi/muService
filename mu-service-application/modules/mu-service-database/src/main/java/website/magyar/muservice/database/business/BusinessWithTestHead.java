@@ -61,4 +61,19 @@ public class BusinessWithTestHead extends BusinessBase {
         return (TestHead) returnWithFirstItem(result);
     }
 
+    /**
+     * Get full list of TestHead records.
+     *
+     * @return with the list
+     */
+    public List<TestHead> getList() {
+        List<TestHead> result;
+        Session session = SessionFactoryHelper.getOpenedSession();
+        session.beginTransaction();
+        result = session.createQuery("from TestHead", TestHead.class).list();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
 }

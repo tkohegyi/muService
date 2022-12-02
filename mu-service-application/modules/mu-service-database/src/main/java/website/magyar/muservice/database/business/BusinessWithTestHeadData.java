@@ -2,12 +2,15 @@ package website.magyar.muservice.database.business;
 
 import com.sun.istack.NotNull;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import website.magyar.muservice.database.SessionFactoryHelper;
 import website.magyar.muservice.database.business.helper.BusinessBase;
 import website.magyar.muservice.database.tables.TestHeadData;
+
+import java.util.List;
 
 /**
  * Business class to handle TestHeadData table, that is to store received measurements/data.
@@ -37,6 +40,38 @@ public class BusinessWithTestHeadData extends BusinessBase {
         }
         session.close();
         return id;
+    }
+
+    public TestHeadData getLastData(String headId) {
+        TestHeadData thd;
+        List<TestHeadData> result = getList(headId, 0, 1);
+        if (result != null && !result.isEmpty()) {
+            thd = result.get(0);
+        } else {
+            thd = new TestHeadData();
+            thd.setTimestamp("N/A");
+            thd.setInformation("N/A");
+        }
+        return thd;
+    }
+
+    /**
+     * Get full list of a TestHead data, by specifying its head id.
+     *
+     * @return with the list
+     */
+    public List<TestHeadData> getList(String headId, Integer startPos, Integer maxResults) {
+        Session session = SessionFactoryHelper.getOpenedSession();
+        session.beginTransaction();
+        String hql = "from TestHeadData as T where T.head like :expectedName order by T.id desc";
+        Query<TestHeadData> query = session.createQuery(hql, TestHeadData.class);
+        query.setParameter("expectedName", headId);
+        query.setFirstResult(startPos);
+        query.setMaxResults(maxResults);
+        List<TestHeadData> result = query.list();
+        session.getTransaction().commit();
+        session.close();
+        return result;
     }
 
 }

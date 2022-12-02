@@ -23,10 +23,6 @@ public class Social {
     private String googleUserName;
     private String googleUserId;
     private String googleUserPicture;
-    private String facebookEmail;
-    private String facebookUserName;
-    private String facebookUserId;
-    private String facebookFirstName;
     private String comment;
 
     /**
@@ -47,7 +43,7 @@ public class Social {
         this.id = id;
     }
 
-    @Column(name = "personId", nullable = true)
+    @Column(name = "personid", nullable = true)
     public Long getPersonId() {
         return personId;
     }
@@ -56,7 +52,7 @@ public class Social {
         this.personId = personId;
     }
 
-    @Column(name = "socialStatus", nullable = false)
+    @Column(name = "socialstatus", nullable = false)
     public Integer getSocialStatus() {
         return socialStatus;
     }
@@ -77,7 +73,7 @@ public class Social {
      *
      * @return with the googleEmail field value or with an empty string.
      */
-    @Column(name = "googleEmail", nullable = true)
+    @Column(name = "googleemail", nullable = true)
     public String getGoogleEmail() {
         if (googleEmail != null) {
             return googleEmail;
@@ -95,7 +91,7 @@ public class Social {
      *
      * @return with the googleUserName field value or with an empty string.
      */
-    @Column(name = "googleUserName", nullable = true)
+    @Column(name = "googleusername", nullable = true)
     public String getGoogleUserName() {
         if (googleUserName != null) {
             return googleUserName;
@@ -113,7 +109,7 @@ public class Social {
      *
      * @return with the googleUserId field value or with an empty string.
      */
-    @Column(name = "googleUserId", nullable = true)
+    @Column(name = "googleuserid", nullable = true)
     public String getGoogleUserId() {
         if (googleUserId != null) {
             return googleUserId;
@@ -131,7 +127,7 @@ public class Social {
      *
      * @return with the googleUserPicture field value or with an empty string.
      */
-    @Column(name = "googleUserPicture", nullable = true)
+    @Column(name = "googleuserpicture", nullable = true)
     public String getGoogleUserPicture() {
         if (googleUserPicture != null) {
             return googleUserPicture;
@@ -142,78 +138,6 @@ public class Social {
 
     public void setGoogleUserPicture(String googleUserPicture) {
         this.googleUserPicture = googleUserPicture;
-    }
-
-    /**
-     * Gets facebookEmail field of a Social record, ensures that it never will have null value.
-     *
-     * @return with the facebookEmail field value or with an empty string.
-     */
-    @Column(name = "facebookEmail", nullable = true)
-    public String getFacebookEmail() {
-        if (facebookEmail != null) {
-            return facebookEmail;
-        } else {
-            return "";
-        }
-    }
-
-    public void setFacebookEmail(String facebookEmail) {
-        this.facebookEmail = facebookEmail;
-    }
-
-    /**
-     * Gets facebookUserName field of a Social record, ensures that it never will have null value.
-     *
-     * @return with the facebookUserName field value or with an empty string.
-     */
-    @Column(name = "facebookUserName", nullable = true)
-    public String getFacebookUserName() {
-        if (facebookUserName != null) {
-            return facebookUserName;
-        } else {
-            return "";
-        }
-    }
-
-    public void setFacebookUserName(String facebookUserName) {
-        this.facebookUserName = facebookUserName;
-    }
-
-    /**
-     * Gets facebookUserId field of a Social record, ensures that it never will have null value.
-     *
-     * @return with the facebookUserId field value or with an empty string.
-     */
-    @Column(name = "facebookUserId", nullable = true)
-    public String getFacebookUserId() {
-        if (facebookUserId != null) {
-            return facebookUserId;
-        } else {
-            return "";
-        }
-    }
-
-    public void setFacebookUserId(String facebookUserId) {
-        this.facebookUserId = facebookUserId;
-    }
-
-    /**
-     * Gets facebookFirstName field of a Social record, ensures that it never will have null value.
-     *
-     * @return with the facebookFirstName field value or with an empty string.
-     */
-    @Column(name = "facebookFirstName", nullable = true)
-    public String getFacebookFirstName() {
-        if (facebookFirstName != null) {
-            return facebookFirstName;
-        } else {
-            return "";
-        }
-    }
-
-    public void setFacebookFirstName(String facebookFirstName) {
-        this.facebookFirstName = facebookFirstName;
     }
 
     /**

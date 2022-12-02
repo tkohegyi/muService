@@ -64,26 +64,6 @@ public class BusinessWithSocial extends BusinessBase {
         return (Social) returnWithFirstItem(result);
     }
 
-    //FACEBOOK METHODS =================================================================================================
-
-    /**
-     * Get (search for) a specific Social record by its Facebook User Id.
-     *
-     * @param facebookUserId is the searched id
-     * @return with the Social object or null
-     */
-    public Social getSocialByFacebookUserId(@NotNull final String facebookUserId) {
-        Session session = SessionFactoryHelper.getOpenedSession();
-        session.beginTransaction();
-        String hql = "from Social as S where S.facebookUserId like :likeValue";
-        Query<Social> query = session.createQuery(hql, Social.class);
-        query.setParameter("likeValue", facebookUserId);
-        List<Social> result = query.list();
-        session.getTransaction().commit();
-        session.close();
-        return (Social) returnWithFirstItem(result);
-    }
-
     /**
      * Gets associated Social records of a Person.
      *

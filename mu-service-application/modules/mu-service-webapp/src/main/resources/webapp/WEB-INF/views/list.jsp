@@ -13,12 +13,12 @@
 <meta name="author" content="Tamas Kohegyi" />
 <meta name="Description" content="muService - Security System" />
 <meta name="Keywords" content="home,security" />
-<script src="/resources/js/external/jquery-3.4.1.js"></script>
-<script src="/resources/js/external/bootstrap-4.3.1.min.js"></script>
+<script src="/resources/js/external/jquery-3.6.4.min.js"></script>
+<script src="/resources/js/external/bootstrap.min.js"></script>
 <script src="/resources/js/common.js"></script>
 <script src="/resources/js/list.js"></script>
 <title>muService - Home Security System - List</title>
-<link href="/resources/css/external/bootstrap-4.3.1.min.css" rel="stylesheet" media="screen">
+<link href="/resources/css/external/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/resources/css/menu.css" rel="stylesheet" media="screen">
 <link id="favicon" rel="shortcut icon" type="image/png" href="/resources/img/favicon.png" />
 </head>

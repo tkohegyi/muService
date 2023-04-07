@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
 /**
@@ -18,6 +21,51 @@ import static org.springframework.security.web.context.HttpSessionSecurityContex
  */
 @Component
 public class CurrentUserProvider {
+
+    private static final Map<String, AuthenticatedUser> sessionCache = new HashMap<>();
+    private static final Object o = new Object();
+
+    public void addSession(String id, AuthenticatedUser user) {
+        synchronized (o) {
+            if (sessionCache.containsKey(id)) {
+                sessionCache.replace(id, user);
+            } else {
+                sessionCache.put(id, user);
+            }
+        }
+    }
+
+    /**
+     * Checks if the actual session-user pair is the originally registered session-user pair or not.
+     * @param httpSession is the session to be checked
+     * @param authenticatedUser is the user that tries to use the session
+     * @return false if something is not correct
+     */
+    private boolean checkSession(HttpSession httpSession, AuthenticatedUser authenticatedUser) {
+        boolean result = false;
+        synchronized (o) {
+            String key = httpSession.getId();
+            if (sessionCache.containsKey(key)) {
+                AuthenticatedUser user = sessionCache.get(key);
+                result = user.equals(authenticatedUser);
+            } //else unregistered session, which is wrong too
+        }
+        return result;
+    }
+
+    /**
+     * Remove the session from the list of active sessions.
+     * Must be called on session expiration and on logouts.
+     *
+     * @param sessionId is the id of the session to be removed
+     */
+    public void removeSession(String sessionId) {
+        synchronized (o) {
+            if (sessionCache.containsKey(sessionId)) {
+                sessionCache.remove(sessionId);
+            }
+        }
+    }
 
     /**
      * Get information about the actual user.
@@ -36,12 +84,16 @@ public class CurrentUserProvider {
             var principal = authentication.getPrincipal();
             if (principal instanceof AuthenticatedUser) {
                 var user = (AuthenticatedUser) principal;
-                if (user.isSessionValid()) {
+                if (user.isSessionValid() && checkSession(httpSession, user)) {
                     user.extendSessionTimeout();
                     currentUserInformationJson = getCurrentUserInformation(user);
                 } else { //session expired!
+                    String sessionID = httpSession.getId();
+                    //logger.info("Session expired/invalidated: {}", sessionID);
+                    removeSession(sessionID);
                     securityContext.setAuthentication(null); // this cleans up the authentication data technically
                     httpSession.removeAttribute(SPRING_SECURITY_CONTEXT_KEY); // this clean up the session itself
+                    httpSession.invalidate(); //and finally truly invalidates the session
                 }
             }
         }

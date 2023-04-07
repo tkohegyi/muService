@@ -2,6 +2,7 @@ package website.magyar.muservice.web.controller;
 
 import website.magyar.muservice.web.configuration.WebAppConfigurationAccess;
 import website.magyar.muservice.web.provider.CurrentUserProvider;
+import website.magyar.muservice.web.service.AuthenticatedUser;
 import website.magyar.muservice.web.service.GoogleOauth2Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,7 +117,16 @@ public class LoginController {
         var sc = SecurityContextHolder.getContext();
         sc.setAuthentication(authentication);
         httpSession.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
-        logger.info("User logged in with {}: {}", serviceName, currentUserProvider.getQuickUserName(authentication));
+        String userName = currentUserProvider.getQuickUserName(authentication);
+        var principal = authentication.getPrincipal();
+        if (principal instanceof AuthenticatedUser) {
+            var user = (AuthenticatedUser) principal;
+            currentUserProvider.addSession(httpSession.getId(), user);
+            logger.info("Session: {} connected to user:{}", httpSession.getId(), userName);
+        } else {
+            logger.warn("Session: {} is without proper user.", httpSession.getId());
+        }
+        logger.info("User logged in with {}: {}", serviceName, userName);
         try {
             httpServletResponse.sendRedirect(webAppConfigurationAccess.getProperties().getGoogleRedirectUrl());
             followUpPage = null;
@@ -158,9 +168,11 @@ public class LoginController {
             if (authentication != null) {
                 logger.info("User logout: {}", currentUserProvider.getQuickUserName(authentication));
             }
+            currentUserProvider.removeSession(httpSession.getId());
             sc.setAuthentication(null); // this cleans up the authentication data technically
             httpSession.removeAttribute(SPRING_SECURITY_CONTEXT_KEY); // this clean up the session itself
         }
+        httpSession.invalidate();
         try {
             httpServletResponse.sendRedirect(webAppConfigurationAccess.getProperties().getBaseUrl());
             return null;

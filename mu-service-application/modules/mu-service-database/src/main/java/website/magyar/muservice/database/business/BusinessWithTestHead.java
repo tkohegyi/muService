@@ -76,4 +76,14 @@ public class BusinessWithTestHead extends BusinessBase {
         return result;
     }
 
+    public TestHead getTestHeadById(@NotNull final String id) {
+        Session session = SessionFactoryHelper.getOpenedSession();
+        session.beginTransaction();
+        String hql = "from TestHead as T where T.id = " + id;
+        Query<TestHead> query = session.createQuery(hql, TestHead.class);
+        List<TestHead> result = query.list();
+        session.getTransaction().commit();
+        session.close();
+        return (TestHead) returnWithFirstItem(result);
+    }
 }

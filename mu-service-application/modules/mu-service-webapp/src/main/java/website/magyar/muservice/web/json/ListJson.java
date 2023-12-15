@@ -11,6 +11,8 @@ public class ListJson {
     @JsonField
     public String type;
     @JsonField
+    public boolean drawable;
+    @JsonField
     public String id;   //id
     @JsonField
     public String lastInformation;

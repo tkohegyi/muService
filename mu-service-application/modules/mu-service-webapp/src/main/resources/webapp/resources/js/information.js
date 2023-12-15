@@ -10,7 +10,7 @@ function getInformation() {
     $("#group").hide();
     $("#dataSource").hide();
     $("#graph").hide();
-    $.get('/muserviceSecure/getInformation', function(data) {
+    $.get('/appSecure/getInformation', function(data) {
         var information = data;
         if (typeof information == "undefined" || information == null || information.error != null) {
             //something was wrong with either the server or with the request, let's go back

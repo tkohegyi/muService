@@ -44,7 +44,7 @@ public class BusinessWithTestHeadData extends BusinessBase {
 
     public TestHeadData getLastData(String headId) {
         TestHeadData thd;
-        List<TestHeadData> result = getList(headId, 0, 1);
+        List<TestHeadData> result = getList(headId, 0, 1, true);
         if (result != null && !result.isEmpty()) {
             thd = result.get(0);
         } else {
@@ -60,10 +60,11 @@ public class BusinessWithTestHeadData extends BusinessBase {
      *
      * @return with the list
      */
-    public List<TestHeadData> getList(String headId, Integer startPos, Integer maxResults) {
+    public List<TestHeadData> getList(String headId, Integer startPos, Integer maxResults, boolean fromTheEnd) {
+        String ordering = fromTheEnd ? "desc" : "asc";
         Session session = SessionFactoryHelper.getOpenedSession();
         session.beginTransaction();
-        String hql = "from TestHeadData as T where T.head like :expectedName order by T.id desc";
+        String hql = "from TestHeadData as T where T.head like :expectedName order by T.id " + ordering;
         Query<TestHeadData> query = session.createQuery(hql, TestHeadData.class);
         query.setParameter("expectedName", headId);
         query.setFirstResult(startPos);
@@ -73,5 +74,23 @@ public class BusinessWithTestHeadData extends BusinessBase {
         session.close();
         return result;
     }
+
+    /**
+     * Get full list of a TestHead data, by specifying its head id.
+     *
+     * @return with the list
+     */
+    public int detectRows(String headId) {
+        Session session = SessionFactoryHelper.getOpenedSession();
+        session.beginTransaction();
+        String hql = "from TestHeadData as T where T.head like :expectedName";
+        Query<TestHeadData> query = session.createQuery(hql, TestHeadData.class);
+        query.setParameter("expectedName", headId);
+        List<TestHeadData> result = query.list();
+        session.getTransaction().commit();
+        session.close();
+        return result.size();
+    }
+
 
 }

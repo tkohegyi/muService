@@ -70,4 +70,15 @@ public class DateTimeConverter {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_PATTERN);
         return formatter.parse(dateString);
     }
+
+    /**
+     * Convert YYYY-MM-DD HH:mm:ss.SSS string to Date object.
+     */
+    public Date getDateTime(final String dateTimeString) throws ParseException {
+        if (dateTimeString == null) {
+            throw new ParseException("Null string received.", 0);
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat(DATETIME_PATTERN);
+        return formatter.parse(dateTimeString);
+    }
 }

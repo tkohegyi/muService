@@ -11,6 +11,7 @@ import website.magyar.muservice.database.business.helper.enums.PersonRoleTypes;
 import website.magyar.muservice.database.tables.TestHead;
 import website.magyar.muservice.database.tables.TestHeadData;
 import website.magyar.muservice.web.json.CurrentUserInformationJson;
+import website.magyar.muservice.web.json.GraphJson;
 import website.magyar.muservice.web.json.SeriesJson;
 import website.magyar.muservice.web.provider.helper.ProviderBase;
 
@@ -38,6 +39,7 @@ public class GraphProvider extends ProviderBase {
      * @return with the info in json object form
      */
     public Object getGraph(CurrentUserInformationJson currentUserInformationJson, long headId, boolean secondSeries) {
+        GraphJson graphJson = new GraphJson();
         DateTimeConverter dateTimeConverter = new DateTimeConverter();
         ArrayList<SeriesJson> seriesA = new ArrayList<>();
         ArrayList<SeriesJson> seriesB = new ArrayList<>();
@@ -50,14 +52,22 @@ public class GraphProvider extends ProviderBase {
             //lehet rajzolni, drawable és van access is
             try {
                 int rows = businessWithTestHeadData.detectRows(testHead.getHeadId());
+                graphJson.dataSize = String.valueOf(rows);
+                graphJson.headInformation = testHead.getDescription();
                 int startPos = Math.max(rows - 1440, 0);
+                graphJson.dataStartingPosition = String.valueOf(startPos);
                 List<TestHeadData> testHeadData = businessWithTestHeadData.getList(testHead.getHeadId(), startPos, 1440, false);
+                graphJson.dataVisibleSize = String.valueOf(testHeadData.size());
                 //get max min temp
                 for (TestHeadData data : testHeadData) {
                     String information = data.getInformation();
                     if (information != null && !information.isEmpty()) {
                         String[] values = information.split(";");
                         String timeStamp = data.getTimestamp();
+                        if (graphJson.dateMin == null) {
+                            graphJson.dateMin = timeStamp;
+                        }
+                        graphJson.dateMax = timeStamp;
                         SeriesJson seriesJson = new SeriesJson(timeStamp, Double.parseDouble(values[0]));
                         seriesA.add(seriesJson);
                         if (hasSeriesB) {
@@ -70,10 +80,9 @@ public class GraphProvider extends ProviderBase {
                 ie.printStackTrace();
             }
         }
-        if (secondSeries && hasSeriesB) {
-            return seriesB;
-        }
-        return seriesA;
+        graphJson.seriesA = seriesA;
+        graphJson.seriesB = seriesB;
+        return graphJson;
     }
 
 }

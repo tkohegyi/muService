@@ -31,8 +31,12 @@
 	    <br/>
         <legend class="message-legend h4"></legend>
         <hidden id="graphId" value="${headId}" />
-        <div id="headId">${headId}</div>
-        <div id="size"></div>
+        <div id="headId">${headId}</div><div id="headInformation"></div>
+        <div id="headDataSize"></div>
+        <div id="headDataVisible"></div>
+        <div id="headDataPosition"></div>
+        <div id="headMinDate"></div>
+        <div id="headMaxDate"></div>
         <br />
         <svg id="statisticInfo" width="1000" height="600"></svg>
 	</div>

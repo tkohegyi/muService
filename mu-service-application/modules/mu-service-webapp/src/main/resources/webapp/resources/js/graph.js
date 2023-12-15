@@ -24,7 +24,13 @@ function showGraph(json) {
     var CHART_WIDTH = 730+60;
     var CHART_HEIGHT = 300;
 
-    var lineData = json;
+    var lineData = json.seriesA;
+    $('#headInformation').text(json.headInformation);
+    $('#headDataSize').text("Total data rows: " + json.dataSize);
+    $('#headDataVisible').text("Visible data rows: " + json.dataVisibleSize);
+    $('#headDataPosition').text("Starting data row: " + json.dataStartingPosition);
+    $('#headMinDate').text("Start date of graph: " + json.dateMin);
+    $('#headMaxDate').text("End date of graph: " + json.dateMax);
 
     // Show svg
     $('#statisticInfo').css('display', 'block');
@@ -43,7 +49,10 @@ function showGraph(json) {
   // Declare the x (horizontal position) scale.
   const x = d3.scaleUtc(d3.extent(lineData, d => d.order), [marginLeft, width - marginRight]);
   // Declare the y (vertical position) scale.
-  const y = d3.scaleLinear([0, d3.max(lineData, d => d.dValue)], [height - marginBottom, marginTop]);
+
+  var min = d3.min(lineData, d => d.dValue);
+  if (min > 0) { min = 0; }
+  const y = d3.scaleLinear([min, d3.max(lineData, d => d.dValue)], [height - marginBottom, marginTop]);
 
   // Declare the line generator.
   const line = d3.line()

@@ -34,7 +34,11 @@
         <div id="headId">${headId}</div><div id="headInformation"></div>
         <div id="headDataSize"></div>
         <div id="headDataVisible"></div>
+        <button id="moreDataButton" type="button" class="btn btn-secondary" onclick="moreDataButton()">Show more</button>&nbsp;
+        <button id="lessDataButton" type="button" class="btn btn-secondary" onclick="lessDataButton()">Show less</button>
         <div id="headDataPosition"></div>
+        <button id="forwardButton" type="button" class="btn btn-secondary" onclick="forwardButton()">Show later data</button>&nbsp;
+        <button id="backwardButton" type="button" class="btn btn-secondary" onclick="backwardButton()">Show earlier data</button>
         <div id="headMinDate"></div>
         <div id="headMaxDate"></div>
         <br />

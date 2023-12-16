@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import website.magyar.muservice.database.business.BusinessWithTestHead;
 import website.magyar.muservice.database.business.BusinessWithTestHeadData;
-import website.magyar.muservice.database.business.helper.DateTimeConverter;
 import website.magyar.muservice.database.business.helper.enums.PersonRoleTypes;
 import website.magyar.muservice.database.tables.TestHead;
 import website.magyar.muservice.database.tables.TestHeadData;
@@ -24,7 +23,7 @@ import java.util.List;
  */
 @Component
 public class GraphProvider extends ProviderBase {
-
+    private static final int DEFAULT_VISIBLE_ROWS = 1440;
     private final Logger logger = LoggerFactory.getLogger(GraphProvider.class);
 
     @Autowired
@@ -38,25 +37,38 @@ public class GraphProvider extends ProviderBase {
      *
      * @return with the info in json object form
      */
-    public Object getGraph(CurrentUserInformationJson currentUserInformationJson, long headId, boolean secondSeries) {
+    public Object getGraph(CurrentUserInformationJson currentUserInformationJson, long headId, int startingPos, int visibleRows) {
         GraphJson graphJson = new GraphJson();
-        DateTimeConverter dateTimeConverter = new DateTimeConverter();
         ArrayList<SeriesJson> seriesA = new ArrayList<>();
         ArrayList<SeriesJson> seriesB = new ArrayList<>();
-        Boolean hasValuesB = Boolean.FALSE;
 
         PersonRoleTypes role = PersonRoleTypes.getTypeFromId(currentUserInformationJson.personRole);
         TestHead testHead = businessWithTestHead.getTestHeadById(String.valueOf(headId));
-        Boolean hasSeriesB = testHead.getType().equalsIgnoreCase("dht11");
-        if (role.equals(PersonRoleTypes.ADMINISTRATOR) && testHead != null && drawables.contains(testHead.getType())) {
+        boolean hasSeriesB = testHead.getType().equalsIgnoreCase("dht11");
+        if (role.equals(PersonRoleTypes.ADMINISTRATOR) && drawables.contains(testHead.getType())) {
             //lehet rajzolni, drawable és van access is
             try {
                 int rows = businessWithTestHeadData.detectRows(testHead.getHeadId());
                 graphJson.dataSize = String.valueOf(rows);
                 graphJson.headInformation = testHead.getDescription();
-                int startPos = Math.max(rows - 1440, 0);
-                graphJson.dataStartingPosition = String.valueOf(startPos);
-                List<TestHeadData> testHeadData = businessWithTestHeadData.getList(testHead.getHeadId(), startPos, 1440, false);
+
+                //set visible rows
+                if (visibleRows < 1) {
+                    visibleRows = DEFAULT_VISIBLE_ROWS;
+                }
+                if (visibleRows > rows) {
+                    visibleRows = rows;
+                } //we have visibleRows set, and it is >= 1
+                //set start pos: if startingPos is not defined or too close to its end, then use default
+                if (startingPos + visibleRows > rows) {
+                    startingPos = rows - visibleRows;
+                }
+                if (startingPos < 0) {
+                    startingPos = 0;
+                }
+
+                graphJson.dataStartingPosition = String.valueOf(startingPos);
+                List<TestHeadData> testHeadData = businessWithTestHeadData.getList(testHead.getHeadId(), startingPos, visibleRows, false);
                 graphJson.dataVisibleSize = String.valueOf(testHeadData.size());
                 //get max min temp
                 for (TestHeadData data : testHeadData) {

@@ -6,9 +6,19 @@ $(document).ready(function() {
     jQuery.ajaxSetup({async:true});
 });
 
+var dataVisibleSize = null;
+var dataStartingPosition = null;
+var dataSize = null;
+var headId = null;
+
 function getGraph() {
     var id = $("#graphId").attr('value');
-    $.get('/appSecure/getGraphSub/' + id, function(data) {
+    headId = id;
+    var request = '/appSecure/getGraphSub/' + id;
+    if (typeof dataSize != "undefined" && dataSize != null) {
+        request += '/' + dataStartingPosition + '/' + dataVisibleSize;
+    }
+    $.get(request, function(data) {
         var information = data;
         if (typeof information == "undefined" || information == null || information.error != null) {
             //something was wrong with either the server or with the request, let's go back
@@ -31,6 +41,9 @@ function showGraph(json) {
     $('#headDataPosition').text("Starting data row: " + json.dataStartingPosition);
     $('#headMinDate').text("Start date of graph: " + json.dateMin);
     $('#headMaxDate').text("End date of graph: " + json.dateMax);
+    dataVisibleSize = Number(json.dataVisibleSize);
+    dataStartingPosition = Number(json.dataStartingPosition);
+    dataSize = Number(json.dataSize);
 
     // Show svg
     $('#statisticInfo').css('display', 'block');
@@ -92,5 +105,27 @@ function showGraph(json) {
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
       .attr("d", line(lineData));
+}
 
+function moreDataButton() {
+    dataVisibleSize *= 2;
+    getGraph();
+}
+
+function lessDataButton() {
+    dataVisibleSize /= 2;
+    dataVisibleSize = Math.round(dataVisibleSize);
+    getGraph();
+}
+
+function forwardButton() {
+    dataStartingPosition += dataVisibleSize / 2;
+    dataStartingPosition = Math.round(dataStartingPosition);
+    getGraph();
+}
+
+function backwardButton() {
+    dataStartingPosition -= dataVisibleSize / 2;
+    dataStartingPosition = Math.round(dataStartingPosition);
+    getGraph();
 }

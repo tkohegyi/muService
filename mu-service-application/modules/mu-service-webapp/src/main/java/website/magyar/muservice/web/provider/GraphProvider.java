@@ -60,6 +60,9 @@ public class GraphProvider extends ProviderBase {
                     visibleRows = rows;
                 } //we have visibleRows set, and it is >= 1
                 //set start pos: if startingPos is not defined or too close to its end, then use default
+                if (startingPos < 0) {
+                    startingPos = rows - DEFAULT_VISIBLE_ROWS;
+                }
                 if (startingPos + visibleRows > rows) {
                     startingPos = rows - visibleRows;
                 }

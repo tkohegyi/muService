@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import website.magyar.muservice.database.SessionFactoryHelper;
 import website.magyar.muservice.database.business.helper.BusinessBase;
 import website.magyar.muservice.database.tables.TestHead;
+import website.magyar.muservice.database.tables.TestHeadData;
 
 import java.util.List;
 
@@ -61,5 +62,22 @@ public class BusinessWithTestHead extends BusinessBase {
         session.getTransaction().commit();
         session.close();
         return (TestHead) returnWithFirstItem(result);
+    }
+
+    public Long deleteRow(TestHeadData testHeadData) {
+        Session session = SessionFactoryHelper.getOpenedSession();
+        try {
+            session.beginTransaction();
+            session.delete(testHeadData);
+            session.getTransaction().commit();
+            session.close();
+            logger.info("TestHeadData deleted successfully: {}", testHeadData.getId());
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            session.close();
+            logger.info("TestHeadData delete failed: {}", testHeadData.getId());
+            throw e;
+        }
+        return testHeadData.getId();
     }
 }

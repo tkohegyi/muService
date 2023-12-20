@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import website.magyar.muservice.database.SessionFactoryHelper;
 import website.magyar.muservice.database.business.helper.BusinessBase;
 import website.magyar.muservice.database.tables.TestHead;
-import website.magyar.muservice.database.tables.TestHeadData;
 
 import java.util.List;
 
@@ -19,29 +18,6 @@ import java.util.List;
 @Component
 public class BusinessWithTestHead extends BusinessBase {
     private final Logger logger = LoggerFactory.getLogger(BusinessWithTestHead.class);
-
-    /**
-     * Create new TestHeadData object.
-     *
-     * @param testHeadData  is the object to be saved
-     * @return with the Id of the new object
-     */
-    public Long newTestHeadData(@NotNull TestHeadData testHeadData) {
-        Long id = null;
-        Session session = SessionFactoryHelper.getOpenedSession();
-        try {
-            session.beginTransaction();
-            session.save(testHeadData); //insert into table !
-            session.getTransaction().commit();
-            id = testHeadData.getId();
-            logger.info("TestHead record created successfully: {}", id);
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            logger.warn("TestHead record creation failure", e);
-        }
-        session.close();
-        return id;
-    }
 
     /**
      * Get (search for) a specific test head by specifying its head id.

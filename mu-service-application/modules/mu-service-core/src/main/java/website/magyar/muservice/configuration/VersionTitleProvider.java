@@ -3,7 +3,7 @@ package website.magyar.muservice.configuration;
 import org.springframework.stereotype.Component;
 
 /**
- * This class provides version title for Adoration Application.
+ * This class provides version title for the Application.
  */
 @Component
 public class VersionTitleProvider {

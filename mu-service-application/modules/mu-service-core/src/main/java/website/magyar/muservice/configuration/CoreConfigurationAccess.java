@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * Configures the module with the necessary properties.
  */
 @Component
-public class EmailConfigurationAccess implements ConfigurationAccessBase {
+public class CoreConfigurationAccess implements ConfigurationAccessBase {
 
     private PropertyDto properties;
 
@@ -31,6 +31,7 @@ public class EmailConfigurationAccess implements ConfigurationAccessBase {
         String smtpPassword = propertyHolder.get("smtp.password");
         String emailFrom = propertyHolder.get("email.from");
         String emailTo = propertyHolder.get("email.to");
-        properties = new PropertyDto(smtpServer, smtpPort, smtpUserName, smtpPassword, emailFrom, emailTo);
+        String cronTask = propertyHolder.get("regularTask.cron.task");
+        properties = new PropertyDto(smtpServer, smtpPort, smtpUserName, smtpPassword, emailFrom, emailTo, cronTask);
     }
 }

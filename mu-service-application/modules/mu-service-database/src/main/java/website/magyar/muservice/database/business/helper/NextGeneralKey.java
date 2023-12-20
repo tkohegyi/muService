@@ -8,7 +8,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 /**
- * Supporter class to get a identification number (ID) that is unique in the whole Adoration database - to identify all objects/record in a unique way.
+ * Supporter class to get a identification number (ID) that is unique in the whole application database - to identify all objects/record in a unique way.
  */
 @Component
 public class NextGeneralKey {

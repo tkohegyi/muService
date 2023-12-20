@@ -11,12 +11,13 @@ public class PropertyDto {
     private final String smtpPassword;
     private final String emailFrom;
     private final String emailTo;
+    private final String cronTask;
 
     /**
      * Constructs a new property holding object with the given fields.
      */
     public PropertyDto(final String smtpServer, final String smtpPort, final String smtpUserName,
-                       final String smtpPassword, final String emailFrom, final String emailTo) {
+                       final String smtpPassword, final String emailFrom, final String emailTo, final String cronTask) {
         super();
         this.smtpServer = smtpServer;
         this.smtpPort = smtpPort;
@@ -24,6 +25,7 @@ public class PropertyDto {
         this.smtpPassword = smtpPassword;
         this.emailFrom = emailFrom;
         this.emailTo = emailTo;
+        this.cronTask = cronTask;
     }
 
     public String getSmtpServer() {
@@ -48,6 +50,10 @@ public class PropertyDto {
 
     public String getEmailTo() {
         return emailTo;
+    }
+
+    public String getCronTask() {
+        return cronTask;
     }
 
 }

@@ -7,6 +7,7 @@ import website.magyar.muservice.properties.PropertyLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import website.magyar.muservice.scheduler.RegularTaskScheduler;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -25,6 +26,8 @@ public class ConfigurationInitializer {
     private ApplicationContext applicationContext;
     @Autowired
     private List<ConfigurationAccessBase> configurationAccesses;
+    @Autowired
+    private RegularTaskScheduler regularTaskScheduler;
 
 
     /**
@@ -37,6 +40,8 @@ public class ConfigurationInitializer {
         propertyLoader.loadProperties();
         loadProperties();
         startUpMessageGenerator.logStartUpMessage();
+        regularTaskScheduler.runTaskOnDemand();
+        regularTaskScheduler.startTaskScheduling();
     }
 
     private void loadProperties() {

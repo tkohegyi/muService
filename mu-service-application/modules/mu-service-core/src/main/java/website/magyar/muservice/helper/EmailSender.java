@@ -1,7 +1,7 @@
 package website.magyar.muservice.helper;
 
 import com.sun.mail.smtp.SMTPTransport; //NOSONAR
-import website.magyar.muservice.configuration.EmailConfigurationAccess;
+import website.magyar.muservice.configuration.CoreConfigurationAccess;
 import website.magyar.muservice.configuration.PropertyDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +25,10 @@ public class EmailSender {
     private final Logger logger = LoggerFactory.getLogger(EmailSender.class);
 
     @Autowired
-    private EmailConfigurationAccess emailConfigurationAccess;
+    private CoreConfigurationAccess coreConfigurationAccess;
 
     private void sendProperMail(final String subject, final String text, final String to, final String cc, final String bcc, final String typeText) {
-        PropertyDto propertyDto = emailConfigurationAccess.getProperties();
+        PropertyDto propertyDto = coreConfigurationAccess.getProperties();
         Properties prop = new Properties();
         prop.put("mail.smtp.starttls.enable","true");
         prop.put("mail.smtp.ssl.trust", "*");
@@ -80,7 +80,7 @@ public class EmailSender {
      * @param text    is the body of the mail - which is a plain text mail
      */
     public void sendMailToAdministrator(final String subject, final String text) {
-        PropertyDto propertyDto = emailConfigurationAccess.getProperties();
+        PropertyDto propertyDto = coreConfigurationAccess.getProperties();
         sendProperMail(subject, text, propertyDto.getEmailTo(), "", "","to Administrator");
     }
 
@@ -92,7 +92,7 @@ public class EmailSender {
      * @param text          is the body of the mail - which is a plain text mail
      */
     public void sendMailFromSocialLogin(String providedEmail, String subject, String text) {
-        PropertyDto propertyDto = emailConfigurationAccess.getProperties();
+        PropertyDto propertyDto = coreConfigurationAccess.getProperties();
         sendProperMail(subject, text, providedEmail, "", propertyDto.getEmailTo(), "to person logged-in first time");
     }
 }

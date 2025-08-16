@@ -69,11 +69,11 @@ public class RegularTask implements Runnable {
                 Date date = dateTimeConverter.getDateTime(timestamp);
                 if (date.before(dateTimeConverter.getDateNDaysAgo(2*365))) { //if more than 2 years ago
                     logger.info("Row {} is candidate for deletion because of obsolete timestamp: {}.", testHeadData.getId(), timestamp);
-                    //businessWithTestHead.deleteRow(testHeadData);
+                    businessWithTestHead.deleteRow(testHeadData);
                 }
             } catch (ParseException e) {
                 logger.info("Row {} is candidate for deletion because of incorrect timestamp data.", testHeadData.getId());
-                //businessWithTestHead.deleteRow(testHeadData);
+                businessWithTestHead.deleteRow(testHeadData);
             }
         }
 

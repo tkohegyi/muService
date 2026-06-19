@@ -5,8 +5,6 @@
 
 #clean up
 cd /opt/mu-service/wanipcheck
-rm -f index.html
-rm -f wget.tmp
 rm -f myip.txt
 rm -f *.old
 

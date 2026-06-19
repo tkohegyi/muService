@@ -22,7 +22,10 @@ function getList() {
             r += "<tr><td>" + item.id + "</td><td>" + item.description + "</td><td>"
                 + item.type + "</td><td>" + item.lastInformation + "</td><td>" + item.lastInformationDate + "</td>";
             if (item.drawable) {
-                r += "<td><a id=\"graph-button" + item.id + "\" class=\"btn btn-primary\" href=\"/appSecure/getGraph/" + item.id + "\">Show</a></td>";
+                var url = (item.type === 'wanipcheck')
+                    ? '/appSecure/getWanIp/' + item.id
+                    : '/appSecure/getGraph/' + item.id;
+                r += "<td><a id=\"graph-button" + item.id + "\" class=\"btn btn-primary\" href=\"" + url + "\">Show</a></td>";
             } else {
                 r += "<td/>";
             }

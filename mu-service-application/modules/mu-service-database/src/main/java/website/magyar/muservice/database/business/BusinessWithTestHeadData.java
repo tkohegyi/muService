@@ -76,6 +76,24 @@ public class BusinessWithTestHeadData extends BusinessBase {
     }
 
     /**
+     * Get list of TestHead data from a given timestamp onwards, ordered by id ascending.
+     *
+     * @return with the list
+     */
+    public List<TestHeadData> getListFromTimestamp(String headId, String fromTimestamp) {
+        Session session = SessionFactoryHelper.getOpenedSession();
+        session.beginTransaction();
+        String hql = "from TestHeadData as T where T.head like :headId and T.timestamp >= :fromTimestamp order by T.id asc";
+        Query<TestHeadData> query = session.createQuery(hql, TestHeadData.class);
+        query.setParameter("headId", headId);
+        query.setParameter("fromTimestamp", fromTimestamp);
+        List<TestHeadData> result = query.list();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
+    /**
      * Get full list of a TestHead data, by specifying its head id.
      *
      * @return with the list

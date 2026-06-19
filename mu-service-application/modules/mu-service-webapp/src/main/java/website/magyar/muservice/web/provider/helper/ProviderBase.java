@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class ProviderBase {
 
-    protected final Set<String> drawables = new HashSet<>(Arrays.asList("dht11", "ds18b20"));
+    protected final Set<String> drawables = new HashSet<>(Arrays.asList("dht11", "ds18b20", "wanipcheck"));
 
     /**
      * Detects if the two long is different. Any of them can be null too.

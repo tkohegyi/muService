@@ -85,7 +85,7 @@ function showWanIpTimeline(json) {
     const marginBottom = 30;
     const marginLeft = 50;
 
-    const x = d3.scaleUtc([rangeStart, now], [marginLeft, width - marginRight]);
+    const x = d3.scaleTime([rangeStart, now], [marginLeft, width - marginRight]);
     const y = d3.scaleLinear([0, 1], [height - marginBottom, marginTop]);
 
     var svg = d3.select('#wanIpTimeline')

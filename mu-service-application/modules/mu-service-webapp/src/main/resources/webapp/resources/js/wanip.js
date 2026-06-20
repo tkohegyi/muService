@@ -1,4 +1,5 @@
 var hoursToShow = 720;
+var previouslyOn = null;
 
 $(document).ready(function() {
     $("#nav-list").addClass("active");
@@ -6,11 +7,26 @@ $(document).ready(function() {
     setupMenu();
     jQuery.ajaxSetup({async:true});
     getWanIpData();
+    setInterval(getWanIpData, 60000);
 });
 
 function setHours(n) {
     hoursToShow = n;
     getWanIpData();
+}
+
+function beep() {
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    var oscillator = ctx.createOscillator();
+    var gainNode = ctx.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    oscillator.frequency.value = 880;
+    oscillator.type = 'sine';
+    gainNode.gain.setValueAtTime(0.5, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.5);
 }
 
 function getWanIpData() {
@@ -37,8 +53,8 @@ function showWanIpTimeline(json) {
     var now = Date.now();
     var rangeStart = now - (hoursToShow * 60 * 60 * 1000);
 
-    // Build ON intervals: each OK point contributes a ±90 second window
-    var HALF_WINDOW = 90 * 1000;
+    // Build ON intervals: each OK report marks ±1 minute as ON
+    var HALF_WINDOW = 60 * 1000;
     var onIntervals = [];
     for (var i = 0; i < points.length; i++) {
         if (points[i].status === "OK") {
@@ -56,6 +72,13 @@ function showWanIpTimeline(json) {
             merged[merged.length - 1].end = Math.max(merged[merged.length - 1].end, onIntervals[j].end);
         }
     }
+
+    // Check current state and beep on transition to NOTOK
+    var currentlyOn = merged.length > 0 && merged[merged.length - 1].end >= now;
+    if (previouslyOn === true && !currentlyOn) {
+        beep();
+    }
+    previouslyOn = currentlyOn;
 
     // Build stepped area dataset: alternating NOTOK(0) and ON(1) segments
     var segments = [];

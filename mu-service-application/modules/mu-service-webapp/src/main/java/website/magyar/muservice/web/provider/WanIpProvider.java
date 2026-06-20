@@ -17,6 +17,7 @@ import website.magyar.muservice.web.provider.helper.ProviderBase;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,8 +26,8 @@ import java.util.List;
 @Component
 public class WanIpProvider extends ProviderBase {
 
-    private static final int DEFAULT_DAYS_TO_SHOW = 30;
-    private static final int MAX_DAYS_TO_SHOW = 365;
+    private static final int DEFAULT_HOURS_TO_SHOW = 720;
+    private static final int MAX_HOURS_TO_SHOW = 8760;
     private final Logger logger = LoggerFactory.getLogger(WanIpProvider.class);
 
     @Autowired
@@ -36,11 +37,11 @@ public class WanIpProvider extends ProviderBase {
     BusinessWithTestHeadData businessWithTestHeadData;
 
     /**
-     * Get WAN IP data for the given head and number of days.
+     * Get WAN IP data for the given head and number of hours.
      *
      * @return with the info in json object form
      */
-    public Object getData(CurrentUserInformationJson currentUserInformationJson, long id, int days) {
+    public Object getData(CurrentUserInformationJson currentUserInformationJson, long id, int hours) {
         WanIpJson wanIpJson = new WanIpJson();
         wanIpJson.points = new ArrayList<>();
 
@@ -54,9 +55,10 @@ public class WanIpProvider extends ProviderBase {
         wanIpJson.description = testHead.getDescription();
         wanIpJson.type = testHead.getType();
 
-        int daysToShow = (days < 1 || days > MAX_DAYS_TO_SHOW) ? DEFAULT_DAYS_TO_SHOW : days;
+        int hoursToShow = (hours < 1 || hours > MAX_HOURS_TO_SHOW) ? DEFAULT_HOURS_TO_SHOW : hours;
         DateTimeConverter dateTimeConverter = new DateTimeConverter();
-        String fromTimestamp = dateTimeConverter.getDateAsString(dateTimeConverter.getDateNDaysAgo(daysToShow));
+        Date fromDate = new Date(System.currentTimeMillis() - (long) hoursToShow * DateTimeConverter.HOUR_IN_MS);
+        String fromTimestamp = dateTimeConverter.getDateAsString(fromDate);
         List<TestHeadData> dataList = businessWithTestHeadData.getListFromTimestamp(testHead.getHeadId(), fromTimestamp);
 
         for (TestHeadData data : dataList) {

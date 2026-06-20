@@ -53,21 +53,21 @@ public class WanIpController extends ControllerBase {
      */
     @GetMapping(value = "/appSecure/getWanIpData/{id}")
     public ResponseEntity<String> wanIpData(HttpSession httpSession, @PathVariable("id") long id) {
-        return wanIpDataForDays(httpSession, id, 30);
+        return wanIpDataForHours(httpSession, id, 720);
     }
 
     /**
-     * Serves WAN IP timeline data as JSON for the given number of days.
+     * Serves WAN IP timeline data as JSON for the given number of hours.
      *
      * @return with proper content
      */
-    @GetMapping(value = "/appSecure/getWanIpData/{id}/{days}")
-    public ResponseEntity<String> wanIpDataForDays(HttpSession httpSession, @PathVariable("id") long id,
-            @PathVariable("days") int days) {
+    @GetMapping(value = "/appSecure/getWanIpData/{id}/{hours}")
+    public ResponseEntity<String> wanIpDataForHours(HttpSession httpSession, @PathVariable("id") long id,
+            @PathVariable("hours") int hours) {
         CurrentUserInformationJson currentUserInformationJson = currentUserProvider.getUserInformation(httpSession);
         ResponseEntity<String> result = buildUnauthorizedActionBodyResult();
         if (currentUserInformationJson.isAuthorized) {
-            Object jsonObject = wanIpProvider.getData(currentUserInformationJson, id, days);
+            Object jsonObject = wanIpProvider.getData(currentUserInformationJson, id, hours);
             result = buildResponseBodyResult(JSON_RESPONSE_STATUS, jsonObject, HttpStatus.OK);
         }
         return result;

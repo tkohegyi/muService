@@ -1,4 +1,4 @@
-var daysToShow = 30;
+var hoursToShow = 720;
 
 $(document).ready(function() {
     $("#nav-list").addClass("active");
@@ -8,14 +8,14 @@ $(document).ready(function() {
     getWanIpData();
 });
 
-function setDays(n) {
-    daysToShow = n;
+function setHours(n) {
+    hoursToShow = n;
     getWanIpData();
 }
 
 function getWanIpData() {
     var id = $("#wanIpId").attr('value');
-    $.get('/appSecure/getWanIpData/' + id + '/' + daysToShow, function(data) {
+    $.get('/appSecure/getWanIpData/' + id + '/' + hoursToShow, function(data) {
         var information = data.status;
         if (typeof information == "undefined" || information == null) {
             window.location.pathname = "/";
@@ -30,12 +30,12 @@ function getWanIpData() {
 function showWanIpTimeline(json) {
     var points = json.points;
     if (!points || points.length === 0) {
-        d3.select('#wanIpTimeline').append("text").attr("x", 10).attr("y", 30).text("No data available for the last " + daysToShow + " days.");
+        d3.select('#wanIpTimeline').append("text").attr("x", 10).attr("y", 30).text("No data available for the last " + hoursToShow + " hours.");
         return;
     }
 
     var now = Date.now();
-    var rangeStart = now - (daysToShow * 24 * 60 * 60 * 1000);
+    var rangeStart = now - (hoursToShow * 60 * 60 * 1000);
 
     // Build ON intervals: each OK point contributes a ±90 second window
     var HALF_WINDOW = 90 * 1000;

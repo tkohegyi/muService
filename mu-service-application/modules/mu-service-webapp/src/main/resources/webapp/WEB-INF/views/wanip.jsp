@@ -35,10 +35,10 @@
         <div id="headDescription"></div>
         <div id="headType"></div>
         <br />
-        <button class="btn btn-default" onclick="setDays(1)">Last day</button>
-        <button class="btn btn-default" onclick="setDays(7)">Last 7 days</button>
-        <button class="btn btn-default" onclick="setDays(30)">Last 30 days</button>
-        <button class="btn btn-default" onclick="setDays(90)">Last 90 days</button>
+        <button class="btn btn-default" onclick="setHours(3)">Last 3 hours</button>
+        <button class="btn btn-default" onclick="setHours(24)">Last day</button>
+        <button class="btn btn-default" onclick="setHours(168)">Last 7 days</button>
+        <button class="btn btn-default" onclick="setHours(720)">Last 30 days</button>
         <br /><br />
         <svg id="wanIpTimeline"></svg>
     </div>

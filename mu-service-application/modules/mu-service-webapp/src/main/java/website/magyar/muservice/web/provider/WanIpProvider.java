@@ -45,7 +45,7 @@ public class WanIpProvider extends ProviderBase {
 
         PersonRoleTypes role = PersonRoleTypes.getTypeFromId(currentUserInformationJson.personRole);
         TestHead testHead = businessWithTestHead.getTestHeadById(String.valueOf(id));
-        if (!role.equals(PersonRoleTypes.ADMINISTRATOR) || testHead == null || !"wanipcheck".equals(testHead.getType())) {
+        if (!role.equals(PersonRoleTypes.ADMINISTRATOR) || testHead == null || !"wanip".equals(testHead.getType())) {
             return wanIpJson;
         }
 

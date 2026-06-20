@@ -22,7 +22,7 @@ function getList() {
             r += "<tr><td>" + item.id + "</td><td>" + item.description + "</td><td>"
                 + item.type + "</td><td>" + item.lastInformation + "</td><td>" + item.lastInformationDate + "</td>";
             if (item.drawable) {
-                var url = (item.type === 'wanipcheck')
+                var url = (item.type === 'wanip')
                     ? '/appSecure/getWanIp/' + item.id
                     : '/appSecure/getGraph/' + item.id;
                 r += "<td><a id=\"graph-button" + item.id + "\" class=\"btn btn-primary\" href=\"" + url + "\">Show</a></td>";

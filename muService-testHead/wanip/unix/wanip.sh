@@ -8,9 +8,10 @@
 # and fill the settings below properly
 MYID=
 MYSERVER=https://muService.magyar.website/appService/uploadData
+MYIPSERVER=
 
 #get my IP
-MYIP=$(curl -s https://api.ipify.org)
+MYIP=$(curl -s $MYIPSERVER)
 
 #if my ip is empty: CRITICAL
 if [ "$MYIP" == "" ]; then

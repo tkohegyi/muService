@@ -122,7 +122,7 @@ function showWanIpTimeline(json) {
     // X axis
     svg.append("g")
         .attr("transform", "translate(0," + (height - marginBottom) + ")")
-        .call(d3.axisBottom(x).ticks(width / 100).tickSizeOuter(0));
+        .call(d3.axisBottom(x).ticks(width / 100).tickSizeOuter(0).tickFormat(d3.timeFormat("%d %b %H:%M")));
 
     // Y axis with ON / NOTOK labels
     svg.append("g")

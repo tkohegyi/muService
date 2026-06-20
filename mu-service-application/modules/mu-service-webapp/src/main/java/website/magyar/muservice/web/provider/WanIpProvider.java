@@ -25,7 +25,8 @@ import java.util.List;
 @Component
 public class WanIpProvider extends ProviderBase {
 
-    private static final int DAYS_TO_SHOW = 30;
+    private static final int DEFAULT_DAYS_TO_SHOW = 30;
+    private static final int MAX_DAYS_TO_SHOW = 365;
     private final Logger logger = LoggerFactory.getLogger(WanIpProvider.class);
 
     @Autowired
@@ -35,11 +36,11 @@ public class WanIpProvider extends ProviderBase {
     BusinessWithTestHeadData businessWithTestHeadData;
 
     /**
-     * Get last 30 days of WAN IP data for the given head.
+     * Get WAN IP data for the given head and number of days.
      *
      * @return with the info in json object form
      */
-    public Object getData(CurrentUserInformationJson currentUserInformationJson, long id) {
+    public Object getData(CurrentUserInformationJson currentUserInformationJson, long id, int days) {
         WanIpJson wanIpJson = new WanIpJson();
         wanIpJson.points = new ArrayList<>();
 
@@ -53,8 +54,9 @@ public class WanIpProvider extends ProviderBase {
         wanIpJson.description = testHead.getDescription();
         wanIpJson.type = testHead.getType();
 
+        int daysToShow = (days < 1 || days > MAX_DAYS_TO_SHOW) ? DEFAULT_DAYS_TO_SHOW : days;
         DateTimeConverter dateTimeConverter = new DateTimeConverter();
-        String fromTimestamp = dateTimeConverter.getDateAsString(dateTimeConverter.getDateNDaysAgo(DAYS_TO_SHOW));
+        String fromTimestamp = dateTimeConverter.getDateAsString(dateTimeConverter.getDateNDaysAgo(daysToShow));
         List<TestHeadData> dataList = businessWithTestHeadData.getListFromTimestamp(testHead.getHeadId(), fromTimestamp);
 
         for (TestHeadData data : dataList) {

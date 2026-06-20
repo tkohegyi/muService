@@ -47,16 +47,27 @@ public class WanIpController extends ControllerBase {
     }
 
     /**
-     * Serves WAN IP timeline data as JSON.
+     * Serves WAN IP timeline data as JSON (defaults to 30 days).
      *
      * @return with proper content
      */
     @GetMapping(value = "/appSecure/getWanIpData/{id}")
     public ResponseEntity<String> wanIpData(HttpSession httpSession, @PathVariable("id") long id) {
+        return wanIpDataForDays(httpSession, id, 30);
+    }
+
+    /**
+     * Serves WAN IP timeline data as JSON for the given number of days.
+     *
+     * @return with proper content
+     */
+    @GetMapping(value = "/appSecure/getWanIpData/{id}/{days}")
+    public ResponseEntity<String> wanIpDataForDays(HttpSession httpSession, @PathVariable("id") long id,
+            @PathVariable("days") int days) {
         CurrentUserInformationJson currentUserInformationJson = currentUserProvider.getUserInformation(httpSession);
         ResponseEntity<String> result = buildUnauthorizedActionBodyResult();
         if (currentUserInformationJson.isAuthorized) {
-            Object jsonObject = wanIpProvider.getData(currentUserInformationJson, id);
+            Object jsonObject = wanIpProvider.getData(currentUserInformationJson, id, days);
             result = buildResponseBodyResult(JSON_RESPONSE_STATUS, jsonObject, HttpStatus.OK);
         }
         return result;

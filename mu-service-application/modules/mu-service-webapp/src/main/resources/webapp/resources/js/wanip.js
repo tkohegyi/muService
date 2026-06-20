@@ -1,3 +1,5 @@
+var daysToShow = 30;
+
 $(document).ready(function() {
     $("#nav-list").addClass("active");
     jQuery.ajaxSetup({async:false});
@@ -6,9 +8,14 @@ $(document).ready(function() {
     getWanIpData();
 });
 
+function setDays(n) {
+    daysToShow = n;
+    getWanIpData();
+}
+
 function getWanIpData() {
     var id = $("#wanIpId").attr('value');
-    $.get('/appSecure/getWanIpData/' + id, function(data) {
+    $.get('/appSecure/getWanIpData/' + id + '/' + daysToShow, function(data) {
         var information = data.status;
         if (typeof information == "undefined" || information == null) {
             window.location.pathname = "/";
@@ -23,12 +30,12 @@ function getWanIpData() {
 function showWanIpTimeline(json) {
     var points = json.points;
     if (!points || points.length === 0) {
-        d3.select('#wanIpTimeline').append("text").attr("x", 10).attr("y", 30).text("No data available for the last 30 days.");
+        d3.select('#wanIpTimeline').append("text").attr("x", 10).attr("y", 30).text("No data available for the last " + daysToShow + " days.");
         return;
     }
 
     var now = Date.now();
-    var rangeStart = now - (30 * 24 * 60 * 60 * 1000);
+    var rangeStart = now - (daysToShow * 24 * 60 * 60 * 1000);
 
     // Build ON intervals: each OK point contributes a ±90 second window
     var HALF_WINDOW = 90 * 1000;

@@ -35,6 +35,9 @@
         <div id="headDescription"></div>
         <div id="headType"></div>
         <br />
+        <label for="baseDay">Base day:</label>
+        <input type="date" id="baseDay" onchange="onBaseDayChange()" />
+        <br /><br />
         <button class="btn btn-default" onclick="setHours(3)">Last 3 hours</button>
         <button class="btn btn-default" onclick="setHours(24)">Last day</button>
         <button class="btn btn-default" onclick="setHours(168)">Last 7 days</button>

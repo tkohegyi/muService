@@ -72,6 +72,17 @@ public class DateTimeConverter {
     }
 
     /**
+     * Gets the standard String format of a given date and time.
+     *
+     * @param date is the given date & time
+     * @return with its string format
+     */
+    public String getDateTimeAsString(final Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATETIME_PATTERN);
+        return simpleDateFormat.format(date);
+    }
+
+    /**
      * Convert YYYY-MM-DD HH:mm:ss.SSS string to Date object.
      */
     public Date getDateTime(final String dateTimeString) throws ParseException {

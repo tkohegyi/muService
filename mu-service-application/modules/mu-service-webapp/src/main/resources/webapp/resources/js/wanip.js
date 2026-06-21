@@ -1,17 +1,60 @@
 var hoursToShow = 720;
 var previouslyOn = null;
+var refreshTimer = null;
 
 $(document).ready(function() {
     $("#nav-list").addClass("active");
     jQuery.ajaxSetup({async:false});
     setupMenu();
     jQuery.ajaxSetup({async:true});
+    initBaseDay();
     getWanIpData();
-    setInterval(getWanIpData, 60000);
+    updateAutoRefresh();
 });
+
+function todayString() {
+    var d = new Date();
+    var mm = String(d.getMonth() + 1).padStart(2, '0');
+    var dd = String(d.getDate()).padStart(2, '0');
+    return d.getFullYear() + '-' + mm + '-' + dd;
+}
+
+function initBaseDay() {
+    document.getElementById('baseDay').value = todayString();
+}
+
+function isBaseDayToday() {
+    return document.getElementById('baseDay').value === todayString();
+}
+
+function getToMs() {
+    if (isBaseDayToday()) {
+        return Date.now();
+    }
+    var dayStr = document.getElementById('baseDay').value;
+    return new Date(dayStr + 'T23:59:59.999').getTime();
+}
+
+function updateAutoRefresh() {
+    if (refreshTimer !== null) {
+        clearInterval(refreshTimer);
+        refreshTimer = null;
+    }
+    if (hoursToShow === 3 && isBaseDayToday()) {
+        refreshTimer = setInterval(getWanIpData, 60000);
+    }
+}
 
 function setHours(n) {
     hoursToShow = n;
+    previouslyOn = null;
+    updateAutoRefresh();
+    getWanIpData();
+}
+
+function onBaseDayChange() {
+    previouslyOn = null;
+    updateAutoRefresh();
     getWanIpData();
 }
 
@@ -31,7 +74,8 @@ function beep() {
 
 function getWanIpData() {
     var id = $("#wanIpId").attr('value');
-    $.get('/appSecure/getWanIpData/' + id + '/' + hoursToShow, function(data) {
+    var toMs = getToMs();
+    $.get('/appSecure/getWanIpData/' + id + '/' + hoursToShow + '/' + toMs, function(data) {
         var information = data.status;
         if (typeof information == "undefined" || information == null) {
             window.location.pathname = "/";
@@ -39,19 +83,21 @@ function getWanIpData() {
         }
         $('#headDescription').text("Description: " + information.description);
         $('#headType').text("Type: " + information.type);
-        showWanIpTimeline(information);
+        showWanIpTimeline(information, toMs);
     });
 }
 
-function showWanIpTimeline(json) {
+function showWanIpTimeline(json, toMs) {
     var points = json.points;
     if (!points || points.length === 0) {
-        d3.select('#wanIpTimeline').append("text").attr("x", 10).attr("y", 30).text("No data available for the last " + hoursToShow + " hours.");
+        d3.select('#wanIpTimeline').selectAll('*').remove();
+        d3.select('#wanIpTimeline').append("text").attr("x", 10).attr("y", 30)
+          .text("No data available for the last " + hoursToShow + " hours.");
         return;
     }
 
-    var now = Date.now();
-    var rangeStart = now - (hoursToShow * 60 * 60 * 1000);
+    var rangeEnd = toMs;
+    var rangeStart = rangeEnd - (hoursToShow * 60 * 60 * 1000);
 
     // Build ON intervals: each OK report marks ±1 minute as ON
     var HALF_WINDOW = 60 * 1000;
@@ -73,31 +119,13 @@ function showWanIpTimeline(json) {
         }
     }
 
-    // Check current state and beep on transition to NOTOK
-    var currentlyOn = merged.length > 0 && merged[merged.length - 1].end >= now;
-    if (previouslyOn === true && !currentlyOn) {
-        beep();
-    }
-    previouslyOn = currentlyOn;
-
-    // Build stepped area dataset: alternating NOTOK(0) and ON(1) segments
-    var segments = [];
-    var cursor = rangeStart;
-    for (var k = 0; k < merged.length; k++) {
-        var seg = merged[k];
-        var segStart = Math.max(seg.start, rangeStart);
-        var segEnd = Math.min(seg.end, now);
-        if (segStart > cursor) {
-            segments.push({ t: cursor, v: 0 });
-            segments.push({ t: segStart, v: 0 });
+    // Beep on NOTOK transition only when viewing live (base day is today, last 3 hours)
+    if (isBaseDayToday() && hoursToShow === 3) {
+        var currentlyOn = merged.length > 0 && merged[merged.length - 1].end >= rangeEnd;
+        if (previouslyOn === true && !currentlyOn) {
+            beep();
         }
-        segments.push({ t: segStart, v: 1 });
-        segments.push({ t: segEnd, v: 1 });
-        cursor = segEnd;
-    }
-    if (cursor < now) {
-        segments.push({ t: cursor, v: 0 });
-        segments.push({ t: now, v: 0 });
+        previouslyOn = currentlyOn;
     }
 
     // D3 chart
@@ -108,7 +136,7 @@ function showWanIpTimeline(json) {
     const marginBottom = 30;
     const marginLeft = 50;
 
-    const x = d3.scaleTime([rangeStart, now], [marginLeft, width - marginRight]);
+    const x = d3.scaleTime([rangeStart, rangeEnd], [marginLeft, width - marginRight]);
     const y = d3.scaleLinear([0, 1], [height - marginBottom, marginTop]);
 
     var svg = d3.select('#wanIpTimeline')
@@ -131,7 +159,7 @@ function showWanIpTimeline(json) {
     for (var m = 0; m < merged.length; m++) {
         var s = merged[m];
         var x1 = x(Math.max(s.start, rangeStart));
-        var x2 = x(Math.min(s.end, now));
+        var x2 = x(Math.min(s.end, rangeEnd));
         if (x2 > x1) {
             svg.append("rect")
                 .attr("x", x1)

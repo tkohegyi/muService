@@ -9,8 +9,6 @@ import java.util.ArrayList;
  */
 public class WanIpJson {
     @JsonField
-    public String headId;
-    @JsonField
     public String description;
     @JsonField
     public String type;

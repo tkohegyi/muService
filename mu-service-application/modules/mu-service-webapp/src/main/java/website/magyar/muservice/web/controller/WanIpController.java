@@ -47,27 +47,38 @@ public class WanIpController extends ControllerBase {
     }
 
     /**
-     * Serves WAN IP timeline data as JSON (defaults to 30 days).
+     * Serves WAN IP timeline data as JSON (defaults to 30 days ending now).
      *
      * @return with proper content
      */
     @GetMapping(value = "/appSecure/getWanIpData/{id}")
     public ResponseEntity<String> wanIpData(HttpSession httpSession, @PathVariable("id") long id) {
-        return wanIpDataForHours(httpSession, id, 720);
+        return wanIpDataForHoursAndBase(httpSession, id, 720, System.currentTimeMillis());
     }
 
     /**
-     * Serves WAN IP timeline data as JSON for the given number of hours.
+     * Serves WAN IP timeline data as JSON for the given number of hours ending now.
      *
      * @return with proper content
      */
     @GetMapping(value = "/appSecure/getWanIpData/{id}/{hours}")
     public ResponseEntity<String> wanIpDataForHours(HttpSession httpSession, @PathVariable("id") long id,
             @PathVariable("hours") int hours) {
+        return wanIpDataForHoursAndBase(httpSession, id, hours, System.currentTimeMillis());
+    }
+
+    /**
+     * Serves WAN IP timeline data as JSON for the given number of hours ending at the given epoch ms.
+     *
+     * @return with proper content
+     */
+    @GetMapping(value = "/appSecure/getWanIpData/{id}/{hours}/{toMs}")
+    public ResponseEntity<String> wanIpDataForHoursAndBase(HttpSession httpSession, @PathVariable("id") long id,
+            @PathVariable("hours") int hours, @PathVariable("toMs") long toMs) {
         CurrentUserInformationJson currentUserInformationJson = currentUserProvider.getUserInformation(httpSession);
         ResponseEntity<String> result = buildUnauthorizedActionBodyResult();
         if (currentUserInformationJson.isAuthorized) {
-            Object jsonObject = wanIpProvider.getData(currentUserInformationJson, id, hours);
+            Object jsonObject = wanIpProvider.getData(currentUserInformationJson, id, hours, toMs);
             result = buildResponseBodyResult(JSON_RESPONSE_STATUS, jsonObject, HttpStatus.OK);
         }
         return result;

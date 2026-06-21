@@ -37,11 +37,11 @@ public class WanIpProvider extends ProviderBase {
     BusinessWithTestHeadData businessWithTestHeadData;
 
     /**
-     * Get WAN IP data for the given head and number of hours.
+     * Get WAN IP data for the given head, number of hours, and window end time.
      *
      * @return with the info in json object form
      */
-    public Object getData(CurrentUserInformationJson currentUserInformationJson, long id, int hours) {
+    public Object getData(CurrentUserInformationJson currentUserInformationJson, long id, int hours, long toMs) {
         WanIpJson wanIpJson = new WanIpJson();
         wanIpJson.points = new ArrayList<>();
 
@@ -51,15 +51,16 @@ public class WanIpProvider extends ProviderBase {
             return wanIpJson;
         }
 
-        wanIpJson.headId = testHead.getHeadId();
         wanIpJson.description = testHead.getDescription();
         wanIpJson.type = testHead.getType();
 
         int hoursToShow = (hours < 1 || hours > MAX_HOURS_TO_SHOW) ? DEFAULT_HOURS_TO_SHOW : hours;
         DateTimeConverter dateTimeConverter = new DateTimeConverter();
-        Date fromDate = new Date(System.currentTimeMillis() - (long) hoursToShow * DateTimeConverter.HOUR_IN_MS);
-        String fromTimestamp = dateTimeConverter.getDateAsString(fromDate);
-        List<TestHeadData> dataList = businessWithTestHeadData.getListFromTimestamp(testHead.getHeadId(), fromTimestamp);
+        Date toDate = new Date(toMs);
+        Date fromDate = new Date(toMs - (long) hoursToShow * DateTimeConverter.HOUR_IN_MS);
+        String fromTimestamp = dateTimeConverter.getDateTimeAsString(fromDate);
+        String toTimestamp = dateTimeConverter.getDateTimeAsString(toDate);
+        List<TestHeadData> dataList = businessWithTestHeadData.getListFromTimestampRange(testHead.getHeadId(), fromTimestamp, toTimestamp);
 
         for (TestHeadData data : dataList) {
             try {

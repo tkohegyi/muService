@@ -95,7 +95,7 @@ function showWanIpTimeline(json, toMs) {
     onIntervals.sort(function(a, b) { return a.start - b.start; });
     var merged = [];
     for (var j = 0; j < onIntervals.length; j++) {
-        if (merged.length === 0 || onIntervals[j].start > merged[merged.length - 1].end) {
+        if (merged.length === 0 || onIntervals[j].start > merged[merged.length - 1].end + HALF_WINDOW) {
             merged.push({ start: onIntervals[j].start, end: onIntervals[j].end });
         } else {
             merged[merged.length - 1].end = Math.max(merged[merged.length - 1].end, onIntervals[j].end);

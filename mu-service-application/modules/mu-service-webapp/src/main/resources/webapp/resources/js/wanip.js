@@ -1,5 +1,4 @@
 var hoursToShow = 720;
-var previouslyOn = null;
 var refreshTimer = null;
 
 $(document).ready(function() {
@@ -47,29 +46,13 @@ function updateAutoRefresh() {
 
 function setHours(n) {
     hoursToShow = n;
-    previouslyOn = null;
     updateAutoRefresh();
     getWanIpData();
 }
 
 function onBaseDayChange() {
-    previouslyOn = null;
     updateAutoRefresh();
     getWanIpData();
-}
-
-function beep() {
-    var ctx = new (window.AudioContext || window.webkitAudioContext)();
-    var oscillator = ctx.createOscillator();
-    var gainNode = ctx.createGain();
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
-    oscillator.frequency.value = 880;
-    oscillator.type = 'sine';
-    gainNode.gain.setValueAtTime(0.5, ctx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + 0.5);
 }
 
 function getWanIpData() {
@@ -117,15 +100,6 @@ function showWanIpTimeline(json, toMs) {
         } else {
             merged[merged.length - 1].end = Math.max(merged[merged.length - 1].end, onIntervals[j].end);
         }
-    }
-
-    // Beep on NOTOK transition only when viewing live (base day is today, last 3 hours)
-    if (isBaseDayToday() && hoursToShow === 3) {
-        var currentlyOn = merged.length > 0 && merged[merged.length - 1].end >= rangeEnd;
-        if (previouslyOn === true && !currentlyOn) {
-            beep();
-        }
-        previouslyOn = currentlyOn;
     }
 
     // D3 chart
